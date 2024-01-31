@@ -1,0 +1,67 @@
+<template>
+  <div>
+    <button :class="btnClass" @click="btnLandingPage">{{ label }}</button>
+  </div>
+</template>
+
+<script>
+export default {
+    props:{
+        label: String,
+        backgroundColor: String,
+
+    },
+
+    methods:{
+        btnLandingPage(){
+            this.$emit("generalLandingPage")
+        }
+    },
+
+    computed: {
+        btnClass() {
+
+        return {
+
+            'EnSavoirPlus-btn': this.backgroundColor === 'EnSavoirPlus',
+            'EnvoyerLandingPage-btn':this.backgroundColor === 'EnvoyerLandingPage'
+
+
+          }
+
+        }
+    }
+
+}
+</script>
+
+<style>
+.EnSavoirPlus-btn{
+    background-color: #7d9167;
+    color: white;
+    cursor: pointer;
+    font-size: 2rem;
+    border:none;
+    padding: 15px;
+    margin-top: 40px;
+    border-radius: 5px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    
+}
+.EnSavoirPlus-btn:hover{
+    background-color: black;
+    transition: 0.6s;
+}
+.EnvoyerLandingPage-btn{
+    margin-top: 20px;
+    background-color: #ADA99B;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    border:none;
+    padding: 10px;
+    border-radius: 3px;
+    
+}
+
+</style>
