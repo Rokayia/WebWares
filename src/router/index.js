@@ -1,6 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+
+import MentionsLegales from '../views/MentionsLegales.vue'
+import PolitiqueDeConfidentialite from '../views/PolitiqueDeConfidentialité.vue'
+import ConditionsUtilisation from '../views/ConditionsUtilisation.vue'
+
+
 import ConnectUser from '../views/ConnexionUser.vue'
+
 
 const routes = [
   {
@@ -8,6 +15,11 @@ const routes = [
     name: 'home',
     component: HomeView
   },
+
+  { path: '/mentions-legales', component: MentionsLegales },
+  { path: '/politique-de-confidentialite', component: PolitiqueDeConfidentialite },
+  { path: '/conditions-utilisation', component: ConditionsUtilisation }
+
   {
 
     path: '/listProducts',
@@ -22,6 +34,7 @@ const routes = [
       path: '/connect',
     name: 'connect',
     component: ConnectUser}
+
 ]
 
 const router = createRouter({
