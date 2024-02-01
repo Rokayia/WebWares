@@ -58,7 +58,7 @@
   
   
   <div>
-  <btn/>
+  <myFooter/>
   </div>
 </div>
 
@@ -68,7 +68,7 @@
 <script>
 
 import btnLanding from '@/components/btnLandingPage.vue'
-import btn from '@/components/myFooter.vue'
+import myFooter from '@/components/myFooter.vue'
 import MyHeader from '@/components/GeneralHeader.vue'
 export default {
 
@@ -80,7 +80,7 @@ export default {
 
    
     MyHeader,
-    btn,
+    myFooter,
     btnLanding,
     
 
@@ -90,8 +90,15 @@ export default {
 </script>
 
 <style>
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+  
+}
 .homepage{
-  background-color: red;
+
   max-width:1200;
   width:100%;
 }
@@ -189,7 +196,11 @@ export default {
   text-align: center;
   width: 100%;
 }
-
+.head-home{
+  max-width:1200px;
+  width:100%;
+  margin-top:20px;
+}
 .cardRightFormContact{
   height: 100%;
   width: 50%;
@@ -214,7 +225,7 @@ export default {
 }
 
 .connect {
-  width: 99vw;
+
   display: flex;
   gap: 16px;
   justify-content: flex-end;
@@ -222,13 +233,16 @@ export default {
 
 .nav-link{
   font-weight: bold;
+
   color: #3b3b3b;
   text-decoration: none;
   display: block;
+
   }
 
 .nav-link:hover {
-  color:#94e9b6;
+      color: #3b3b3b;
+ 
 }
 
 /* MediaQuery */

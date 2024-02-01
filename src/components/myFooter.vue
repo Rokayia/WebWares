@@ -37,31 +37,23 @@ export default {
 
 <style>
 
-* {
-    margin: 0;
-    padding: 0;
-}
 
-body{
-    background-color: #333;
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    flex-direction: column;
-}
 
-footer{
+
+
+/* footer{
     border-top: 1px dashed black;
     width: 100%;
     background-color: rgb(201, 157, 157);
     color: #333;
-}
+} */
 
 .footerContainer{
-  max-width: 1200px;
+ max-width: 1200px;
   width:100%;
   margin: 0 auto;
   display: flex;
-
+  background-color: #eadfd8; ;
   margin-top: auto;  align-items: flex-start;
   font-size: 20px;
   padding: 10px 0;
