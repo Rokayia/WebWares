@@ -52,7 +52,7 @@ body{
 footer{
     border-top: 1px dashed black;
     width: 100%;
-  background-color: rgb(201, 157, 157);
+    background-color: rgb(201, 157, 157);
     color: #333;
 }
 
