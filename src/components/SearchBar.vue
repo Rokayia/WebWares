@@ -1,5 +1,7 @@
 <template>
-    <input type="text" placeholder="Votre recherche" @input="onSearch" v-model="this.query">
+    <div class="searsh">
+        <input type="text" placeholder="Votre recherche" @input="onSearch" v-model="this.query">
+    </div>
   </template>
   
   <script>
@@ -21,7 +23,7 @@
   </script>
   
   <style>
-  input {
+  .searsh input {
   display: block;
   width: 350px;
   margin: 20px auto;

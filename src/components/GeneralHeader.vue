@@ -4,8 +4,8 @@
     <div class="logo">
       <router-link to="/"> <img src="@/assets/logo1.jpg" alt="Logo de l'application" /></router-link>
     </div>
-    <nav>
-      <router-link to="/listProducts">Accueil</router-link>
+    <nav class="navbar">
+      <router-link to="/">Accueil</router-link>
       <router-link to="/listProducts">Tous les Produits</router-link>
       <!--Menu déroulant -->
       <ul class="nav-dropdown">
@@ -19,7 +19,7 @@
         </li>
       </ul>
      </nav>   
-   </header>
+    </header>
 </template>
 
 <script>
@@ -45,20 +45,23 @@ export default {
 
 <style lang="scss">
 
-div {
+.logo {
   display: inline;
 }
 header { 
   display: flex;
+
   // justify-content: space-between;
   align-items: center;
-  padding: 0 32px;
+
+  width:100%;
 }
 nav {
   display: flex; 
   justify-content: center;
   align-items: center;
-  width: 100vw;
+
+  width:100%;
   gap: 16px;
   
 
@@ -74,7 +77,7 @@ nav {
   }
   
 a:hover{
-  color:#94e9b6;
+  color:#9abf72;
 }
   .nav-link {
   text-decoration: none; 
@@ -96,6 +99,10 @@ a:hover{
 .dropdown {
   position: relative;
   display: inline-block;
+  
+}
+.dropdown:hover{
+  color:#9abf72;
 }
 
 .dropdown-content {
@@ -114,6 +121,7 @@ a:hover{
 }
 .dropdown-content a:hover {
   background-color: #ada99b;
+  color:#9abf72;
 }
 .dropdown:hover .dropdown-content {
   display: block;
