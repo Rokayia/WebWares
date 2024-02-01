@@ -3,6 +3,7 @@
     <!-- Votre contenu ici -->
     <router-view />
   </div>
+
 </template>
 
 <script>
@@ -18,7 +19,9 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+
   color: #3b3b3b;
+
 }
 
 </style>
