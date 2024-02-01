@@ -84,9 +84,16 @@ export default {
     btnLanding,
     
 
-  }
-
+  } ,
+  mounted(){
+    
+    this.$store.dispatch('loadUtilisateurs')
 }
+}
+ 
+      
+
+
 </script>
 
 <style>
