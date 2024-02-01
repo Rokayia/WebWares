@@ -1,5 +1,17 @@
 <template>
 
+  <div class="head-home">
+    <div class="connect">
+     <router-link to="/listProducts" class="nav-link">Connexion</router-link>
+      <router-link to="/listProducts" class="nav-link">Inscrivez-vous</router-link>
+      </div>
+    <MyHeader />
+   
+      
+
+  </div>
+
+
 <div class="containerLandingPage">
   <div class="cardLeft">
   <h1>Bienvenue sur WebWares votre solution de commande en ligne simplifié</h1>
@@ -37,12 +49,21 @@
 import formulaireLandingPage from '@/components/formulaireLandingPage.vue'
 import btnLanding from '@/components/btnLandingPage.vue'
 import btn from '@/components/myFooter.vue'
+import MyHeader from '@/components/GeneralHeader.vue'
 export default {
 
+
+
+
+ // Composant utilisés dans le composant principal
   components:{
+
+   
+    MyHeader,
     btn,
     btnLanding,
     formulaireLandingPage,
+
   }
 
 }
@@ -104,6 +125,25 @@ export default {
   width: 50%;
   display: flex;
   flex-direction: column;
+}
+
+.connect {
+  width: 99vw;
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+}
+
+.nav-link{
+  font-weight: bold;
+    color: #3b3b3b;
+    text-decoration: none;
+    
+    display: block;
+  }
+
+.nav-link:hover {
+  color:#94e9b6;
 }
 
 </style>
