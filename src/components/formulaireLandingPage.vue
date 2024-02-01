@@ -10,6 +10,15 @@
     <label for="message">{{ msg }}</label>
     <textarea  id="message" ></textarea>
 
+    
+
+
+
+
+
+
+
+
     </form>
   </div>
 </template>
@@ -20,6 +29,9 @@ export default {
         name: String,
         email: String,
         msg: String,
+       
+
+        
        
 
     },
