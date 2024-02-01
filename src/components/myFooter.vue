@@ -17,7 +17,8 @@
       <div class="bloc footerReseauxSociaux">
         <h3>Nos réseaux</h3>
         <ul class="listeMedia">            
-          <li><a href="https://www.facebook.com/"><img src="../assets/Facebook_f_logo_(2021).svg" alt="icones réseaux sociaux"> </a></li>
+          <li><a href="https://www.facebook.com/">
+            <img src="../assets/Facebook_f_logo_(2021).svg" alt="icones réseaux sociaux"> </a></li>
           <li><a href="https://www.twitter.com"><img src="../assets/Logo_of_Twitter.svg" alt="icones réseaux sociaux"> </a></li>
           <li><a href="https://www.linkedin.com"><img src="../assets/LinkedIn_icon.svg.png" alt="icones réseaux sociaux"></a></li>
         </ul>  
@@ -51,14 +52,16 @@ body{
 footer{
     border-top: 1px dashed black;
     width: 100%;
-    background-color: rgb(201, 157, 157);
+  background-color: rgb(201, 157, 157);
     color: #333;
 }
 
 .footerContainer{
-  width: 1200px;
+  max-width: 1200px;
+  width:100%;
   margin: 0 auto;
   display: flex;
+
   margin-top: auto;  align-items: flex-start;
   font-size: 20px;
   padding: 10px 0;
@@ -72,13 +75,13 @@ footer{
     flex-direction: column;
 }
 
-h3{
+.footerService h3{
     font-size: 25px;
     padding-bottom: 20px;
     color: #333;
 }
 
-img{
+.listeMedia img{
     width: 50px;
 }
 

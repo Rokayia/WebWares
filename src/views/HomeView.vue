@@ -1,48 +1,56 @@
 <template>
-
-  <div class="head-home">
-    <div class="connect">
-     <router-link to="/listProducts" class="nav-link">Connexion</router-link>
-      <router-link to="/listProducts" class="nav-link">Inscrivez-vous</router-link>
-      </div>
-    <MyHeader />
-   
-      
-
+<div class="homepage">
+  
+    <div class="head-home">
+      <div class="connect">
+       <router-link to="/listProducts" class="nav-link">Connexion</router-link>
+        <router-link to="/listProducts" class="nav-link">Inscrivez-vous</router-link>
+        </div>
+      <MyHeader />
+  
+  
+  
+    </div>
+  <div class="containerGeneral">
+  
+  
+    <div class="containerLandingPage">
+      <div class="cardLeft">
+      <h1>Bienvenue sur WebWares votre solution de commande en ligne simplifié</h1>
+      <btnLanding  label="En Savoir Plus" backgroundColor="EnSavoirPlus"/>
+    </div>
+    <div class="cardRight">
+  
+      <video src="../video&PhotosLandingPage/LandingPageVideo.mp4" autoplay loop muted ></video>
+  
+  
+    </div>
+    </div>
+    <div class="containerFormContact">
+      <div class="cardLeftForm">
+      <img src="../video&PhotosLandingPage/cuisineLandingPage.jpg" alt="">
+      <h5>WebWares</h5>
+      <p>15 place Georges Pompidou, 69150 Lyon</p>
+      <p>0256487931</p>
+      <p>contact-us@wares.fr</p>
+  
+    </div>
+    <div class="cardRightFormContact">
+      <h3>Une question ? Laissez nous savoir cela dans ce formulaire.</h3>
+      <formulaireLandingPage name="NOM" email="E-MAIL" msg="MESSAGE"/>
+      <btnLanding  label="Envoyer" backgroundColor="EnvoyerLandingPage"/>
+  
+    </div>
+    </div>
   </div>
+  
+  
+  <div>
+  <btn/>
+  </div>
+</div>
 
 
-<div class="containerLandingPage">
-  <div class="cardLeft">
-  <h1>Bienvenue sur WebWares votre solution de commande en ligne simplifié</h1>
-  <btnLanding  label="En Savoir Plus" backgroundColor="EnSavoirPlus"/>
-</div>
-<div class="cardRight">
-  
-  <video src="../video&PhotosLandingPage/LandingPageVideo.mp4" autoplay loop muted ></video>
- 
-  
-</div>
-</div>
-<div class="containerFormContact">
-  <div class="cardLeftForm">
-  <img src="../video&PhotosLandingPage/cuisineLandingPage.jpg" alt="">
-  <h5>WebWares</h5>
-  <p>15 place Georges Pompidou, 69150 Lyon</p>
-  <p>0256487931</p>
-  <p>contact-us@wares.fr</p>
-  
-</div>
-<div class="cardRightFormContact">
-  <h3>Une question ? Laissez nous savoir cela dans ce formulaire.</h3>
-  <formulaireLandingPage name="NOM" email="E-MAIL" msg="MESSAGE"/>
-  <btnLanding  label="Envoyer" backgroundColor="EnvoyerLandingPage"/>
-  
-</div>
-</div>
-<div>
-<btn/>
-</div>
 </template>
 
 <script>
@@ -70,6 +78,15 @@ export default {
 </script>
 
 <style>
+.homepage{
+  background-color: red;
+  max-width:1200;
+  width:100%;
+}
+.containerGeneral{
+  max-width:1400;
+  width:100%;
+}
 .containerLandingPage{
   background-color: #F1F1F1 ;
   height: 600px;
@@ -113,7 +130,7 @@ export default {
   margin-top: 45px;
 }
 
-.cardLeftForm{
+.cardLeftForm {
   height: 100%;
   width: 50%;
   padding-top: 20px;

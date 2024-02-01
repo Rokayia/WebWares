@@ -63,7 +63,7 @@ form input{
 }
 
 form textarea{
-  width: 500px;
+  width: 100%;
   height: 300px;
   border: 1px solid #ccc;
   resize: none;
