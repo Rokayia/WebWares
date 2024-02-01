@@ -1,7 +1,7 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> | 
-    <router-link to="/connect">Connexion</router-link> | 
+    <router-link to="/inscription">Inscription</router-link> | 
     <!-- <router-link to="/about">Tous les produits</router-link> -->
   </nav>
   <router-view/>

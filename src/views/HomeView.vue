@@ -56,7 +56,6 @@ export default {
   display: flex;
   justify-content: center;
   
-  
 }
 .cardLeft{
   height: 100%;
@@ -74,18 +73,9 @@ export default {
   height: 100%;
   width: 50%;
   
-  
-  
-  
-  
-  
 }
 .cardRight video{
   height: 600px;
-  
-  
-  
-  
 
 }
 .cardRight img{

@@ -26,6 +26,7 @@ export default {
             'EnSavoirPlus-btn': this.backgroundColor === 'EnSavoirPlus',
             'EnvoyerLandingPage-btn':this.backgroundColor === 'EnvoyerLandingPage',
             'ValiderConnexion-btn':this.backgroundColor === 'ValiderConnexion',
+            'ValiderInscription-btn':this.backgroundColor === 'ValiderInscription',
 
 
           }
@@ -77,6 +78,21 @@ export default {
     
 }
 .ValiderConnexion-btn:hover{
+    background-color: black;
+    transition: 0.4s;
+}
+.ValiderInscription-btn{
+    background-color: #a7c28a;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border:none;
+    padding: 10px 30px 10px 30px;
+    margin-top: 40px;
+    border-radius: 5px;
+
+}
+.ValiderInscription-btn:hover{
     background-color: black;
     transition: 0.4s;
 }

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ConnectUser from '../views/ConnexionUser.vue'
+import InscriptionUser from '../views/InscriptionUser.vue'
 
 const routes = [
   {
@@ -12,7 +13,13 @@ const routes = [
     path: '/connect',
     name: 'connect',
     component: ConnectUser
+  },
 
+  {
+    path: '/inscription',
+    name: 'inscription',
+    component: InscriptionUser
+    
   }
 ]
 
