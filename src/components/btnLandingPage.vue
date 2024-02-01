@@ -45,9 +45,9 @@ export default {
     font-size: 2rem;
     border:none;
     padding: 15px;
-    margin-top: 40px;
     border-radius: 5px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    
     
 }
 .EnSavoirPlus-btn:hover{
@@ -63,6 +63,11 @@ export default {
     border:none;
     padding: 10px;
     border-radius: 3px;
+    
+}
+.EnvoyerLandingPage-btn:hover{
+    background-color: black;
+    transition: 0.4s;
     
 }
 
