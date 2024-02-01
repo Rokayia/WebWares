@@ -79,7 +79,5 @@ export default {
 
 
 
-slot {
-  padding-bottom: 20px;
-}
+
 </style>

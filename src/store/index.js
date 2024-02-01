@@ -200,7 +200,7 @@ export default createStore({
         categorieId: 4
       }
     ],
-    currentProduct:{}
+    currentProduct:[],
   },
   getters: {
     filteredProduits(state){
