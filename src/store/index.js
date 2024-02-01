@@ -1,5 +1,11 @@
-import { createStore } from 'vuex'
-
+import { createStore } from "vuex";
+// Initialiser le state lastUser avec la valeur du local storage
+function getLastUser(){
+  // Récupérer l'id du dernier utilisateur enregistré 
+  let lastProd = localStorage.getItem('lastProdId');
+  //  On récupère le dernier is si il existe sinon on commence à 0
+  return lastProd ? parseInt(lastProd) : 0;
+}
 export default createStore({
   state: {
     categories : [
@@ -7,14 +13,256 @@ export default createStore({
       { id: 2, name: 'Luminaires' },
       { id: 3, name: 'Tapis' },
       { id: 4, name: 'Objets de décorations' }
-    ]
+    ],
+    query:'', 
+    lastProd: getLastUser(),
+    produits: [
+      {
+        id: 1,
+        image: 'mobilier-5.jpg',
+        titre: "Table à manger en bois",
+        description: "Table à manger en bois massif avec finition élégante.",
+        prix: 299.99,
+        moq: 5,
+        categorieId: 1,
+      },
+      {
+        id: 2,
+        image: "luminaire-1.jpg",
+        titre: "Lampe moderne",
+        description: "Lampe avec un design moderne et éclairage ajustable.",
+        prix: 129.99,
+        moq: 10,
+        categorieId: 2,
+      },
+      {
+        id: 3,
+        image: "tapis-2.jpg",
+        titre: "Tapis en laine",
+        description: "Tapis doux en laine avec motif géométrique.",
+        prix: 89.99,
+        moq: 20,
+        categorieId: 3,
+      },
+      {
+        id: 4,
+        image: "deco-3.jpg",
+        titre: "Vase éthnique en argile",
+        description: "Vase éthnique en argile avec motifs gravés à la main.",
+        prix: 49.99,
+        moq: 20,
+        categorieId: 4,
+      },
+      {
+        id: 5,
+        image: "mobilier-4.jpg",
+        titre: "Canapé vert sapin",
+        description: "Canapé vert sapin en velour avec un design moderne .",
+        prix: 399.99,
+        moq: 4,
+        categorieId: 1,
+      },
+      {
+        id: 6,
+        image: "luminaire-2.jpg",
+        titre: "Lampe bout bois",
+        description: "Lampe blanche avec un bout en bois",
+        prix: 59.99,
+        moq: 10,
+        categorieId: 2,
+      },
+      {
+        id: 7,
+        image: "tapis-3.jpg",
+        titre: "Tapis rustique coloré",
+        description: "Tapis rustique fin avec des couleurs orangées.",
+        prix: 89.99,
+        moq: 20,
+        categorieId: 3,
+      },
+      {
+        id: 8,
+        image: "deco-4.jpg",
+        titre: "Vase moderne blanc",
+        description: "Grand vase neutre blanc de forme ovale.",
+        prix: 49.99,
+        moq: 25,
+        categorieId: 4,
+      },
+      {
+        id: 9,
+        image: 'mobilier-3.jpg',
+        titre: 'Canapé camel',
+        description: 'Canapé en cuir de couleur camel, 3 places .',
+        prix: 299.99,
+        moq: 6,
+        categorieId: 1
+      },
+      {
+        id: 10,
+        image: 'luminaire-3.jpg',
+        titre: 'Lampe bois',
+        description: 'Lampe moderne d\'extérieur ovale en bois',
+        prix: 89.99,
+        moq: 15,
+        categorieId: 2
+      },
+      {
+        id: 11,
+        image: 'tapis-4.jpg',
+        titre: 'Tapis forme éléphant',
+        description: 'Tapis gris en laine en forme d\'éléphant',
+        prix: 79.99,
+        moq: 15,
+        categorieId: 3
+      },
+      {
+        id: 12,
+        image: 'deco-5.jpg',
+        titre: 'Vase style velour',
+        description: 'Vase style velour bleu marine.',
+        prix: 99.99,
+        moq: 13,
+        categorieId: 4
+      },
+
+      {
+        id: 13,
+        image: 'mobilier-2.jpg',
+        titre: 'Table murale',
+        description: 'Table murale en bois avec deux accorche dorée.',
+        prix: 29.99,
+        moq: 10,
+        categorieId: 1
+      },
+      {
+        id: 14,
+        image: 'luminaire-4.jpg',
+        titre: 'Lampe noire',
+        description: 'Lampe métallique noir style rétro.',
+        prix: 59.99,
+        moq: 12,
+        categorieId: 2
+      },
+      {
+        id: 15,
+        image: 'tapis-5.jpg',
+        titre: 'Tapis vert sapin',
+        description: 'Tapis épais vert sapin rectangulaire',
+        prix: 89.99,
+        moq: 20,
+        categorieId: 3
+      },
+      {
+        id: 16,
+        image: 'deco-1.jpg',
+        titre: 'Vase en bois',
+        description: 'Vase en bois forme ovale.',
+        prix: 79.99,
+        moq: 15,
+        categorieId: 4
+      },
+   
+      {
+        id: 17,
+        image: 'mobilier-1.jpg',
+        titre: 'Table blanche bout bois',
+        description: 'Table de chevet blanche avec 3 pieds en bois.',
+        prix: 39.99,
+        moq: 10,
+        categorieId: 1
+      },
+      {
+        id: 18,
+        image: 'luminaire-5.jpg',
+        titre: 'Lampe bois originale',
+        description: 'Lampe moderne d\'intérieur avec une forme originale en bois',
+        prix: 99.99,
+        moq: 10,
+        categorieId: 2
+      },
+      {
+        id: 19,
+        image: 'tapis-1.jpg',
+        titre: 'Tapis fourrure beige',
+        description: 'Tapis léger en fourrure de couleur beige',
+        prix: 69.99,
+        moq: 20,
+        categorieId: 3
+      },
+      {
+        id: 20,
+        image: 'deco-2.jpg',
+        titre: 'Vase vert clair',
+        description: 'Vase en verre de couleur vert clair avec des formes géométriques.',
+        prix: 99.99,
+        moq: 20,
+        categorieId: 4
+      }
+    ],
+    currentProduct:{}
   },
   getters: {
+    filteredProduits(state){
+      if(!state.query) return state.produits;
+      let query = state.query.toLowerCase();
+      return state.produits.filter(user => 
+        user.titre.toLowerCase().includes(query.toLowerCase())
+        )
+      },
+      getProduits(state){
+        console.log(state.produits)
+        return state.produits;
+      }
   },
   mutations: {
+    setQuery(state, query){
+      state.query = query;
+    },
+    setCurrentProduct(state, prod){
+      state.currentProduct = prod;
+    },
+    setProduct(state, prods){
+      state.produits = prods;
+    },
+    addProd(state, prod){
+      // On incrément ele dernier id de 1 
+      state.lastProd += 1;
+      // On ajoute une propriété id à l'objet userData 
+      prod.id = state.lastProd;
+      // On enregistre l'utilisateur dans le local storage
+      localStorage.setItem(`prod_${prod.id}`, JSON.stringify(prod));
+      // On enregistre le dernier id dans le local storage
+      localStorage.setItem('lastProdId', state.lastProd);
+    }
+
   },
   actions: {
+    loadProds(context){
+//localStorage.clear();
+      context.getters.getProduits.forEach(function(currentValue) {
+        let selectedProd = localStorage.getItem(`prod_${currentValue.id}`)
+        if(!selectedProd){
+          context.commit('addProd', currentValue);
+        }
+       
+    });
+      let prods = Object.keys(localStorage)
+      .filter(key => key.startsWith('prod_'))
+      .map(key => JSON.parse(localStorage.getItem(key)))
+      context.commit('setProduct', prods);
+    },
+    oneProd(context, prodId){
+      let selectedProd = localStorage.getItem(`prod_${prodId}`)
+      console.log(selectedProd)
+      if(selectedProd){
+        let prodObj = JSON.parse(selectedProd)
+        context.commit('setCurrentProduct', prodObj)
+      }else{
+        alert('Produit introuvable')
+      }
+
+    }
   },
-  modules: {
-  }
-})
+  modules: {},
+});

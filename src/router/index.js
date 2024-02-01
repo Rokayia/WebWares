@@ -8,17 +8,31 @@ import ConditionsUtilisation from '../views/ConditionsUtilisation.vue'
 
 import ConnectUser from '../views/ConnexionUser.vue'
 
-
+import DetailsView from '../views/DetailsProduct.vue'
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
   },
+  {
+    path: '/listProducts',
+    name: 'listproduits',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/ListProducts.vue')
+  },
+  {
+    path: '/detailsProduct/:id',
+    name: 'detailsproduits',
+  
+    component:DetailsView
+  },
 
   { path: '/mentions-legales', component: MentionsLegales },
   { path: '/politique-de-confidentialite', component: PolitiqueDeConfidentialite },
-  { path: '/conditions-utilisation', component: ConditionsUtilisation }
+  { path: '/conditions-utilisation', component: ConditionsUtilisation },
 
   {
 
@@ -29,7 +43,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/TestVue.vue')
 
-  }
+  },
   {
       path: '/connect',
     name: 'connect',

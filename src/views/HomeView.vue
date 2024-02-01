@@ -49,17 +49,17 @@
 import formulaireLandingPage from '@/components/formulaireLandingPage.vue'
 import btnLanding from '@/components/btnLandingPage.vue'
 import btn from '@/components/myFooter.vue'
-export default {
-
-
 import MyHeader from '@/components/GeneralHeader.vue'
 export default {
+
+
+
+
  // Composant utilisés dans le composant principal
   components:{
 
    
-    MyHeader
-
+    MyHeader,
     btn,
     btnLanding,
     formulaireLandingPage,
