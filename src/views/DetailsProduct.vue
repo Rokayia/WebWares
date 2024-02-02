@@ -38,6 +38,7 @@
       </div>
         </div>
         <myFooter/>
+
 </template>
 
 <script>

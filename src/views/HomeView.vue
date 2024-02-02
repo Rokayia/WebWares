@@ -1,17 +1,6 @@
 <template>
-<div class="homepage">
-  
-    <div class="head-home">
-      <div class="connect">
-       <router-link to="/listProducts" class="nav-link">Connexion</router-link>
-        <router-link to="/inscription" class="nav-link">Inscrivez-vous</router-link>
-        </div>
+
       <MyHeader />
-  
-  
-  
-    </div>
-  
   
   <div class="containerBienvenue">
     <div class="containerLandingPage">
@@ -71,9 +60,11 @@ import btnLanding from '@/components/btnLandingPage.vue'
 import myFooter from '@/components/myFooter.vue'
 import MyHeader from '@/components/GeneralHeader.vue'
 export default {
-
-
-
+  data() {
+    return {
+      isConnected: false,
+    };
+  },
 
  // Composant utilisés dans le composant principal
   components:{
@@ -88,7 +79,10 @@ export default {
   mounted(){
     
     this.$store.dispatch('loadUtilisateurs')
+   // this.$store.dispatch("oneUtilisateur", 1)
 }
+
+
 }
  
       
