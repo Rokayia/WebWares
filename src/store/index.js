@@ -235,7 +235,7 @@ export default createStore({
       },
     ],
     currentProduct: [],
-    currentUtilisateur: {},
+    currentUtilisateur: [],
   },
   getters: {
     filteredProduits(state) {
@@ -254,14 +254,32 @@ export default createStore({
     },
     getCategories(state){
       return state.categories;
+    },
+    
+    getCurrentUtilisateur(state){
+      if(localStorage.getItem(`currentUtilisateur`)){
+        return state.currentUtilisateur;
+      }else{
+        return ;
+      }
+     
     }
   },
   mutations: {
     setQuery(state, query) {
       state.query = query;
     },
-    setcurrentUtilisateur(state, utilisateur) {
-      state.currentUtilisateur = utilisateur;
+    setCurrentUtilisateur(state, utilisateur) {
+      console.log("dans le set")
+      if(utilisateur==0){
+        console.log("dans le if")
+        localStorage.removeItem(`currentUtilisateur`);
+      }else{
+        console.log("dans le else")
+        state.currentUtilisateur = utilisateur;
+        localStorage.setItem(`currentUtilisateur`, JSON.stringify(utilisateur));
+      }
+      
     },
     setCurrentProduct(state, prod) {
       state.currentProduct = prod;
@@ -328,6 +346,16 @@ export default createStore({
         context.commit("setCurrentProduct", prodObj);
       } else {
         alert("Produit introuvable");
+      }
+    },
+    oneUtilisateur(context, utilisateurId) {
+      let selectedUtilisateur= localStorage.getItem(`utilisateur_${utilisateurId}`);
+      console.log(selectedUtilisateur);
+      if (selectedUtilisateur) {
+        let utilisateurObj = JSON.parse(selectedUtilisateur);
+        context.commit("setCurrentUtilisateur", utilisateurObj);
+      } else {
+        alert("Utilisateur introuvable");
       }
     },
   },

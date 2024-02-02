@@ -1,22 +1,19 @@
 <template>
-  <header>
-    <!-- <div>
-    <a href="#" v-on:click.prevent="showDropDown=!showDropDown">
-      <div>Catness</div>
-      <img src="@/assets/logo1.jpg" alt="avatar">
-      <i :class="{ 'fa-caret-up': showDropDown, 'fa-caret-down': !showDropDown }" class="fa" aria-hidden="true"></i>
-    </a>
-    <div v-if="showDropDown">
-      <ul class="menu list pl0 pa0 ma0">
-        <li v-for="link in links" class="list" :key="link.name">
-          <a href="#" class="dd-link pointer hover-bg-moon-gray">{{link.name}}</a>
-        </li>
-      </ul>
+
+  <!-- <div v-if="currentUtilisateur==null">
+    <div class="head-home">
+      <div class="connect">
+        <router-link to="/listProducts" class="nav-link">Connexion</router-link>
+        <router-link to="/listProducts" class="nav-link"
+          >Inscrivez-vous</router-link
+        >
+      </div>
     </div>
   </div> -->
+  <header v-bind="idcurrentUtilisateur">
     <div class="logo">
       <router-link to="/">
-        <img src="@/assets/logo1.jpg" alt="Logo de l'application"
+        <img class="logoimg" src="@/assets/logo1.jpg" alt="Logo de l'application"
       /></router-link>
     </div>
     <nav class="navbar">
@@ -27,12 +24,10 @@
         <li class="nav-link dropdown">
           Catégories
           <ul class="dropdown-content">
-            <div   v-for="category in categories"   :key="category.id">
+            <div v-for="category in categories" :key="category.id">
               <router-link
                 :to="'/categorieProduct/:' + category.id"
-              
                 v-on:click="getCatégories(category.id)"
-              
                 class="nav-link"
               >
                 {{ category.name }}
@@ -41,56 +36,73 @@
           </ul>
         </li>
       </ul>
-
-      <!-- <div>{{ utilisateurs[0].raisonSociale }}</div> -->
+      <!-- <div v-if="currentUtilisateur!=null"> -->
+        <!--Menu déroulant -->
+        <!-- <ul class="nav-dropdown">
+          <li class="nav-link dropdown">
+            <div class="circle">
+              <font-awesome-icon :icon="['fas', 'user']" size="3x" />
+            
+            </div>
+            <ul class="dropdown-content">
+              <router-link to="/" 
+                >Bienvenue, {{ currentUtilisateur.raisonSociale }}</router-link
+              >
+              <router-link to="/" v-on:click="deconnecterCurrentUser()">
+                Déconnexion
+              </router-link>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div v-else></div> -->
     </nav>
   </header>
 </template>
 
 <script>
-import { mapState } from "vuex";
 export default {
-  data() {
-    return {
-      isDropdownOpen: false,
-      links: [
-        {
-          name: "Account",
-        },
-        {
-          name: "Profile",
-        },
-        {
-          name: "Logout",
-        },
-      ],
-    };
-  },
+      props:{
+  idcurrentUtilisateur:Number,
+          
+      },
   methods: {
     getCatégories(categoriesId) {
-      this.$router.push({ name: "categorieproduits", params: { id: categoriesId } });
+      this.$router.push({
+        name: "categorieproduits",
+        params: { id: categoriesId },
+      });
+    },
+    getUser() {
+      return this.$store.getters.getCurrentUtilisateur;
     },
     toggleDropdown() {
       this.isDropdownOpen = !this.isDropdownOpen;
     },
+    deconnecterCurrentUser() {
+      this.$store.commit("setCurrentUtilisateur", 0);
+      
+    }
   },
   computed: {
-    ...mapState(["utilisateurs"]),
     categories() {
       return this.$store.state.categories;
     },
-  },
-  mounted() {
-    this.$store.dispatch("loadUtilisateurs");
+    currentUtilisateur() {
+      return this.$store.getters.getCurrentUtilisateur;
+    },
   },
   
 };
-
 </script>
 
 <style lang="scss">
 .logo {
   display: inline;
+  
+}
+.logoimg{
+  width:100%;
 }
 header {
   display: flex;
@@ -162,5 +174,17 @@ nav {
   .dropdown:hover .dropdown-content {
     display: block;
   }
+}
+
+.circle {
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin: auto;
+  background-color: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
