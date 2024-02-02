@@ -10,6 +10,8 @@ import ConnectUser from '../views/ConnexionUser.vue'
 import InscriptionUser from '../views/InscriptionUser.vue'
 
 import DetailsView from '../views/DetailsProduct.vue'
+
+import CategoriesView from '../views/CategoriesProducts.vue'
 const routes = [
   {
     path: '/',
@@ -50,6 +52,12 @@ const routes = [
     name: 'detailsproduits',
   
     component:DetailsView
+  },
+  {
+    path: '/categorieProduct/:id',
+    name: 'categorieproduits',
+  
+    component:CategoriesView
   },
 
  
