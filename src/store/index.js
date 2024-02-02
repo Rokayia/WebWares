@@ -250,7 +250,16 @@ export default createStore({
     },
 
     getUtilisateurs(state){
+      let users = Object.keys(localStorage)
+        .filter((key) => key.startsWith("utilisateur_"))
+        .map((key) => JSON.parse(localStorage.getItem(key)));
+        console.log("getuser" + users);
+        if(users.length){
+          state.utilisateurs = users;
+        }
       return state.utilisateurs;
+      
+
     }
   },
   mutations: {
