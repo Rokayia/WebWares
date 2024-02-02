@@ -49,7 +49,7 @@ export default {
     productCard,
   },
   computed: {
-    ...mapState(["produits"]),
+    ...mapState(["produits","categories"]),
   },
   methods:{
     getImgUrl(pic) {
@@ -59,12 +59,10 @@ return require('../assets/'+pic.image)
 getNomCategorie(){
     let titre="lal";
     let cat = this.categorieId
-    this.produits.forEach(function(currentValue) {
-        console.log(cat + " " + currentValue.id)
-    if(cat==currentValue.categorieId){
-     titre=currentValue.titre;
+    this.categories.forEach(function(currentValue) {
+    if(cat==currentValue.id){
+      titre=currentValue.name;
     }
-   
 });
 return titre;
 },
