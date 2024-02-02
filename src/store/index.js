@@ -251,6 +251,9 @@ export default createStore({
 
     getUtilisateurs(state){
       return state.utilisateurs;
+    },
+    getCategories(state){
+      return state.categories;
     }
   },
   mutations: {

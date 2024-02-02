@@ -27,15 +27,17 @@
         <li class="nav-link dropdown">
           Catégories
           <ul class="dropdown-content">
-            <router-link
-              :to="'/categorieProduct' + category.id"
-              v-for="category in categories"
-              v-on:click="getCatégories(category.id)"
-              :key="category.id"
-              class="nav-link"
-            >
-              {{ category.name }}
-            </router-link>
+            <div   v-for="category in categories"   :key="category.id">
+              <router-link
+                :to="'/categorieProduct/:' + category.id"
+              
+                v-on:click="getCatégories(category.id)"
+              
+                class="nav-link"
+              >
+                {{ category.name }}
+              </router-link>
+            </div>
           </ul>
         </li>
       </ul>
