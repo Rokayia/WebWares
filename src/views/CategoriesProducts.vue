@@ -67,6 +67,10 @@ getNomCategorie(){
    
 });
 return titre;
+},
+getDetails(prodId){
+  this.$router.push({ name: 'detailsproduits', params: {id: prodId} })
+
 }
 
   },
