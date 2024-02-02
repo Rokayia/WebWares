@@ -17,7 +17,7 @@
       /></router-link>
     </div>
     <nav class="navbar">
-      <router-link to="/">Accueil</router-link>
+      <router-link to="/connect">Accueil</router-link>
       <router-link to="/listProducts">Tous les Produits</router-link>
       <!--Menu déroulant -->
       <ul class="nav-dropdown">
