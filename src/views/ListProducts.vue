@@ -10,7 +10,7 @@
     <MyHeader />
   </div>
 
-<SearchBar/>
+<SearchBar v-on:click="filtered=true"/>
   <div class=" produits">
     <div
       class=" prod"
@@ -36,7 +36,11 @@ import SearchBar from '@/components/SearchBar.vue'
 import MyHeader from '@/components/GeneralHeader.vue'
 import myFooter from '@/components/myFooter.vue'
 export default {
-
+  data() {
+    return {
+      filtered: false,
+    };
+  },
     components: {
         productCard,
         MyHeader,
@@ -57,7 +61,12 @@ getDetails(prodId){
 computed:{
   
     produits(){
-            return this.$store.getters.filteredProduits
+      if(this.filtered){
+        return this.$store.getters.filteredProduits
+      }else{
+        return this.$store.getters.getProduits
+      }
+           
         }
        
 },

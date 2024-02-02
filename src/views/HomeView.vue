@@ -18,7 +18,7 @@
       <div class="cardLeft">
         <div class="title-btn">
       <h1>Bienvenue sur WebWares votre solution de commande en ligne simplifié</h1>
-      <btnLanding  label="En Savoir Plus" backgroundColor="EnSavoirPlus"/>
+      <btnLanding  label="Dénichez vos meubles et objects déco, connectez-vous." backgroundColor="EnSavoirPlus"/>
     </div>
     </div>
     <div class="cardRight">

@@ -258,7 +258,10 @@ export default createStore({
           state.utilisateurs = users;
         }
       return state.utilisateurs;
-      
+
+    },
+    getCategories(state){
+      return state.categories;
 
     }
   },

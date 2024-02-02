@@ -42,9 +42,10 @@ export default {
     background-color: #7d9167;
     color: white;
     cursor: pointer;
-    font-size: 2rem;
+    font-size: 1.2rem;
     border:none;
     padding: 15px;
+    margin-left:10px;
     border-radius: 5px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     
