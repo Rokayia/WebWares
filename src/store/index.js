@@ -201,68 +201,158 @@ export default createStore({
       }
     ],
     currentProduct:[],
+    commandes : [
+      {
+        id: 1,
+        produits: [
+          { produitId: 1, quantite: 2 },
+          { produitId: 3, quantite: 1 }
+        ],
+        coutTotal: 689.97,
+        userId: 1
+      },
+      {
+        id: 2,
+        produits: [
+          { produitId: 2, quantite: 1 },
+          { produitId: 4, quantite: 3 }
+        ],
+        coutTotal: 539.96,
+        userId: 2
+      },
+    ],
   },
   getters: {
-    filteredProduits(state){
-      if(!state.query) return state.produits;
+    filteredProduits(state) {
+      if (!state.query) return state.produits;
       let query = state.query.toLowerCase();
-      return state.produits.filter(user => 
+      return state.produits.filter((user) =>
         user.titre.toLowerCase().includes(query.toLowerCase())
-        )
-      },
-      getProduits(state){
-        console.log(state.produits)
-        return state.produits;
+      );
+    },
+    getProduits(state) {
+      return state.produits;
+    },
+
+    getUtilisateurs(state){
+      let users = Object.keys(localStorage)
+        .filter((key) => key.startsWith("utilisateur_"))
+        .map((key) => JSON.parse(localStorage.getItem(key)));
+        console.log("getuser" + users);
+        if(users.length){
+          state.utilisateurs = users;
+        }
+      return state.utilisateurs;
+
+    },
+    getCategories(state){
+      return state.categories;
+
+    },
+    
+    getCurrentUtilisateur(state){
+      if(localStorage.getItem(`currentUtilisateur`)){
+        return state.currentUtilisateur;
+      }else{
+        return ;
       }
+     
+
+    }
   },
   mutations: {
-    setQuery(state, query){
+    setQuery(state, query) {
       state.query = query;
     },
-    setCurrentProduct(state, prod){
+    setCurrentUtilisateur(state, utilisateur) {
+      console.log("dans le set")
+      if(utilisateur==0){
+        console.log("dans le if")
+        localStorage.removeItem(`currentUtilisateur`);
+      }else{
+        console.log("dans le else")
+        state.currentUtilisateur = utilisateur;
+        localStorage.setItem(`currentUtilisateur`, JSON.stringify(utilisateur));
+      }
+      
+    },
+    setCurrentProduct(state, prod) {
       state.currentProduct = prod;
     },
-    setProduct(state, prods){
+    setProduct(state, prods) {
       state.produits = prods;
     },
-    addProd(state, prod){
-      // On incrément ele dernier id de 1 
+    setUtilisateur(state, utilisateurs) {
+      state.utilisateurs = utilisateurs;
+    },
+    addProd(state, prod) {
+      // On incrément le dernier id de 1
       state.lastProd += 1;
-      // On ajoute une propriété id à l'objet userData 
+      // On ajoute une propriété id à l'objet userData
       prod.id = state.lastProd;
       // On enregistre l'utilisateur dans le local storage
       localStorage.setItem(`prod_${prod.id}`, JSON.stringify(prod));
       // On enregistre le dernier id dans le local storage
-      localStorage.setItem('lastProdId', state.lastProd);
-    }
+      localStorage.setItem("lastProdId", state.lastProd);
+    },
+    addUtilisateur(state, utilisateur) {
+      state.lastUtilisateur += 1;
 
+      utilisateur.id = state.lastUtilisateur;
+
+      localStorage.setItem(`utilisateur_${utilisateur.id}`, JSON.stringify(utilisateur));
+
+      localStorage.setItem("lastUtilisateurId", state.lastUtilisateur);
+    },
   },
   actions: {
-    loadProds(context){
-//localStorage.clear();
-      context.getters.getProduits.forEach(function(currentValue) {
-        let selectedProd = localStorage.getItem(`prod_${currentValue.id}`)
-        if(!selectedProd){
-          context.commit('addProd', currentValue);
+    loadProds(context) {
+      //localStorage.clear();
+      context.getters.getProduits.forEach(function (currentValue) {
+        let selectedProd = localStorage.getItem(`prod_${currentValue.id}`);
+        if (!selectedProd) {
+          context.commit("addProd", currentValue);
         }
-       
-    });
+      });
       let prods = Object.keys(localStorage)
-      .filter(key => key.startsWith('prod_'))
-      .map(key => JSON.parse(localStorage.getItem(key)))
-      context.commit('setProduct', prods);
+        .filter((key) => key.startsWith("prod_"))
+        .map((key) => JSON.parse(localStorage.getItem(key)));
+      context.commit("setProduct", prods);
     },
-    oneProd(context, prodId){
-      let selectedProd = localStorage.getItem(`prod_${prodId}`)
-      console.log(selectedProd)
-      if(selectedProd){
-        let prodObj = JSON.parse(selectedProd)
-        context.commit('setCurrentProduct', prodObj)
-      }else{
-        alert('Produit introuvable')
+    loadUtilisateurs(context) {
+      //localStorage.clear();
+      
+      context.getters.getUtilisateurs.forEach(function (currentValue) {
+        let selectedUtilisateur = localStorage.getItem(`utilisateur_${currentValue.id}`);
+        if (!selectedUtilisateur) {
+          context.commit("addUtilisateur", currentValue);
+        }
+      });
+      let users = Object.keys(localStorage)
+        .filter((key) => key.startsWith("utilisateur_"))
+        .map((key) => JSON.parse(localStorage.getItem(key)));
+      context.commit("setUtilisateur", users);
+    },
+    oneProd(context, prodId) {
+      let selectedProd = localStorage.getItem(`prod_${prodId}`);
+      console.log(selectedProd);
+      if (selectedProd) {
+        let prodObj = JSON.parse(selectedProd);
+        context.commit("setCurrentProduct", prodObj);
+      } else {
+        alert("Produit introuvable");
       }
-
-    }
+    },
+    oneUtilisateur(context, utilisateurId) {
+      let selectedUtilisateur= localStorage.getItem(`utilisateur_${utilisateurId}`);
+      console.log(selectedUtilisateur);
+      if (selectedUtilisateur) {
+        let utilisateurObj = JSON.parse(selectedUtilisateur);
+        context.commit("setCurrentUtilisateur", utilisateurObj);
+      } else {
+        alert("Utilisateur introuvable");
+      }
+    },
   },
   modules: {},
 });

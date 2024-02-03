@@ -3,7 +3,7 @@
   
     <div class="head-home">
       <div class="connect">
-       <router-link to="/listProducts" class="nav-link">Connexion</router-link>
+       <router-link to="/connect" class="nav-link">Connexion</router-link>
         <router-link to="/listProducts" class="nav-link">Inscrivez-vous</router-link>
         </div>
       <MyHeader />
@@ -132,6 +132,9 @@ export default {
   width: 100%;
   height: 100%;
  
+}
+buuton {
+  cursor: pointer;
 }
 
 .title-btn h1{

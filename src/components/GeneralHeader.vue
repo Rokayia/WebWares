@@ -1,6 +1,6 @@
 <template>
    <header>
-  
+    <slot></slot>
     <div class="logo">
       <router-link to="/"> <img src="@/assets/logo1.jpg" alt="Logo de l'application" /></router-link>
     </div>

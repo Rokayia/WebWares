@@ -10,6 +10,7 @@ import ConnectUser from '../views/ConnexionUser.vue'
 import InscriptionUser from '../views/InscriptionUser.vue'
 
 import DetailsView from '../views/DetailsProduct.vue'
+import MyOrder from '../views/OrderUser.vue'
 const routes = [
   {
     path: '/',
@@ -51,6 +52,11 @@ const routes = [
   
     component:DetailsView
   },
+  {
+    path: '/myOrder',
+  name: 'myorder',
+  component: MyOrder
+},
 
  
 
