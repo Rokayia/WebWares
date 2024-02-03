@@ -1,5 +1,9 @@
 <template>
 
+   <header>
+    <slot></slot>
+
+
   <!-- <div v-if="currentUtilisateur==null">
     <div class="head-home">
       <div class="connect">
@@ -11,6 +15,7 @@
     </div>
   </div> -->
   <header v-bind="idcurrentUtilisateur">
+
     <div class="logo">
       <router-link to="/">
         <img class="logoimg" src="@/assets/logo1.jpg" alt="Logo de l'application"

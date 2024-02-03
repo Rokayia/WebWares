@@ -11,8 +11,12 @@ import InscriptionUser from '../views/InscriptionUser.vue'
 
 import DetailsView from '../views/DetailsProduct.vue'
 
+import MyOrder from '../views/OrderUser.vue'
+
+
 import CategoriesView from '../views/CategoriesProducts.vue'
 import ListProductsView from '../views/ListProducts.vue'
+
 const routes = [
   {
     path: '/',
@@ -53,11 +57,17 @@ const routes = [
     component:DetailsView
   },
   {
+
+    path: '/myOrder',
+  name: 'myorder',
+  component: MyOrder
+
     path: '/categorieProduct/:id',
     name: 'categorieproduits',
   
     component:CategoriesView
   },
+
 
  
 

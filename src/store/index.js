@@ -210,6 +210,29 @@ export default createStore({
         categorieId: 4,
       },
     ],
+
+   
+    commandes : [
+      {
+        id: 1,
+        produits: [
+          { produitId: 1, quantite: 2 },
+          { produitId: 3, quantite: 1 }
+        ],
+        coutTotal: 689.97,
+        userId: 1
+      },
+      {
+        id: 2,
+        produits: [
+          { produitId: 2, quantite: 1 },
+          { produitId: 4, quantite: 3 }
+        ],
+        coutTotal: 539.96,
+        userId: 2
+      },
+    ],
+
     utilisateurs: [
       {
         id: 1,
@@ -236,6 +259,7 @@ export default createStore({
     ],
     currentProduct: [],
     currentUtilisateur: [],
+
   },
   getters: {
     filteredProduits(state) {
@@ -301,7 +325,9 @@ export default createStore({
       state.utilisateurs = utilisateurs;
     },
     addProd(state, prod) {
+
       // On incrément ele dernier id de 1
+
       state.lastProd += 1;
       // On ajoute une propriété id à l'objet userData
       prod.id = state.lastProd;

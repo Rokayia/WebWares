@@ -8,19 +8,24 @@
     <p>
       <strong> {{ prix }} €</strong>
     </p>
-    <p>Quantité minimale de commande : {{ moq }}</p>
+    <p v-show="afficheMoq">Quantité minimale de commande : {{ moq }}</p>
     <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
+  
   props: {
     image: String,
     titre: String,
     prix: Number,
     moq: Number,
     backgroundColor: String,
+    afficherParagraphe: {
+      type: Boolean,
+      default: true,
+    },
   },
   computed: {
     cardClass() {
