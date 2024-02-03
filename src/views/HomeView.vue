@@ -1,4 +1,5 @@
 <template>
+
 <div class="homepage">
   
     <div class="head-home">
@@ -6,19 +7,17 @@
        <router-link to="/connect" class="nav-link">Connexion</router-link>
         <router-link to="/listProducts" class="nav-link">Inscrivez-vous</router-link>
         </div>
+
+ <div class="homepage">
+
       <MyHeader />
-  
-  
-  
-    </div>
-  
   
   <div class="containerBienvenue">
     <div class="containerLandingPage">
       <div class="cardLeft">
         <div class="title-btn">
       <h1>Bienvenue sur WebWares votre solution de commande en ligne simplifié</h1>
-      <btnLanding  label="En Savoir Plus" backgroundColor="EnSavoirPlus"/>
+      <btnLanding  label="Dénichez vos meubles et objects déco, connectez-vous." backgroundColor="EnSavoirPlus"/>
     </div>
     </div>
     <div class="cardRight">
@@ -71,9 +70,11 @@ import btnLanding from '@/components/btnLandingPage.vue'
 import myFooter from '@/components/myFooter.vue'
 import MyHeader from '@/components/GeneralHeader.vue'
 export default {
-
-
-
+  data() {
+    return {
+      isConnected: false,
+    };
+  },
 
  // Composant utilisés dans le composant principal
   components:{
@@ -84,9 +85,19 @@ export default {
     btnLanding,
     
 
-  }
+  } ,
+  mounted(){
+    
+    this.$store.dispatch('loadUtilisateurs')
+   // this.$store.dispatch("oneUtilisateur", 1)
+}
+
 
 }
+ 
+      
+
+
 </script>
 
 <style>

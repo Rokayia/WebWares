@@ -1,25 +1,33 @@
 import { createStore } from "vuex";
 // Initialiser le state lastUser avec la valeur du local storage
-function getLastUser(){
-  // Récupérer l'id du dernier utilisateur enregistré 
-  let lastProd = localStorage.getItem('lastProdId');
+function getLastProd() {
+  // Récupérer l'id du dernier utilisateur enregistré
+  let lastProd = localStorage.getItem("lastProdId");
   //  On récupère le dernier is si il existe sinon on commence à 0
   return lastProd ? parseInt(lastProd) : 0;
 }
+
+function getLastUtilisateur() {
+  // Récupérer l'id du dernier utilisateur enregistré
+  let lastUtilisateur = localStorage.getItem("lastUtilisateurId");
+  //  On récupère le dernier is si il existe sinon on commence à 0
+  return lastUtilisateur ? parseInt(lastUtilisateur) : 0;
+}
 export default createStore({
   state: {
-    categories : [
-      { id: 1, name: 'Mobilier d\'intérieur' },
-      { id: 2, name: 'Luminaires' },
-      { id: 3, name: 'Tapis' },
-      { id: 4, name: 'Objets de décorations' }
+    categories: [
+      { id: 1, name: "Mobilier d'intérieur" },
+      { id: 2, name: "Luminaires" },
+      { id: 3, name: "Tapis" },
+      { id: 4, name: "Objets de décorations" },
     ],
-    query:'', 
-    lastProd: getLastUser(),
+    query: "",
+    lastProd: getLastProd(),
+    lastUtilisateur:getLastUtilisateur(),
     produits: [
       {
         id: 1,
-        image: 'mobilier-5.jpg',
+        image: "mobilier-5.jpg",
         titre: "Table à manger en bois",
         description: "Table à manger en bois massif avec finition élégante.",
         prix: 299.99,
@@ -91,116 +99,119 @@ export default createStore({
       },
       {
         id: 9,
-        image: 'mobilier-3.jpg',
-        titre: 'Canapé camel',
-        description: 'Canapé en cuir de couleur camel, 3 places .',
+        image: "mobilier-3.jpg",
+        titre: "Canapé camel",
+        description: "Canapé en cuir de couleur camel, 3 places .",
         prix: 299.99,
         moq: 6,
-        categorieId: 1
+        categorieId: 1,
       },
       {
         id: 10,
-        image: 'luminaire-3.jpg',
-        titre: 'Lampe bois',
-        description: 'Lampe moderne d\'extérieur ovale en bois',
+        image: "luminaire-3.jpg",
+        titre: "Lampe bois",
+        description: "Lampe moderne d'extérieur ovale en bois",
         prix: 89.99,
         moq: 15,
-        categorieId: 2
+        categorieId: 2,
       },
       {
         id: 11,
-        image: 'tapis-4.jpg',
-        titre: 'Tapis forme éléphant',
-        description: 'Tapis gris en laine en forme d\'éléphant',
+        image: "tapis-4.jpg",
+        titre: "Tapis forme éléphant",
+        description: "Tapis gris en laine en forme d'éléphant",
         prix: 79.99,
         moq: 15,
-        categorieId: 3
+        categorieId: 3,
       },
       {
         id: 12,
-        image: 'deco-5.jpg',
-        titre: 'Vase style velour',
-        description: 'Vase style velour bleu marine.',
+        image: "deco-5.jpg",
+        titre: "Vase style velour",
+        description: "Vase style velour bleu marine.",
         prix: 99.99,
         moq: 13,
-        categorieId: 4
+        categorieId: 4,
       },
 
       {
         id: 13,
-        image: 'mobilier-2.jpg',
-        titre: 'Table murale',
-        description: 'Table murale en bois avec deux accorche dorée.',
+        image: "mobilier-2.jpg",
+        titre: "Table murale",
+        description: "Table murale en bois avec deux accorche dorée.",
         prix: 29.99,
         moq: 10,
-        categorieId: 1
+        categorieId: 1,
       },
       {
         id: 14,
-        image: 'luminaire-4.jpg',
-        titre: 'Lampe noire',
-        description: 'Lampe métallique noir style rétro.',
+        image: "luminaire-4.jpg",
+        titre: "Lampe noire",
+        description: "Lampe métallique noir style rétro.",
         prix: 59.99,
         moq: 12,
-        categorieId: 2
+        categorieId: 2,
       },
       {
         id: 15,
-        image: 'tapis-5.jpg',
-        titre: 'Tapis vert sapin',
-        description: 'Tapis épais vert sapin rectangulaire',
+        image: "tapis-5.jpg",
+        titre: "Tapis vert sapin",
+        description: "Tapis épais vert sapin rectangulaire",
         prix: 89.99,
         moq: 20,
-        categorieId: 3
+        categorieId: 3,
       },
       {
         id: 16,
-        image: 'deco-1.jpg',
-        titre: 'Vase en bois',
-        description: 'Vase en bois forme ovale.',
+        image: "deco-1.jpg",
+        titre: "Vase en bois",
+        description: "Vase en bois forme ovale.",
         prix: 79.99,
         moq: 15,
-        categorieId: 4
+        categorieId: 4,
       },
-   
+
       {
         id: 17,
-        image: 'mobilier-1.jpg',
-        titre: 'Table blanche bout bois',
-        description: 'Table de chevet blanche avec 3 pieds en bois.',
+        image: "mobilier-1.jpg",
+        titre: "Table blanche bout bois",
+        description: "Table de chevet blanche avec 3 pieds en bois.",
         prix: 39.99,
         moq: 10,
-        categorieId: 1
+        categorieId: 1,
       },
       {
         id: 18,
-        image: 'luminaire-5.jpg',
-        titre: 'Lampe bois originale',
-        description: 'Lampe moderne d\'intérieur avec une forme originale en bois',
+        image: "luminaire-5.jpg",
+        titre: "Lampe bois originale",
+        description:
+          "Lampe moderne d'intérieur avec une forme originale en bois",
         prix: 99.99,
         moq: 10,
-        categorieId: 2
+        categorieId: 2,
       },
       {
         id: 19,
-        image: 'tapis-1.jpg',
-        titre: 'Tapis fourrure beige',
-        description: 'Tapis léger en fourrure de couleur beige',
+        image: "tapis-1.jpg",
+        titre: "Tapis fourrure beige",
+        description: "Tapis léger en fourrure de couleur beige",
         prix: 69.99,
         moq: 20,
-        categorieId: 3
+        categorieId: 3,
       },
       {
         id: 20,
-        image: 'deco-2.jpg',
-        titre: 'Vase vert clair',
-        description: 'Vase en verre de couleur vert clair avec des formes géométriques.',
+        image: "deco-2.jpg",
+        titre: "Vase vert clair",
+        description:
+          "Vase en verre de couleur vert clair avec des formes géométriques.",
         prix: 99.99,
         moq: 20,
-        categorieId: 4
-      }
+        categorieId: 4,
+      },
     ],
-    currentProduct:[],
+
+   
     commandes : [
       {
         id: 1,
@@ -221,6 +232,34 @@ export default createStore({
         userId: 2
       },
     ],
+
+    utilisateurs: [
+      {
+        id: 1,
+        raisonSociale: "Entreprise A",
+        siret: "12345678901234",
+        adresse: "123 Rue de la République",
+        codePostal: "75001",
+        ville: "Paris",
+        email: "entrepriseA@example.com",
+        motDePasse: "motdepasseA",
+        role: "USER",
+      },
+      {
+        id: 2,
+        raisonSociale: "Entreprise B",
+        siret: "56789012345678",
+        adresse: "456 Avenue des Champs-Élysées",
+        codePostal: "75008",
+        ville: "Paris",
+        email: "entrepriseB@example.com",
+        motDePasse: "motdepasseB",
+        role: "ADMIN",
+      },
+    ],
+    currentProduct: [],
+    currentUtilisateur: [],
+
   },
   getters: {
     filteredProduits(state) {
@@ -286,7 +325,9 @@ export default createStore({
       state.utilisateurs = utilisateurs;
     },
     addProd(state, prod) {
-      // On incrément le dernier id de 1
+
+      // On incrément ele dernier id de 1
+
       state.lastProd += 1;
       // On ajoute une propriété id à l'objet userData
       prod.id = state.lastProd;

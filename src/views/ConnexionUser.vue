@@ -1,25 +1,81 @@
 <template>
+  <MyHeader />
   <div class="containerConnexion">
     
       <div class="containerConnect">
     <h1>CONNEXION</h1>
     <label for="email">E-MAIL</label>
-    <input type="text" placeholder="Votre e-mail" id="email">
+    <input type="text" placeholder="Votre e-mail" id="email" v-model="verifUser.email">
     <label for="password">MOT DE PASSE</label>
-    <input type="password" placeholder="Votre mot de passe" id="password">
-    <BtnConnexion label="VALIDER" backgroundColor="ValiderConnexion"/>
+    <input type="password" placeholder="Votre mot de passe" id="password" v-model="verifUser.motDePasse">
+    <p class="erreurConnect">{{ erreur }}</p>
+    <BtnConnexion label="VALIDER" backgroundColor="ValiderConnexion" @click="ValiderUser()"/>
   </div>
   
   </div>
+  <myFooter/>
 </template>
 
 <script>
 import BtnConnexion from '@/components/btnLandingPage.vue'
+import MyHeader from '@/components/GeneralHeader.vue'
+import myFooter from '@/components/myFooter.vue'
+
 export default {
+
+ 
+
+  data(){
+
+return{
+
+
+verifUser:{
+
+},
+erreur:''
+}
+  },
+
+
 
     components:{
         BtnConnexion,
-    }
+        MyHeader,
+        myFooter
+    },
+
+    methods:{
+
+    
+      ValiderUser(){
+        let trouve = false
+        this.utilisateurs.forEach(user => {
+         console.log("user" + user) ;
+         if(user.email === this.verifUser.email && user.motDePasse === this.verifUser.motDePasse){
+            this.$store.commit('setCurrentUtilisateur',user)
+            this.$router.push('/')
+            trouve = true
+          }
+        
+        })
+        if(trouve === false){
+          this.erreur = 'email ou mot de passe incorrect'
+        }
+        
+        
+
+      }
+
+    },
+
+     computed: {
+      utilisateurs() {
+      return this.$store.getters.getUtilisateurs;
+    },
+
+   
+  },
 
 }
 </script>
@@ -57,6 +113,9 @@ export default {
   outline: 2px solid #A7C28A;
   border-radius: 5px;
 
+}
+.erreurConnect{
+  color: red;
 }
 
 </style>
