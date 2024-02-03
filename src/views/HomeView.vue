@@ -8,10 +8,10 @@
         <router-link to="/listProducts" class="nav-link">Inscrivez-vous</router-link>
         </div>
 
- <div class="homepage">
+
 
       <MyHeader />
-  
+    </div>
   <div class="containerBienvenue">
     <div class="containerLandingPage">
       <div class="cardLeft">
