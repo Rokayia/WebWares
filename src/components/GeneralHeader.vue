@@ -1,6 +1,7 @@
 <template>
 <slot></slot>
 
+
 <div class="connectionUser" v-if="isUser">
   <header  >
       <div class="logo">
@@ -11,6 +12,7 @@
       <nav class="navbar">
         <router-link to="/">Accueil</router-link>
         <router-link to="/listProducts">Tous les Produits</router-link>
+
         <!--Menu déroulant -->
         <ul class="nav-dropdown">
           <li class="nav-link dropdown">

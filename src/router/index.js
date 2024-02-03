@@ -8,11 +8,14 @@ import ConditionsUtilisation from "../views/ConditionsUtilisation.vue";
 import ConnectUser from "../views/ConnexionUser.vue";
 import InscriptionUser from "../views/InscriptionUser.vue";
 
-import DetailsView from "../views/DetailsProduct.vue";
 
-import CategoriesView from "../views/CategoriesProducts.vue";
+import DetailsView from '../views/DetailsProduct.vue'
+import MyOrder from '../views/OrderUser.vue'
 import CategoriesAdminView from "../views/CategoriesProductsAdmin.vue";
-import ListProductsView from "../views/ListProducts.vue";
+import CategoriesView from '../views/CategoriesProducts.vue'
+import ListProductsView from '../views/ListProducts.vue'
+
+
 const routes = [
   {
     path: "/",
@@ -39,9 +42,21 @@ const routes = [
     component: InscriptionUser,
   },
   {
+
     path: "/listProducts",
     name: "listproduits",
     component: ListProductsView,
+
+
+    path: '/myOrder',
+  name: 'myorder',
+  component: MyOrder
+
+    path: '/categorieProduct/:id',
+    name: 'categorieproduits',
+  
+    component:CategoriesView
+
   },
   {
     path: "/detailsProduct/:id",
@@ -52,6 +67,7 @@ const routes = [
   {
     path: "/categorieProduct/:id",
     name: "categorieproduits",
+
 
     component: CategoriesView,
   },
