@@ -1,14 +1,11 @@
 <template>
-  <div class="head-home">
-    <div class="connect">
-      <router-link to="/listProducts" class="nav-link">Connexion</router-link>
-      <router-link to="/listProducts" class="nav-link"
-        >Inscrivez-vous</router-link
-      >
-    </div>
-    <MyHeader />
-  </div>
-
+   <MyHeader
+    :currentUtilisateur="currentUtilisateur"
+    @deconnexionEventBtn="deconnecterCurrentUser"
+    :is-visible="isHere()"
+    :is-user="isUser"
+  />
+  
   <SearchBar v-on:click="filtered = true" />
   <div class="produits">
     <div class="prod" v-for="item in produits" :key="item.id">
@@ -21,7 +18,7 @@
         backgroundColor="red"
       >
       <div v-if="currentUtilisateur">
-        <btnProduct label="Envoyer" backgroundColor="EnvoyerLandingPage" />
+        <btnProduct label="Ajouter au panier" backgroundColor="AjouterPanier" />
         </div>
       </productCard>
     </div>
@@ -41,6 +38,8 @@ export default {
   data() {
     return {
       filtered: false,
+      isConnected: false,
+      isUser: true,
     };
   },
   components: {
@@ -57,6 +56,21 @@ export default {
     getDetails(prodId) {
       this.$router.push({ name: "detailsproduits", params: { id: prodId } });
     },
+    deconnecterCurrentUser() {
+      this.$store.commit("setCurrentUtilisateur", 0);
+      this.$router.push({
+        name: "listproduits"
+      });
+    location.reload();
+   
+    },
+    isHere(){
+      if(this.currentUtilisateur){
+        return true;
+      }else{
+        return false;
+      }
+    }
   },
   computed: {
     produits() {
@@ -73,7 +87,8 @@ export default {
 
   mounted() {
     this.$store.dispatch("loadProds"),
-      this.$store.dispatch("oneUtilisateur", 1);
+    this.$store.dispatch("loadUtilisateurs"),
+    this.$store.dispatch("oneUtilisateur")
   },
 };
 </script>
