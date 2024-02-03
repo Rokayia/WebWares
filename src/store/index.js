@@ -258,7 +258,7 @@ export default createStore({
       },
     ],
     currentProduct: [],
-    currentUtilisateur: [],
+    currentUtilisateur: {},
 
   },
   getters: {
@@ -290,10 +290,14 @@ export default createStore({
     },
     
     getCurrentUtilisateur(state){
-      if(localStorage.getItem(`currentUtilisateur`)){
+      let currentUtilisateur= JSON.parse(localStorage.getItem("currentUtilisateur"));
+      if(currentUtilisateur){
+        state.currentUtilisateur=currentUtilisateur;
+        console.log("dans le if getcurrent" + state.currentUtilisateur)
         return state.currentUtilisateur;
       }else{
-        return ;
+        console.log("dans le else")
+        return undefined;
       }
      
 
@@ -307,7 +311,7 @@ export default createStore({
       console.log("dans le set")
       if(utilisateur==0){
         console.log("dans le if")
-        localStorage.removeItem(`currentUtilisateur`);
+        localStorage.removeItem(`currentUtilisateur`)
       }else{
         console.log("dans le else")
         state.currentUtilisateur = utilisateur;
@@ -384,14 +388,15 @@ export default createStore({
         alert("Produit introuvable");
       }
     },
-    oneUtilisateur(context, utilisateurId) {
-      let selectedUtilisateur= localStorage.getItem(`utilisateur_${utilisateurId}`);
+    oneUtilisateur(context) {
+      let selectedUtilisateur= localStorage.getItem(`currentUtilisateur`);
       console.log(selectedUtilisateur);
       if (selectedUtilisateur) {
+        console.log("dans le if oneutil")
         let utilisateurObj = JSON.parse(selectedUtilisateur);
         context.commit("setCurrentUtilisateur", utilisateurObj);
       } else {
-        alert("Utilisateur introuvable");
+        context.commit("setCurrentUtilisateur", 0);
       }
     },
   },

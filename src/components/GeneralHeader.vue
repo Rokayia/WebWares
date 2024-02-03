@@ -1,76 +1,148 @@
 <template>
-
-   <header>
-    <slot></slot>
+<slot></slot>
 
 
-  <!-- <div v-if="currentUtilisateur==null">
-    <div class="head-home">
-      <div class="connect">
-        <router-link to="/listProducts" class="nav-link">Connexion</router-link>
-        <router-link to="/listProducts" class="nav-link"
-          >Inscrivez-vous</router-link
-        >
+<div class="connectionUser" v-if="isUser">
+  <header  >
+      <div class="logo">
+        <router-link to="/">
+          <img class="logoimg" src="@/assets/logo1.jpg" alt="Logo de l'application"
+        /></router-link>
       </div>
-    </div>
-  </div> -->
-  <header v-bind="idcurrentUtilisateur">
+      <nav class="navbar">
+        <router-link to="/">Accueil</router-link>
+        <router-link to="/listProducts">Tous les Produits</router-link>
 
-    <div class="logo">
-      <router-link to="/">
-        <img class="logoimg" src="@/assets/logo1.jpg" alt="Logo de l'application"
-      /></router-link>
-    </div>
-    <nav class="navbar">
-      <router-link to="/connect">Accueil</router-link>
-      <router-link to="/listProducts">Tous les Produits</router-link>
-      <!--Menu déroulant -->
-      <ul class="nav-dropdown">
-        <li class="nav-link dropdown">
-          Catégories
-          <ul class="dropdown-content">
-            <div v-for="category in categories" :key="category.id">
-              <router-link
-                :to="'/categorieProduct/:' + category.id"
-                v-on:click="getCatégories(category.id)"
-                class="nav-link"
-              >
-                {{ category.name }}
-              </router-link>
-            </div>
-          </ul>
-        </li>
-      </ul>
-      <!-- <div v-if="currentUtilisateur!=null"> -->
         <!--Menu déroulant -->
-        <!-- <ul class="nav-dropdown">
+        <ul class="nav-dropdown">
           <li class="nav-link dropdown">
-            <div class="circle">
-              <font-awesome-icon :icon="['fas', 'user']" size="3x" />
-            
-            </div>
+            Catégories
             <ul class="dropdown-content">
-              <router-link to="/" 
-                >Bienvenue, {{ currentUtilisateur.raisonSociale }}</router-link
-              >
-              <router-link to="/" v-on:click="deconnecterCurrentUser()">
-                Déconnexion
-              </router-link>
+              <div v-for="category in categories" :key="category.id">
+                <router-link
+                  :to="'/categorieProduct/:' + category.id"
+                  v-on:click="getCatégories(category.id)"
+                  class="nav-link"
+                >
+                  {{ category.name }}
+      
+                </router-link>
+              </div>
             </ul>
           </li>
         </ul>
+        <div v-if="isVisible">
+          <ul class="nav-dropdown">
+            <font-awesome-icon :icon="['fas', 'basket-shopping']" size="3x" />
+            <li class="nav-link dropdown">
+              <div class="circle">
+                <font-awesome-icon :icon="['fas', 'user']" size="3x" />
+              </div>
+              <ul class="dropdown-content">
+                <router-link
+                  :to="'/' "
+                  class="nav-link"
+                >
+                Bienvenue, {{ currentUtilisateur.raisonSociale }}
+                </router-link>
+      
+                <router-link to="/"
+                @click="methGeneralEvent"
+                >
+                  Déconnexion
+                </router-link>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div v-else>
+          <div class="head-home">
+            <div class="connect">
+              <router-link to="/connect" class="nav-link"
+                >Connexion</router-link
+              >
+              <router-link to="/inscription" class="nav-link"
+                >Inscrivez-vous</router-link
+              >
+            </div>
+          </div>
+        </div>
+      
+      </nav>
+    </header>
+    </div>
+    <div v-else>
+
+      <header  >
+      <div class="logo">
+        <router-link to="/">
+          <img class="logoimg" src="@/assets/logo1.jpg" alt="Logo de l'application"
+        /></router-link>
       </div>
-      <div v-else></div> -->
-    </nav>
-  </header>
+      <nav class="navbar">
+        <router-link to="/categorieProductAdmin">Utilisateurs</router-link>
+        <router-link to="/categorieProductAdmin">Tous les Produits</router-link>
+        <router-link to="/categorieProductAdmin">Catégories</router-link>
+        <router-link to="/categorieProductAdmin">Commandes</router-link>
+   
+          <ul class="nav-dropdown">
+           
+            <li class="nav-link dropdown">
+              <div class="circle">
+                <span style=" color: Tomato;">
+                <font-awesome-icon :icon="['fas', 'user']" size="3x" /> </span>
+              </div>
+              <ul class="dropdown-content">
+                <router-link
+                  :to="'/categorieProductAdmin' "
+                  class="nav-link"
+                >
+                Bienvenue, {{ currentUtilisateur.raisonSociale }}
+                </router-link>
+      
+                <router-link to="/categorieProductAdmin"
+                @click="methGeneralEvent"
+                >
+                  Déconnexion
+                </router-link>
+              </ul>
+            </li>
+          </ul>
+      
+      
+      </nav>
+    </header>
+    </div>
+
+
+
+ 
+
+
+
+
 </template>
 
 <script>
+
+
+
+   
 export default {
-      props:{
-  idcurrentUtilisateur:Number,
-          
-      },
+ props: {
+    currentUtilisateur: {
+            type: Object,
+            required: true
+        },
+        isVisible:{
+            type:Boolean
+        },
+        isUser:{
+            type:Boolean
+        }
+        
+    },
+    
   methods: {
     getCatégories(categoriesId) {
       this.$router.push({
@@ -79,24 +151,40 @@ export default {
       });
     },
     getUser() {
-      return this.$store.getters.getCurrentUtilisateur;
+    console.log("getuserheader"+this.currentUtilisateur.raisonSociale);
     },
     toggleDropdown() {
       this.isDropdownOpen = !this.isDropdownOpen;
     },
-    deconnecterCurrentUser() {
-      this.$store.commit("setCurrentUtilisateur", 0);
+    methGeneralEvent() {
+
+            this.$emit('deconnexionEventBtn');
+        },
       
-    }
+    // deconnecterCurrentUser() {
+    //   this.$store.commit("setCurrentUtilisateur", 0);
+    //   this.$router.push({
+    //     name: "home"
+    //   });
+
+   
+    // },
+    
+
+
+
   },
   computed: {
     categories() {
       return this.$store.state.categories;
     },
-    currentUtilisateur() {
-      return this.$store.getters.getCurrentUtilisateur;
-    },
+    // currentUtilisateur() {
+    //   return this.$store.state.getCurrentUtilisateur;
+    // },
+    
   },
+
+  
   
 };
 </script>
@@ -106,7 +194,7 @@ export default {
   display: inline;
   
 }
-.logoimg{
+.logo img{
   width:100%;
 }
 header {
@@ -173,6 +261,15 @@ nav {
     // padding: 10px;
   }
   .dropdown-content a:hover {
+    background-color: #ada99b;
+    color: #9abf72;
+  }
+
+  .dropdown-content div {
+    display: block;
+    // padding: 10px;
+  }
+  .dropdown-content div:hover {
     background-color: #ada99b;
     color: #9abf72;
   }
