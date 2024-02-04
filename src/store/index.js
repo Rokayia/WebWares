@@ -216,6 +216,29 @@ export default createStore({
         categorieId: 4,
       },
     ],
+
+   
+    commandes : [
+      {
+        id: 1,
+        produits: [
+          { produitId: 1, quantite: 2 },
+          { produitId: 3, quantite: 1 }
+        ],
+        coutTotal: 689.97,
+        userId: 1
+      },
+      {
+        id: 2,
+        produits: [
+          { produitId: 2, quantite: 1 },
+          { produitId: 4, quantite: 3 }
+        ],
+        coutTotal: 539.96,
+        userId: 2
+      },
+    ],
+
     utilisateurs: [
       {
         id: 1,
@@ -242,6 +265,7 @@ export default createStore({
     ],
     currentProduct: [],
     currentUtilisateur: {},
+
   },
   getters: {
     filteredProduits(state) {
@@ -256,15 +280,51 @@ export default createStore({
     },
 
     getUtilisateurs(state){
+      let users = Object.keys(localStorage)
+        .filter((key) => key.startsWith("utilisateur_"))
+        .map((key) => JSON.parse(localStorage.getItem(key)));
+        console.log("getuser" + users);
+        if(users.length){
+          state.utilisateurs = users;
+        }
       return state.utilisateurs;
+
+    },
+    getCategories(state){
+      return state.categories;
+
+    },
+    
+    getCurrentUtilisateur(state){
+      let currentUtilisateur= JSON.parse(localStorage.getItem("currentUtilisateur"));
+      if(currentUtilisateur){
+        state.currentUtilisateur=currentUtilisateur;
+        console.log("dans le if getcurrent" + state.currentUtilisateur.raisonSociale)
+        return state.currentUtilisateur;
+      }else{
+        console.log("dans le else getcurrent")
+        return undefined;
+      }
+     
+
     }
   },
   mutations: {
     setQuery(state, query) {
       state.query = query;
     },
-    setcurrentUtilisateur(state, utilisateur) {
-      state.currentUtilisateur = utilisateur;
+    setCurrentUtilisateur(state, utilisateur) {
+      console.log("dans le set")
+      if(utilisateur==0){
+        console.log("dans le if")
+        localStorage.removeItem(`currentUtilisateur`)
+      }else{
+        console.log("dans le else")
+        state.currentUtilisateur = utilisateur;
+        console.log("currentutilisateur store" + state.currentUtilisateur)
+        localStorage.setItem(`currentUtilisateur`, JSON.stringify(utilisateur));
+      }
+      
     },
     setCurrentProduct(state, prod) {
       state.currentProduct = prod;
@@ -276,7 +336,9 @@ export default createStore({
       state.utilisateurs = utilisateurs;
     },
     addProd(state, prod) {
+
       // On incrément ele dernier id de 1
+
       state.lastProd += 1;
       // On ajoute une propriété id à l'objet userData
       prod.id = state.lastProd;
@@ -331,6 +393,17 @@ export default createStore({
         context.commit("setCurrentProduct", prodObj);
       } else {
         alert("Produit introuvable");
+      }
+    },
+    oneUtilisateur(context) {
+      let selectedUtilisateur= localStorage.getItem(`currentUtilisateur`);
+      console.log(selectedUtilisateur);
+      if (selectedUtilisateur) {
+        console.log("dans le if oneutil")
+        let utilisateurObj = JSON.parse(selectedUtilisateur);
+        context.commit("setCurrentUtilisateur", utilisateurObj);
+      } else {
+        context.commit("setCurrentUtilisateur", 0);
       }
     },
   },

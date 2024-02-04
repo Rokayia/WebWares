@@ -27,6 +27,7 @@ export default {
             'EnvoyerLandingPage-btn':this.backgroundColor === 'EnvoyerLandingPage',
             'ValiderConnexion-btn':this.backgroundColor === 'ValiderConnexion',
             'ValiderInscription-btn':this.backgroundColor === 'ValiderInscription',
+            'AjouterPanier-btn':this.backgroundColor === 'AjouterPanier',
 
 
           }
@@ -42,9 +43,10 @@ export default {
     background-color: #7d9167;
     color: white;
     cursor: pointer;
-    font-size: 2rem;
+    font-size: 1.2rem;
     border:none;
     padding: 15px;
+    margin-left:10px;
     border-radius: 5px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     
@@ -101,5 +103,15 @@ export default {
     background-color: black;
     transition: 0.4s;
 }
+.AjouterPanier-btn{
+    background-color: #7d9167;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border:none;
+    padding: 10px 30px 10px 30px;
+    margin-top: 3px;
+    border-radius: 5px;
 
+}
 </style>

@@ -1,15 +1,12 @@
 <template>
       
-      <div class="head-home">
-      <div class="connect">
-       <router-link to="/listProducts" class="nav-link">Connexion</router-link>
-        <router-link to="/listProducts" class="nav-link">Inscrivez-vous</router-link>
-        </div>
-      <MyHeader />
+      <MyHeader
+    :currentUtilisateur="currentUtilisateur"
+    @deconnexionEventBtn="deconnecterCurrentUser"
+    :is-visible="isHere()"
+    :is-user="isUser"
+  />
   
-  
-  
-    </div>
     <div class="utilisation">
         <h1>Conditions d'utilisation</h1>
         <br><br>
@@ -40,13 +37,50 @@
 import footerVue from '@/components/myFooter.vue'
 import MyHeader from '@/components/GeneralHeader.vue'
 export default {
-
+    data() {
+    return {
+      isConnected: false,
+      isUser: true,
+    };
+  },
     components: {
         footerVue,
         MyHeader,
     }
 
-}
+    ,
+  methods:{
+   
+    deconnecterCurrentUser() {
+      this.$store.commit("setCurrentUtilisateur", 0);
+      this.$router.push({
+        name: "conditionsutilisation"
+      });
+    location.reload();
+   
+    },
+    isHere(){
+      if(this.currentUtilisateur){
+        return true;
+      }else{
+        return false;
+      }
+    }
+  },
+  computed: {
+    currentUtilisateur() {
+     
+      return this.$store.getters.getCurrentUtilisateur;
+    },
+
+  },
+  mounted() {
+    
+    this.$store.dispatch("loadUtilisateurs"),
+    this.$store.dispatch("oneUtilisateur")
+  },
+
+};
 </script>
 
 <style>

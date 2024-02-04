@@ -1,13 +1,9 @@
 <template>
-    
-    <div class="head-home">
-    <div class="connect">
-     <router-link to="/listProducts" class="nav-link">Connexion</router-link>
-      <router-link to="/listProducts" class="nav-link">Inscrivez-vous</router-link>
-      </div>
-    <MyHeader />
-  </div>
+ 
+ <MyHeader :currentUtilisateur="currentUtilisateur" @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser"/>
   
+
+
   <div class="details">
 <div class="titreDetails">
     
@@ -38,6 +34,7 @@
       </div>
         </div>
         <myFooter/>
+
 </template>
 
 <script>
@@ -45,6 +42,12 @@ import productCard from "@/components/ProdCard.vue";
 import myFooter from '@/components/myFooter.vue'
 import MyHeader from '@/components/GeneralHeader.vue'
 export default {
+  data() {
+    return {
+      isConnected: false,
+      isUser: true,
+    };
+  },
   components: {
     productCard,
     MyHeader,
@@ -54,16 +57,37 @@ export default {
     getImgUrl(pic) {
     
       return require("../assets/" + pic);
-    }
+    },   
+    deconnecterCurrentUser() {
+      this.$store.commit("setCurrentUtilisateur", 0);
+      this.$router.push({
+        name: "detailsproduits"
+      });
+    location.reload();
+   
+    },
+    isHere(){
+      if(this.currentUtilisateur){
+        return true;
+      }else{
+        return false;
+      }
+    },
+
   },
   computed: {
     currentProduct() {
       return this.$store.state.currentProduct;
+    }, currentUtilisateur() {
+     
+      return this.$store.getters.getCurrentUtilisateur;
     },
   },
   mounted() {
     let prodId = this.$route.params.id;
     this.$store.dispatch("oneProd", prodId);
+    this.$store.dispatch("loadUtilisateurs"),
+    this.$store.dispatch("oneUtilisateur")
   },
 };
 </script>

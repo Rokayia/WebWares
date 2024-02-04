@@ -1,96 +1,207 @@
 <template>
-  <header>
-    <!-- <div>
-    <a href="#" v-on:click.prevent="showDropDown=!showDropDown">
-      <div>Catness</div>
-      <img src="@/assets/logo1.jpg" alt="avatar">
-      <i :class="{ 'fa-caret-up': showDropDown, 'fa-caret-down': !showDropDown }" class="fa" aria-hidden="true"></i>
-    </a>
-    <div v-if="showDropDown">
-      <ul class="menu list pl0 pa0 ma0">
-        <li v-for="link in links" class="list" :key="link.name">
-          <a href="#" class="dd-link pointer hover-bg-moon-gray">{{link.name}}</a>
-        </li>
-      </ul>
-    </div>
-  </div> -->
 
-        
+
+<slot></slot>
+
+
+<div class="connectionUser" v-if="isUser">
+  <header  >
       <div class="logo">
-      <router-link to="/">
-        <img src="@/assets/logo1.jpg" alt="Logo de l'application"
-      /></router-link>
-    </div>
-    <nav class="navbar">
-      <router-link to="/">Accueil</router-link>
-      <router-link to="/listProducts">Tous les Produits</router-link>
-      <!--Menu déroulant -->
-      <ul class="nav-dropdown">
-        <li class="nav-link dropdown">
-          Catégories
-          <ul class="dropdown-content">
-            <router-link
-              :to="'/categorieProduct' + category.id"
-              v-for="category in categories"
-              v-on:click="getCatégories(category.id)"
-              :key="category.id"
-              class="nav-link"
-            >
-              {{ category.name }}
-            </router-link>
-          </ul>
-        </li>
-      </ul>
+        <router-link to="/">
+          <img class="logoimg" src="@/assets/logo1.jpg" alt="Logo de l'application"
+        /></router-link>
+      </div>
+      <nav class="navbar">
+        <router-link to="/">Accueil</router-link>
+        <router-link to="/listProducts">Tous les Produits</router-link>
 
-      <!-- <div>{{ utilisateurs[0].raisonSociale }}</div> -->
-    </nav>
-  </header>
+        <!--Menu déroulant -->
+        <ul class="nav-dropdown">
+          <li class="nav-link dropdown">
+            Catégories
+            <ul class="dropdown-content">
+              <div v-for="category in categories" :key="category.id">
+                <router-link
+                  :to="'/categorieProduct/:' + category.id"
+                  v-on:click="getCatégories(category.id)"
+                  class="nav-link"
+                >
+                  {{ category.name }}
+      
+                </router-link>
+              </div>
+            </ul>
+          </li>
+        </ul>
+        <div v-if="isVisible">
+          <ul class="nav-dropdown">
+
+            <router-link
+                  :to="'/myOrder' "
+                >
+            <font-awesome-icon :icon="['fas', 'basket-shopping']" size="3x" />
+          </router-link>
+            <li class="nav-link dropdown">
+              <div class="circle">
+                <font-awesome-icon :icon="['fas', 'user']" size="3x" />
+              </div>
+              <ul class="dropdown-content">
+                <router-link
+                  :to="'/' "
+                  class="nav-link"
+                >
+                Bienvenue, {{ currentUtilisateur.raisonSociale }}
+                </router-link>
+      
+                <router-link to="/"
+                @click="methGeneralEvent"
+                >
+                  Déconnexion
+                </router-link>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div v-else>
+          <div class="head-home">
+            <div class="connect">
+              <router-link to="/connect" class="nav-link"
+                >Connexion</router-link
+              >
+              <router-link to="/inscription" class="nav-link"
+                >Inscrivez-vous</router-link
+              >
+            </div>
+          </div>
+        </div>
+      
+      </nav>
+    </header>
+    </div>
+    <div v-else>
+
+      <header  >
+      <div class="logo">
+        <router-link to="/">
+          <img class="logoimg" src="@/assets/logo1.jpg" alt="Logo de l'application"
+        /></router-link>
+      </div>
+      <nav class="navbar">
+        <router-link to="/categorieProductAdmin">Utilisateurs</router-link>
+        <router-link to="/categorieProductAdmin">Tous les Produits</router-link>
+        <router-link to="/categorieProductAdmin">Catégories</router-link>
+        <router-link to="/categorieProductAdmin">Commandes</router-link>
+   
+          <div v-if="isVisible">
+            <ul class="nav-dropdown">
+            
+              <li class="nav-link dropdown">
+                <div class="circle">
+                  <span style=" color: Tomato;">
+                  <font-awesome-icon :icon="['fas', 'user']" size="3x" /> </span>
+                </div>
+                <ul class="dropdown-content">
+                  <router-link
+                    :to="'/categorieProductAdmin' "
+                    class="nav-link"
+                  >
+                  Bienvenue, {{ currentUtilisateur.raisonSociale }}
+                  </router-link>
+                  <router-link to="/categorieProductAdmin"
+                  @click="methGeneralEvent"
+                  >
+                    Déconnexion
+                  </router-link>
+                </ul>
+              </li>
+            </ul>
+          </div>
+      </nav>
+    </header>
+    </div>
+
+
+
+ 
+
+
+
+
 </template>
 
 <script>
-import { mapState } from "vuex";
+
+
+
+   
 export default {
-  data() {
-    return {
-      isDropdownOpen: false,
-      links: [
-        {
-          name: "Account",
+ props: {
+    currentUtilisateur: {
+            type: Object,
+            required: true
         },
-        {
-          name: "Profile",
+        isVisible:{
+            type:Boolean
         },
-        {
-          name: "Logout",
-        },
-      ],
-    };
-  },
+        isUser:{
+            type:Boolean
+        }
+        
+    },
+    
   methods: {
     getCatégories(categoriesId) {
-      this.$router.push({ name: "categorieproduits", params: { id: categoriesId } });
+      this.$router.push({
+        name: "categorieproduits",
+        params: { id: categoriesId },
+      });
+    },
+    getUser() {
+    console.log("getuserheader"+this.currentUtilisateur.raisonSociale);
     },
     toggleDropdown() {
       this.isDropdownOpen = !this.isDropdownOpen;
     },
+    methGeneralEvent() {
+
+            this.$emit('deconnexionEventBtn');
+        },
+      
+    // deconnecterCurrentUser() {
+    //   this.$store.commit("setCurrentUtilisateur", 0);
+    //   this.$router.push({
+    //     name: "home"
+    //   });
+
+   
+    // },
+    
+
+
+
   },
   computed: {
-    ...mapState(["utilisateurs"]),
     categories() {
       return this.$store.state.categories;
     },
+    // currentUtilisateur() {
+    //   return this.$store.state.getCurrentUtilisateur;
+    // },
+    
   },
-  mounted() {
-    this.$store.dispatch("loadUtilisateurs");
-  },
+
+  
   
 };
-
 </script>
 
 <style lang="scss">
 .logo {
   display: inline;
+  
+}
+.logo img{
+  width:100%;
 }
 header {
   display: flex;
@@ -159,8 +270,29 @@ nav {
     background-color: #ada99b;
     color: #9abf72;
   }
+
+  .dropdown-content div {
+    display: block;
+    // padding: 10px;
+  }
+  .dropdown-content div:hover {
+    background-color: #ada99b;
+    color: #9abf72;
+  }
   .dropdown:hover .dropdown-content {
     display: block;
   }
+}
+
+.circle {
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin: auto;
+  background-color: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
