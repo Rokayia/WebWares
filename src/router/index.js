@@ -10,6 +10,9 @@ import ConnectUser from '../views/ConnexionUser.vue'
 import InscriptionUser from '../views/InscriptionUser.vue'
 
 import DetailsView from '../views/DetailsProduct.vue'
+import compoRecapClient from '../views/RecapCommandePageTest.vue'
+
+
 
 import CategoriesView from '../views/CategoriesProducts.vue'
 const routes = [
@@ -20,9 +23,23 @@ const routes = [
   },
 
 
+
+
+
+  {
+    path: '/recapClient',
+    name: 'nomRecapClient',
+    component: compoRecapClient,
+},
+
+
+
+
+
   { path: '/mentions-legales', component: MentionsLegales },
   { path: '/politique-de-confidentialite', component: PolitiqueDeConfidentialite },
   { path: '/conditions-utilisation', component: ConditionsUtilisation },
+
 
 
   {
@@ -60,6 +77,8 @@ const routes = [
     component:CategoriesView
   },
 
+ 
+    
  
 
 

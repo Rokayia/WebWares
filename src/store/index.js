@@ -15,6 +15,12 @@ function getLastUtilisateur() {
 }
 export default createStore({
   state: {
+
+
+    
+    
+    
+    
     categories: [
       { id: 1, name: "Mobilier d'intérieur" },
       { id: 2, name: "Luminaires" },
@@ -328,5 +334,13 @@ export default createStore({
       }
     },
   },
+
+
+
+
+
+
+
+
   modules: {},
 });

@@ -14,7 +14,9 @@
       </ul>
     </div>
   </div> -->
-    <div class="logo">
+
+        
+      <div class="logo">
       <router-link to="/">
         <img src="@/assets/logo1.jpg" alt="Logo de l'application"
       /></router-link>
