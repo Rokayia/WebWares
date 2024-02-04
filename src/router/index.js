@@ -45,13 +45,13 @@ const routes = [
 
     path: "/listProducts",
     name: "listproduits",
-    component: ListProductsView,
+    component: ListProductsView,},
 
-
-    path: '/myOrder',
-  name: 'myorder',
-  component: MyOrder
-
+{   path: '/myOrder',
+name: 'myorder',
+component: MyOrder},
+ 
+{
     path: '/categorieProduct/:id',
     name: 'categorieproduits',
   
@@ -64,13 +64,7 @@ const routes = [
 
     component: DetailsView,
   },
-  {
-    path: "/categorieProduct/:id",
-    name: "categorieproduits",
 
-
-    component: CategoriesView,
-  },
   {
     path: "/categorieProductAdmin",
     name: "categorieproduitsadmin",

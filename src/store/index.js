@@ -293,10 +293,10 @@ export default createStore({
       let currentUtilisateur= JSON.parse(localStorage.getItem("currentUtilisateur"));
       if(currentUtilisateur){
         state.currentUtilisateur=currentUtilisateur;
-        console.log("dans le if getcurrent" + state.currentUtilisateur)
+        console.log("dans le if getcurrent" + state.currentUtilisateur.raisonSociale)
         return state.currentUtilisateur;
       }else{
-        console.log("dans le else")
+        console.log("dans le else getcurrent")
         return undefined;
       }
      
@@ -315,6 +315,7 @@ export default createStore({
       }else{
         console.log("dans le else")
         state.currentUtilisateur = utilisateur;
+        console.log("currentutilisateur store" + state.currentUtilisateur)
         localStorage.setItem(`currentUtilisateur`, JSON.stringify(utilisateur));
       }
       

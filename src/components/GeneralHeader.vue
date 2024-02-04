@@ -33,7 +33,11 @@
         </ul>
         <div v-if="isVisible">
           <ul class="nav-dropdown">
+            <router-link
+                  :to="'/myOrder' "
+                >
             <font-awesome-icon :icon="['fas', 'basket-shopping']" size="3x" />
+          </router-link>
             <li class="nav-link dropdown">
               <div class="circle">
                 <font-awesome-icon :icon="['fas', 'user']" size="3x" />
@@ -85,31 +89,30 @@
         <router-link to="/categorieProductAdmin">Catégories</router-link>
         <router-link to="/categorieProductAdmin">Commandes</router-link>
    
-          <ul class="nav-dropdown">
-           
-            <li class="nav-link dropdown">
-              <div class="circle">
-                <span style=" color: Tomato;">
-                <font-awesome-icon :icon="['fas', 'user']" size="3x" /> </span>
-              </div>
-              <ul class="dropdown-content">
-                <router-link
-                  :to="'/categorieProductAdmin' "
-                  class="nav-link"
-                >
-                Bienvenue, {{ currentUtilisateur.raisonSociale }}
-                </router-link>
-      
-                <router-link to="/categorieProductAdmin"
-                @click="methGeneralEvent"
-                >
-                  Déconnexion
-                </router-link>
-              </ul>
-            </li>
-          </ul>
-      
-      
+          <div v-if="isVisible">
+            <ul class="nav-dropdown">
+            
+              <li class="nav-link dropdown">
+                <div class="circle">
+                  <span style=" color: Tomato;">
+                  <font-awesome-icon :icon="['fas', 'user']" size="3x" /> </span>
+                </div>
+                <ul class="dropdown-content">
+                  <router-link
+                    :to="'/categorieProductAdmin' "
+                    class="nav-link"
+                  >
+                  Bienvenue, {{ currentUtilisateur.raisonSociale }}
+                  </router-link>
+                  <router-link to="/categorieProductAdmin"
+                  @click="methGeneralEvent"
+                  >
+                    Déconnexion
+                  </router-link>
+                </ul>
+              </li>
+            </ul>
+          </div>
       </nav>
     </header>
     </div>

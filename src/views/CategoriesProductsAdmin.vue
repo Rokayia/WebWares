@@ -1,5 +1,5 @@
 <template>
-    <MyHeader :currentUtilisateur="currentUtilisateur" @deconnexionEventBtn="deconnecterCurrentUser"  :is-user="isUser"/>
+    <MyHeader :currentUtilisateur="currentUtilisateur" @deconnexionEventBtn="deconnecterCurrentUser"  :is-user="isUser" :is-visible="isHere()"/>
   
 
   <div>hello</div>
@@ -47,15 +47,15 @@ export default {
 
   },
   mounted() {
-   
-    this.$store.dispatch("loadUtilisateurs"),
-    this.$store.dispatch("oneUtilisateur")
     if (localStorage.getItem('reloaded')) {
           localStorage.removeItem('reloaded');
     } else {
         localStorage.setItem('reloaded', '1');
         location.reload();
     }
+    this.$store.dispatch("loadUtilisateurs"),
+    this.$store.dispatch("oneUtilisateur")
+   
  
   },
 };

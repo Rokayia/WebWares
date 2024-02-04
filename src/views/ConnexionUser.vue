@@ -78,7 +78,7 @@ export default {
             this.$store.commit("setCurrentUtilisateur", this.verifUser);
             this.$router.push("/");
             trouve = true;
-          } else {
+          } else if(this.verifUser.role === "ADMIN"){
             console.log("dans ADMIN");
             this.$store.commit("setCurrentUtilisateur", this.verifUser);
             this.$router.push("/categorieProductAdmin");

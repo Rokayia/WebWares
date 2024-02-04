@@ -5,19 +5,6 @@
     <MyHeader :currentUtilisateur="currentUtilisateur" @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser"/>
 
 
-  <div class="containerBienvenue">
-    <div class="containerLandingPage">
-      <div class="cardLeft">
-        <div class="title-btn">
-      <h1>Bienvenue sur WebWares votre solution de commande en ligne simplifié</h1>
-      <btnLanding  label="Dénichez vos meubles et objects déco, connectez-vous." backgroundColor="EnSavoirPlus"/>
-    </div>
-    </div>
-    <div class="cardRight">
-  
-      <video src="../video&PhotosLandingPage/LandingPageVideo.mp4" autoplay loop muted ></video>
-
-  
 
     <div class="containerBienvenue">
       <div class="containerLandingPage">
@@ -68,9 +55,9 @@
       </div>
     </div>
 
-    <div>
+   
       <myFooter />
-    </div>
+ 
   </div>
 </template>
 
