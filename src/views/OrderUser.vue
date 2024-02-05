@@ -108,7 +108,7 @@ export default {
       location.reload();
     },
     isHere() {
-      if (this.currentUtilisateur) {
+      if (this.currentUtilisateur && this.currentUtilisateurCommande) {
         return true;
       } else {
         return false;
