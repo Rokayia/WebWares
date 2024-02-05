@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faBasketShopping } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { faRectangleXmark } from '@fortawesome/free-solid-svg-icons'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -21,7 +21,7 @@ import { faRectangleXmark } from '@fortawesome/free-solid-svg-icons'
 library.add(faUser)
 library.add(faBasketShopping)
 library.add(faBars)
-library.add(faRectangleXmark)
+library.add(faXmark)
 
 
 createApp(App)
