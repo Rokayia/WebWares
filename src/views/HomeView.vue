@@ -135,7 +135,7 @@ export default {
   padding: 0;
 }
 .homepage {
-  max-width: 1200;
+
   width: 100%;
 }
 
@@ -165,9 +165,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-buuton {
-  cursor: pointer;
-}
+
 
 .title-btn h1 {
   font-size: 4rem;
@@ -175,7 +173,7 @@ buuton {
   margin-left: 25px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   font-weight: 400;
-  margin-bottom: 95px;
+  margin-bottom: 85px;
 }
 .cardRight {
   height: 100%;
@@ -225,11 +223,7 @@ buuton {
   text-align: center;
   width: 100%;
 }
-.head-home {
-  max-width: 1200px;
-  width: 100%;
-  margin-top: 20px;
-}
+
 .cardRightFormContact {
   height: 100%;
   width: 50%;
@@ -255,8 +249,11 @@ buuton {
 
 .connect {
   display: flex;
-  gap: 16px;
-  justify-content: flex-end;
+  flex-direction: column;
+ 
+}
+.connect a:hover{
+  color: #7D9167;
 }
 
 .nav-link {
