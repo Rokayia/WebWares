@@ -215,51 +215,7 @@ export default {
     },
 
 
-    methods:{
-        getSiret(){
-            this.error = [];
-            this.errmail=[];
-            this.errmp=[];
-            this.errconfirmmp=[];
-         
-            let regex= /^\d{14}$/;
-            if(!regex.test(this.checkUser.siret )){
-                 this.error.push('Numéro de siret est invalide');
-               
-            }
-            let regex2= /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
-            if(!regex2.test(this.checkUser.email)){
-                 this.errmail.push('adresse email est invalide');
 
-            }
-
-            let regex3 = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-.]).{8,}$/;
-            if(!regex3.test(this.checkUser.motDePasse)){
-                this.errmp.push('mot de passe est invalide : Au moins un caractère spécial, un chiffre , une majuscule et  minimum de 8 caractères');
-            }
-            if (this.checkUser.motDePasse!== this.checkUser.confirmPassword) {
-                this.errconfirmmp.push('le mot de passe ne correspondent pas');
-            }
-            if(this.error.length===0 && this.errmail.length===0 && this.errmp.length===0 && this.errconfirmmp.length===0){
-                this.checkUser.id += this.$store.state.lastUtilisateur
-                
-                
-                this.$store.commit("addUtilisateur", this.checkUser);
-                this.checkUser = {};
-                this.error = [];
-                this.errmail = [];
-                this.errmp = [];
-                this.$router.push('/')
-                
-            }
-
-            
-
-
-
-   
-}
-}
 },
   
   mounted(){
