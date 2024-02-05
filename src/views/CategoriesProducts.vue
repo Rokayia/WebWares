@@ -1,13 +1,8 @@
 <template>
-  <div class="head-home">
-    <div class="connect">
-      <router-link to="/listProducts" class="nav-link">Connexion</router-link>
-      <router-link to="/listProducts" class="nav-link"
-        >Inscrivez-vous</router-link
-      >
-    </div>
-    <MyHeader />
-  </div>
+
+    <MyHeader :currentUtilisateur="currentUtilisateur" @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser"/>
+  
+
   <div class="categorie">
     <h1 class="titreCategorie">{{ getNomCategorie() }}</h1>
 
@@ -41,6 +36,8 @@ export default {
   data() {
     return {
       categorieId: 0,
+      isConnected: false,
+      isUser: true,
     };
   },
   components: {
@@ -49,7 +46,10 @@ export default {
     productCard,
   },
   computed: {
-    ...mapState(["produits","categories"]),
+    ...mapState(["produits","categories"]),    currentUtilisateur() {
+     
+     return this.$store.getters.getCurrentUtilisateur;
+   },
   },
   methods:{
     getImgUrl(pic) {
@@ -69,12 +69,28 @@ return titre;
 getDetails(prodId){
   this.$router.push({ name: 'detailsproduits', params: {id: prodId} })
 
-}
+},   deconnecterCurrentUser() {
+      this.$store.commit("setCurrentUtilisateur", 0);
+      this.$router.push({
+        name: "categorieproduits"
+      });
+    location.reload();
+   
+    },
+    isHere(){
+      if(this.currentUtilisateur){
+        return true;
+      }else{
+        return false;
+      }
+    },
 
   },
   mounted() {
     this.categorieId = this.$route.params.id;
     console.log("categorie" + this.categorieId);
+    this.$store.dispatch("loadUtilisateurs"),
+    this.$store.dispatch("oneUtilisateur")
   },
 };
 </script>

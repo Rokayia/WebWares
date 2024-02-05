@@ -1,182 +1,204 @@
 <template>
- <div class="homepage">
-      <MyHeader />
-  
-  <div class="containerBienvenue">
-    <div class="containerLandingPage">
-      <div class="cardLeft">
-        <div class="title-btn">
-      <h1>Bienvenue sur WebWares votre solution de commande en ligne simplifié</h1>
-      <btnLanding  label="Dénichez vos meubles et objects déco, connectez-vous." backgroundColor="EnSavoirPlus"/>
+
+
+  <div class="homepage">
+    <MyHeader :currentUtilisateur="currentUtilisateur" @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser"/>
+
+
+
+    <div class="containerBienvenue">
+      <div class="containerLandingPage">
+        <div class="cardLeft">
+          <div class="title-btn">
+            <h1>
+              Bienvenue sur WebWares votre solution de commande en ligne
+              simplifié
+            </h1>
+            <btnLanding
+              label="Dénichez vos meubles et objects déco, connectez-vous."
+              backgroundColor="EnSavoirPlus"
+            />
+          </div>
+        </div>
+        <div class="cardRight">
+          <video
+            src="../video&PhotosLandingPage/LandingPageVideo.mp4"
+            autoplay
+            loop
+            muted
+          ></video>
+        </div>
+      </div>
     </div>
+    <div class="containerGe" >
+      <div class="containerFormContact">
+        <div class="cardLeftForm">
+          <img src="../video&PhotosLandingPage/cuisineLandingPage.jpg" alt="" />
+          <h5>WebWares</h5>
+          <p>15 place Georges Pompidou, 69150 Lyon</p>
+          <p>0256487931</p>
+          <p>contact-us@wares.fr</p>
+        </div>
+        <div class="cardRightFormContact">
+          <h3>Une question ? Laissez nous savoir cela dans ce formulaire.</h3>
+          <label for="name">NOM</label>
+          <input type="text" id="name" />
+
+          <label for="email">EMAIL</label>
+          <input type="text" id="email" />
+
+          <label for="message">MESSAGE</label>
+          <textarea id="message"></textarea>
+
+          <btnLanding label="Envoyer" backgroundColor="EnvoyerLandingPage" />
+        </div>
+      </div>
     </div>
-    <div class="cardRight">
-  
-      <video src="../video&PhotosLandingPage/LandingPageVideo.mp4" autoplay loop muted ></video>
-  
-  
-    </div>
-    </div>
+
+   
+      <myFooter />
+ 
   </div>
-    <div class="containerGe">
-    <div class="containerFormContact">
-      <div class="cardLeftForm">
-      <img src="../video&PhotosLandingPage/cuisineLandingPage.jpg" alt="">
-      <h5>WebWares</h5>
-      <p>15 place Georges Pompidou, 69150 Lyon</p>
-      <p>0256487931</p>
-      <p>contact-us@wares.fr</p>
-  
-    </div>
-    <div class="cardRightFormContact">
-      <h3>Une question ? Laissez nous savoir cela dans ce formulaire.</h3>
-      <label for="name">NOM</label>
-      <input type="text" id="name">
-
-      <label for="email">EMAIL</label>
-      <input type="text" id="email">
-
-      <label for="message">MESSAGE</label>
-      <textarea  id="message" ></textarea>
-
-      <btnLanding  label="Envoyer" backgroundColor="EnvoyerLandingPage"/>
-  
-    </div>
-    </div>
-  </div>
-  
-  
-  <div>
-  <myFooter/>
-  </div>
-</div>
-
-
 </template>
 
 <script>
+import btnLanding from "@/components/btnLandingPage.vue";
+import myFooter from "@/components/myFooter.vue";
+import MyHeader from "@/components/GeneralHeader.vue";
 
-import btnLanding from '@/components/btnLandingPage.vue'
-import myFooter from '@/components/myFooter.vue'
-import MyHeader from '@/components/GeneralHeader.vue'
 export default {
   data() {
     return {
       isConnected: false,
+      isUser: true,
     };
   },
 
- // Composant utilisés dans le composant principal
-  components:{
-
-   
+  // Composant utilisés dans le composant principal
+  components: {
     MyHeader,
     myFooter,
     btnLanding,
-    
+  },
+  methods:{
+   
+    deconnecterCurrentUser() {
+      this.$store.commit("setCurrentUtilisateur", 0);
+      this.$router.push({
+        name: "home"
+      });
+    location.reload();
+   
+    },
+    isHere(){
+      if(this.currentUtilisateur){
+        return true;
+      }else{
+        return false;
+      }
+    },
+  },
+  computed: {
+    currentUtilisateur() {
+     
+      return this.$store.getters.getCurrentUtilisateur;
+    },
 
-  } ,
-  mounted(){
-    
-    this.$store.dispatch('loadUtilisateurs')
-   // this.$store.dispatch("oneUtilisateur", 1)
-}
-
-
-}
+  },
+  mounted() {
+   
+    this.$store.dispatch("loadUtilisateurs"),
+    this.$store.dispatch("oneUtilisateur")
+    if (localStorage.getItem('reloaded')) {
+          localStorage.removeItem('reloaded');
+    } else {
+        localStorage.setItem('reloaded', '1');
+        location.reload();
+    }
  
-      
-
-
+  },
+};
 </script>
 
 <style>
 *,
 *::before,
-*::after{
-    margin: 0;
-    padding: 0;
-  
+*::after {
+  margin: 0;
+  padding: 0;
 }
-.homepage{
-
-  max-width:1200;
-  width:100%;
+.homepage {
+  max-width: 1200;
+  width: 100%;
 }
 
-.containerBienvenue{
+.containerBienvenue {
   display: flex;
   flex-direction: column;
   align-items: center;
-   margin: 30px auto;
-
+  margin: 30px auto;
 }
 
-.containerLandingPage{
-  background-color: #F1F1F1 ;
+.containerLandingPage {
+  background-color: #f1f1f1;
   max-width: 1300px;
   width: 100%;
   display: flex;
   justify-content: center;
-  
 }
-.cardLeft{
+.cardLeft {
   height: 100%;
   width: 50%;
- 
 }
 
-.title-btn{
+.title-btn {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
   height: 100%;
- 
+}
+buuton {
+  cursor: pointer;
 }
 
-.title-btn h1{
+.title-btn h1 {
   font-size: 4rem;
-  text-align:left;
+  text-align: left;
   margin-left: 25px;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   font-weight: 400;
   margin-bottom: 95px;
- 
 }
-.cardRight{
+.cardRight {
   height: 100%;
   width: 50%;
-  
 }
-.cardRight video{
+.cardRight video {
   height: 500px;
   width: 100%;
-
 }
-.cardRight img{
+.cardRight img {
   height: 600px;
- 
 }
-.containerGe{
- background-color: #F9F7F4;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    height: 750px;
-    margin: 0 auto;
+.containerGe {
+  background-color: #f9f7f4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  height: 750px;
+  margin: 0 auto;
 }
-.containerFormContact{
-  
-    max-width: 1500px;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 40px ;
+.containerFormContact {
+  max-width: 1500px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
 }
 
 .cardLeftForm {
@@ -186,23 +208,22 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
- 
 }
-.cardLeftForm h5{
+.cardLeftForm h5 {
   margin-bottom: 25px;
   font-size: 1.2rem;
 }
 
-.cardLeftForm p{
+.cardLeftForm p {
   text-align: center;
   width: 100%;
 }
-.head-home{
-  max-width:1200px;
-  width:100%;
-  margin-top:20px;
+.head-home {
+  max-width: 1200px;
+  width: 100%;
+  margin-top: 20px;
 }
-.cardRightFormContact{
+.cardRightFormContact {
   height: 100%;
   width: 50%;
   display: flex;
@@ -211,99 +232,90 @@ export default {
   align-items: center;
 }
 
-.cardRightFormContact label{
+.cardRightFormContact label {
   margin-top: 25px;
 }
 
-.cardRightFormContact input{
+.cardRightFormContact input {
   width: 50%;
   height: 30px;
 }
-.cardRightFormContact textarea{
+.cardRightFormContact textarea {
   width: 80%;
   height: 50%;
   resize: none;
 }
 
 .connect {
-
   display: flex;
   gap: 16px;
   justify-content: flex-end;
 }
 
-.nav-link{
+.nav-link {
   font-weight: bold;
 
   color: #3b3b3b;
   text-decoration: none;
   display: block;
-
-  }
+}
 
 .nav-link:hover {
-      color: #3b3b3b;
- 
+  color: #3b3b3b;
 }
 
 /* MediaQuery */
-@media (max-width:850px){
-
-  .containerGe{
+@media (max-width: 850px) {
+  .containerGe {
     height: 900px;
     padding-bottom: 20px;
   }
-  .title-btn h1{
+  .title-btn h1 {
     font-size: 3rem;
   }
 
-  .containerFormContact{
-   display: flex;
+  .containerFormContact {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 20px ;
-    
+    margin-top: 20px;
   }
-  .cardLeftForm{
-    display:block;
+  .cardLeftForm {
+    display: block;
     width: 600px;
     height: 600px;
     margin-bottom: 35px;
   }
-  .cardLeftForm img{
+  .cardLeftForm img {
     width: 100%;
   }
 
-  .cardLeftForm h5{
-  margin-bottom: 25px;
-  font-size: 1rem;
+  .cardLeftForm h5 {
+    margin-bottom: 25px;
+    font-size: 1rem;
+  }
+
+  .cardLeftForm p {
+    text-align: center;
+    width: 100%;
+  }
+  .cardRightFormContact {
+    width: 600px;
+    height: 100%;
+  }
 }
 
-.cardLeftForm p{
-  text-align: center;
-  width: 100%;
-}
-.cardRightFormContact{
-  width: 600px;
-  height: 100%;
-
-
-}
-
-}
-
-@media (max-width:655px){
-  .title-btn h1{
+@media (max-width: 655px) {
+  .title-btn h1 {
     font-size: 2rem;
     text-align: center;
     margin: 8px 8px 50px 8px;
   }
-  .cardLeft{
+  .cardLeft {
     width: 100%;
-
   }
-  .title-btn{
+  .title-btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -312,24 +324,21 @@ export default {
   .cardRight {
     display: none;
   }
-  .cardRight video{
+  .cardRight video {
     display: none;
   }
-  .cardLeftForm{
-    display:block;
+  .cardLeftForm {
+    display: block;
     width: 300px;
     height: 300px;
     margin-bottom: 35px;
-  
   }
-  .cardLeftForm img{
+  .cardLeftForm img {
     width: 100%;
   }
 
-  .cardRightFormContact{
+  .cardRightFormContact {
     width: 100%;
   }
-  
 }
-
 </style>

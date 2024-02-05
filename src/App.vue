@@ -9,8 +9,17 @@
 <script>
 export default {
   name: 'App',
-  // Autres configurations du composant
-};
+  computed: { 
+    commandes(){
+      return this.$store.state.commandes
+    },
+
+  }
+ 
+    
+  }
+
+;
 </script>
 
 <style lang="scss">

@@ -1,121 +1,146 @@
 <template>
-  <MyHeader />
+  <MyHeader
+    :currentUtilisateur="currentUtilisateur"
+    @deconnexionEventBtn="deconnecterCurrentUser"
+    :is-visible="isHere()"
+    :is-user="isUser"
+  />
+
   <div class="containerConnexion">
-    
-      <div class="containerConnect">
-    <h1>CONNEXION</h1>
-    <label for="email">E-MAIL</label>
-    <input type="text" placeholder="Votre e-mail" id="email" v-model="verifUser.email">
-    <label for="password">MOT DE PASSE</label>
-    <input type="password" placeholder="Votre mot de passe" id="password" v-model="verifUser.motDePasse">
-    <p class="erreurConnect">{{ erreur }}</p>
-    <BtnConnexion label="VALIDER" backgroundColor="ValiderConnexion" @click="ValiderUser()"/>
+    <div class="containerConnect">
+      <h1>CONNEXION</h1>
+      <label for="email">E-MAIL</label>
+      <input
+        type="text"
+        placeholder="Votre e-mail"
+        id="email"
+        v-model="verifUser.email"
+      />
+      <label for="password">MOT DE PASSE</label>
+      <input
+        type="password"
+        placeholder="Votre mot de passe"
+        id="password"
+        v-model="verifUser.motDePasse"
+      />
+      <p class="erreurConnect">{{ erreur }}</p>
+      <BtnConnexion
+        label="VALIDER"
+        backgroundColor="ValiderConnexion"
+        @click="ValiderUser()"
+      />
+    </div>
   </div>
-  
-  </div>
-  <myFooter/>
+  <myFooter />
 </template>
 
 <script>
-import BtnConnexion from '@/components/btnLandingPage.vue'
-import MyHeader from '@/components/GeneralHeader.vue'
-import myFooter from '@/components/myFooter.vue'
+import BtnConnexion from "@/components/btnLandingPage.vue";
+import MyHeader from "@/components/GeneralHeader.vue";
+import myFooter from "@/components/myFooter.vue";
 
 export default {
-
- 
-
-  data(){
-
-return{
-
-
-verifUser:{
-
-},
-erreur:''
-}
+  data() {
+    return {
+      verifUser: {},
+      erreur: "",
+      isConnected: false,
+      isUser: true,
+    };
   },
 
+  components: {
+    BtnConnexion,
+    MyHeader,
+    myFooter,
+  },
 
-
-    components:{
-        BtnConnexion,
-        MyHeader,
-        myFooter
-    },
-
-    methods:{
-
-    
-      ValiderUser(){
-        let trouve = false
-        this.utilisateurs.forEach(user => {
-         console.log("user" + user) ;
-         if(user.email === this.verifUser.email && user.motDePasse === this.verifUser.motDePasse){
-            this.$store.commit('setCurrentUtilisateur',user)
-            this.$router.push('/')
-            trouve = true
-          }
-        
-        })
-        if(trouve === false){
-          this.erreur = 'email ou mot de passe incorrect'
+  methods: {
+    ValiderUser() {
+      let trouve = false;
+      this.utilisateurs.forEach((user) => {
+       
+        if (
+          user.email === this.verifUser.email &&
+          user.motDePasse === this.verifUser.motDePasse
+        ) {
+          this.verifUser=user;
+          console.log("verifuser" + this.verifUser);
+          trouve = true;
         }
-        
-        
-
+      });
+      if (trouve === false) {
+        this.erreur = "email ou mot de passe incorrect";
       }
 
+      if (this.verifUser.role === "USER") {
+        console.log("dans USER");
+            this.$store.commit("setCurrentUtilisateur", this.verifUser);
+            this.$router.push("/");
+            trouve = true;
+          } else if(this.verifUser.role === "ADMIN"){
+            console.log("dans ADMIN");
+            this.$store.commit("setCurrentUtilisateur", this.verifUser);
+            this.$router.push("/categorieProductAdmin");
+            
+          }
     },
-
-     computed: {
-      utilisateurs() {
-      return this.$store.getters.getUtilisateurs;
-    },
-
-   
+    isHere(){
+      if(this.currentUtilisateur){
+        return true;
+      }else{
+        return false;
+      }
+    }
   },
 
-}
+  computed: {
+    utilisateurs() {
+      return this.$store.getters.getUtilisateurs;
+    },
+    currentUtilisateur() {
+     
+     return this.$store.getters.getCurrentUtilisateur;
+   },
+  },
+    mounted() {
+    
+    this.$store.dispatch("loadUtilisateurs"),
+    this.$store.dispatch("oneUtilisateur")
+  },
+};
 </script>
 
 <style>
-.containerConnexion{
+.containerConnexion {
   height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
-.containerConnect{
+.containerConnect {
   max-width: 600px;
   width: 30%;
   padding: 35px;
   display: flex;
-  flex-direction: column;  
- 
+  flex-direction: column;
 }
-.containerConnect h1{
-  color: #A7C28A;
-  
+.containerConnect h1 {
+  color: #a7c28a;
 }
 
-.containerConnect label{
+.containerConnect label {
   margin: 60px 0px 10px 0px;
-
 }
 
-.containerConnect input{
+.containerConnect input {
   text-align: center;
   height: 40px;
   border: none;
-  outline: 2px solid #A7C28A;
+  outline: 2px solid #a7c28a;
   border-radius: 5px;
-
 }
-.erreurConnect{
+.erreurConnect {
   color: red;
 }
-
 </style>
