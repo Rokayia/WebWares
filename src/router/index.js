@@ -9,6 +9,7 @@ import ConditionsUtilisation from '../views/ConditionsUtilisation.vue'
 import ConnectUser from '../views/ConnexionUser.vue'
 import InscriptionUser from '../views/InscriptionUser.vue'
 
+
 import DetailsView from '../views/DetailsProduct.vue'
 
 import CategoriesView from '../views/CategoriesProducts.vue'
@@ -32,6 +33,7 @@ const routes = [
     name: 'connect',
     component: ConnectUser
   },
+ 
 
   {
     path: '/inscription',

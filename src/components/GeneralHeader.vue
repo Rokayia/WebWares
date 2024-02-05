@@ -1,15 +1,15 @@
 <template>
 
-  <!-- <div v-if="currentUtilisateur==null">
+   <div v-if="currentUtilisateur==null">
     <div class="head-home">
       <div class="connect">
         <router-link to="/listProducts" class="nav-link">Connexion</router-link>
-        <router-link to="/listProducts" class="nav-link"
+        <router-link to="/inscription" class="nav-link"
           >Inscrivez-vous</router-link
         >
       </div>
     </div>
-  </div> -->
+  </div> 
   <header v-bind="idcurrentUtilisateur">
     <div class="logo">
       <router-link to="/">

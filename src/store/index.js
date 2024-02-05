@@ -221,6 +221,7 @@ export default createStore({
         email: "entrepriseA@example.com",
         motDePasse: "motdepasseA",
         role: "USER",
+        
       },
       {
         id: 2,
@@ -232,10 +233,13 @@ export default createStore({
         email: "entrepriseB@example.com",
         motDePasse: "motdepasseB",
         role: "ADMIN",
+        
+
       },
     ],
     currentProduct: [],
     currentUtilisateur: [],
+    
   },
   getters: {
     filteredProduits(state) {
@@ -248,6 +252,7 @@ export default createStore({
     getProduits(state) {
       return state.produits;
     },
+   
 
     getUtilisateurs(state){
       let users = Object.keys(localStorage)
@@ -368,6 +373,8 @@ export default createStore({
         alert("Utilisateur introuvable");
       }
     },
+
+  
   },
   modules: {},
 });

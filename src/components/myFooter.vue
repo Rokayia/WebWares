@@ -4,7 +4,7 @@
 
     <div class="footerContainer">
   
-      <div class="bloc footerService">
+      <div class="blocfooterService">
         <h3>Nos Services</h3>
         <ul class="listeServices">
           <li><router-link to="/mentions-legales">Mentions légales</router-link></li>
@@ -14,7 +14,7 @@
         </ul>  
       </div>
       
-      <div class="bloc footerReseauxSociaux">
+      <div class="blocfooterReseauxSociaux">
         <h3>Nos réseaux</h3>
         <ul class="listeMedia">            
           <li><a href="https://www.facebook.com/">
@@ -37,71 +37,84 @@ export default {
 
 <style>
 
+*{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-decoration: none;
+}
 
-
-
-
-/* footer{
-    border-top: 1px dashed black;
+footer{
     width: 100%;
-    background-color: rgb(201, 157, 157);
+    background-color: #eadfd8;
     color: #333;
-} */
+} 
 
 .footerContainer{
-
+  max-width: 1100px;
   width:100%;
+  height: 150px;
   margin: 0 auto;
   display: flex;
-  background-color: #eadfd8; ;
-  margin-top: auto;  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   font-size: 20px;
-  padding: 10px 0;
-  /* margin-top: auto; */
+  
+  
 }
 
-.bloc {
-    width: 25%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
+.blocfooterService{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.footerService h3{
-    font-size: 25px;
-    padding-bottom: 20px;
-    color: #333;
-}
 
 .listeMedia img{
-    width: 50px;
+    width: 40px;
 }
 
-.footerService li{
-    list-style-type: none;
-    /* padding: 2px 0; */
-}
-.footerService a{
-    text-decoration: none;
-    color: #333;
-}
-/* .footerService h3{
-    padding-left: 40px;
-} */
 
-.footerReseauxSociaux ul{
-    list-style-type: none;
+.blocfooterReseauxSociaux {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
-/* .footerReseauxSociaux h3{
-    padding-left: 40px;
-} */
-.footerReseauxSociaux {
-  gap: 15px;
-  text-decoration: none;
+.listeServices li{
+  margin-top: 5px;
+}
+.listeServices a{
+  color: grey;
+  
 }
 
 .listeMedia{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  
 }
+
+@media (max-width:485px){
+  .listeServices a{
+    font-size: 10px;
+  }
+  .blocfooterService h3{
+    font-size: 18px;
+  }
+  .blocfooterReseauxSociaux h3{
+    font-size: 18px;
+}
+.listeMedia img{
+    width: 30px;
+}
+}
+
+
 </style>

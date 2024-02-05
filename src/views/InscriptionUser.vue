@@ -8,7 +8,7 @@
         
         <div class="card1" >
     <label for="RaisonSocial">Raison sociale (nom complet de l’entreprise)</label>
-    <input type="text" id="RaisonSocial" placeholder="WebWares" v-model="checkUser.raisonSocial">
+    <input type="text" id="RaisonSocial" placeholder="WebWares" v-model="checkUser.raisonSociale">
 
     <label for="NumeroSiret">Numéro de Siret</label>
     <input type="number" id="NumeroSiret" placeholder="ex: 12345678901234" v-model="checkUser.siret" :class="{ 'is-error': error}">
@@ -107,15 +107,17 @@ export default {
             if(this.error.length===0 && this.errmail.length===0 && this.errmp.length===0 && this.errconfirmmp.length===0){
                 this.checkUser.id += this.$store.state.lastUtilisateur
                 
+                
                 this.$store.commit("addUtilisateur", this.checkUser);
                 this.checkUser = {};
                 this.error = [];
                 this.errmail = [];
                 this.errmp = [];
+                this.$router.push('/')
+                
             }
 
             
-
 
 
 
