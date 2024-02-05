@@ -3,7 +3,7 @@
 <slot></slot>
 
 
-<div class="connectionUser" v-if="isUser">
+<div class="connectionUser" v-if="isUser" v-cloak>
   <header  >
       <div class="logo">
         <router-link to="/">
@@ -38,7 +38,7 @@
             <router-link
                   :to="'/myOrder' "
                 >
-            <font-awesome-icon :icon="['fas', 'basket-shopping']" size="3x" />
+            <font-awesome-icon :icon="['fas', 'basket-shopping']" size="3x" />{{ quantitePanier() }}
           </router-link>
             <li class="nav-link dropdown">
               <div class="circle">
@@ -169,11 +169,11 @@ export default {
 
             this.$emit('deconnexionEventBtn');
         },
-  //  quantitePanier(){
-  //   if(this.currentUtilisateurCommande && this.currentUtilisateur){
-  //    return this.currentUtilisateurCommande.produits.length
-  //   }
-  //  }
+   quantitePanier(){
+    if(this.currentUtilisateurCommande && this.currentUtilisateur){
+     return this.currentUtilisateurCommande.produits.length
+    }
+   }
     // deconnecterCurrentUser() {
     //   this.$store.commit("setCurrentUtilisateur", 0);
     //   this.$router.push({

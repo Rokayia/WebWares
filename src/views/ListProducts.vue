@@ -154,12 +154,12 @@ export default {
       // this.$store.dispatch("loadUtilisateurs"),
       // this.$store.dispatch("oneUtilisateur");
 
-    if (localStorage.getItem("reloaded")) {
-      localStorage.removeItem("reloaded");
-    } else {
-      localStorage.setItem("reloaded", "1");
-      location.reload();
-    }
+    // if (localStorage.getItem("reloaded")) {
+    //   localStorage.removeItem("reloaded");
+    // } else {
+    //   localStorage.setItem("reloaded", "1");
+    //   location.reload();
+    // }
   },
 };
 </script>
