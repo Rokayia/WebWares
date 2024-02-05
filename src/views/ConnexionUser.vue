@@ -76,6 +76,7 @@ export default {
       if (this.verifUser.role === "USER") {
         console.log("dans USER");
             this.$store.commit("setCurrentUtilisateur", this.verifUser);
+            this.$store.commit("setCurrentUtilisateurCommande");
             this.$router.push("/");
             trouve = true;
           } else if(this.verifUser.role === "ADMIN"){
@@ -107,6 +108,7 @@ export default {
     
     this.$store.dispatch("loadUtilisateurs"),
     this.$store.dispatch("oneUtilisateur")
+    this.$store.dispatch("oneUtilisateurCommande")
   },
 };
 </script>

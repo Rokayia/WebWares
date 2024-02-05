@@ -1,5 +1,6 @@
 <template>
   <div :class="cardClass">
+    <a class="detailsCard" @click="cardGeneralEvent" v-show="affichedetails" href="">Plus de détails</a>
     <div class="image">
       <img :src="image" />
     </div>
@@ -21,17 +22,26 @@ export default {
     titre: String,
     prix: Number,
     moq: Number,
+    afficheMoq:Boolean,
+    affichedetails:Boolean,
     backgroundColor: String,
     afficherParagraphe: {
       type: Boolean,
       default: true,
     },
-  },
+  }, 
+   methods: {
+        cardGeneralEvent() {
+            // Event personnalisé 
+            // Déclarer un alias pour appeler l'evenment sur le composant parent
+            this.$emit('detailsCardEventBtn');
+        }
+    },
   computed: {
     cardClass() {
       return {
         "xxl-card": this.backgroundColor === "white",
-        "normal-card": this.backgroundColor === "red",
+        "normal-card": this.backgroundColor === "beige",
       };
     },
   },

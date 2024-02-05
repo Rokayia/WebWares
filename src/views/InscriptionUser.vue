@@ -188,6 +188,8 @@ export default {
     },
     deconnecterCurrentUser() {
       this.$store.commit("setCurrentUtilisateur", 0);
+      this.$store.commit("setCommandes",this.currentUtilisateurCommande);
+      this.$store.commit("setCurrentUtilisateurCommande",1);
       this.$router.push({
         name: "inscription"
       });
@@ -206,6 +208,9 @@ export default {
     currentUtilisateur() {
      
       return this.$store.getters.getCurrentUtilisateur;
+    },
+    currentUtilisateurCommande() {
+      return this.$store.getters.getCurrentUtilisateurCommande;
     },
 
 
