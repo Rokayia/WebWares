@@ -3,15 +3,22 @@
 
 
 <div class="connectionUser" v-if="isUser">
-  <header  >
+  <header>
       <div class="logo">
         <router-link to="/">
           <img class="logoimg" src="@/assets/logo1.jpg" alt="Logo de l'application"
         /></router-link>
       </div>
-      <nav class="navbar">
-        <router-link to="/">Accueil</router-link>
-        <router-link to="/listProducts">Tous les Produits</router-link>
+  
+
+
+<nav class="partie-nav">
+   
+      <ul class="nav-bar">
+        <input type='checkbox' id='check' />
+        <span class="menu">
+        <router-link class="nav-burger" to="/">Accueil</router-link>
+        <router-link  class="nav-burger" to="/listProducts">Tous les Produits</router-link>
 
         <!--Menu déroulant -->
         <ul class="nav-dropdown">
@@ -30,7 +37,9 @@
               </div>
             </ul>
           </li>
-        </ul>
+        </ul> 
+     
+     
         <div v-if="isVisible">
           <ul class="nav-dropdown">
             <router-link
@@ -71,8 +80,13 @@
             </div>
           </div>
         </div>
+        <label for="check" class="close-menu"><font-awesome-icon :icon="['fas', 'Rectangle-Xmark']" size="2x" /></label>
+    </span>
+          <label for="check" class="open-menu"><font-awesome-icon :icon="['fas', 'bars']" size="3x" /></label>
+       
+      </ul>
+    </nav>
       
-      </nav>
     </header>
     </div>
     <div v-else>
@@ -132,6 +146,7 @@
 
    
 export default {
+ 
  props: {
     currentUtilisateur: {
             type: Object,
@@ -145,7 +160,8 @@ export default {
         }
         
     },
-    
+
+
   methods: {
     getCatégories(categoriesId) {
       this.$router.push({
@@ -172,11 +188,11 @@ export default {
 
    
     // },
-    
+
+  
+},
 
 
-
-  },
   computed: {
     categories() {
       return this.$store.state.categories;
@@ -202,20 +218,73 @@ export default {
 }
 header {
   display: flex;
-
+height: 100px;
   // justify-content: space-between;
   align-items: center;
 
   width: 100%;
 }
-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.no-scroll {
+  overflow: hidden;
+}
+.partie-nav{
+  height: 100%;
+}
 
+
+.nav-bar {
   width: 100%;
-  gap: 16px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    position: relative;
+    position:fixed;
+    z-index: 1;
+    padding: 12px 20px;
+}
+.menu {
+display: flex;
+}
 
+.menu li a{
+  display: inline-block;
+    text-decoration: none;
+    color: white;
+    font-weight: 100;
+    text-align: center;
+    transition: 0.15s ease-in-out;
+    position: relative;
+    text-transform: uppercase;
+}
+.menu li a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: white;
+    transition: 0.1s ease;
+}
+.menu li a:hover:after {width: 100%;}
+.open-menu , .close-menu {
+    position: absolute;
+    color: black;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: none;
+}
+.open-menu {
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+.close-menu {
+    top: 20px;
+    right: 20px;
+}
   a {
     font-weight: bold;
     color: #3b3b3b;
@@ -230,10 +299,11 @@ nav {
     text-decoration: none;
     font-weight: bold;
     color: #3b3b3b;
-    padding: 10px;
+
     display: inline;
     margin: 0;
   }
+
 
   /* Menu déroulant */
   .nav-dropdown {
@@ -244,7 +314,7 @@ nav {
 
   .dropdown {
     position: relative;
-    display: inline-block;
+
   }
   .dropdown:hover {
     color: #9abf72;
@@ -279,7 +349,7 @@ nav {
   .dropdown:hover .dropdown-content {
     display: block;
   }
-}
+
 
 .circle {
   width: 60px;
@@ -292,4 +362,53 @@ nav {
   align-items: center;
   justify-content: center;
 }
+
+
+.open-menu , .close-menu {
+    position: absolute;
+    color: black;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: none;
+}
+.open-menu {
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+.close-menu {
+    top: 20px;
+    right: 20px;
+}
+
+#check {display: none;}
+
+@media(max-width: 610px){
+    .menu {
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        height: 55vh;
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 100;
+        background-color: grey;
+        transition: all 0.2s ease-in-out;
+    }
+    .nav-link {
+      padding: 0px;
+    }
+  
+    .connect {
+      flex-direction: column;
+    }
+
+    .open-menu , .close-menu {
+      display: block;
+    }
+    #check:checked ~ .menu {right: 0;}
+}
+
 </style>
