@@ -217,9 +217,9 @@ export default {
     // Utilisez cette méthode computed pour accéder à la méthode totalBag depuis le store
   },
   mounted() {
-    this.$store.dispatch("loadProds");
-    this.$store.dispatch("loadCommandes");
-    this.$store.dispatch("oneUtilisateur");
+    // this.$store.dispatch("loadProds");
+    // this.$store.dispatch("loadCommandes");
+    // this.$store.dispatch("oneUtilisateur");
  
     if (localStorage.getItem('reloaded')) {
           localStorage.removeItem('reloaded');

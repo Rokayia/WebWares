@@ -107,10 +107,10 @@ export default {
    },
   },
     mounted() {
-      this.$store.dispatch("loadCommandes");
-    this.$store.dispatch("loadUtilisateurs"),
-    this.$store.dispatch("oneUtilisateur")
-    this.$store.dispatch("oneUtilisateurCommande")
+    //   this.$store.dispatch("loadCommandes");
+    // this.$store.dispatch("loadUtilisateurs"),
+    // this.$store.dispatch("oneUtilisateur")
+    // this.$store.dispatch("oneUtilisateurCommande")
   },
 };
 </script>

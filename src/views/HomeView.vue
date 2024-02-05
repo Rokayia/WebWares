@@ -111,8 +111,9 @@ export default {
 
   },
   mounted() {
-    this.$store.dispatch("loadCommandes");
-    this.$store.dispatch("loadUtilisateurs"),
+    this.$store.dispatch("loadCommandes")
+    this.$store.dispatch("loadUtilisateurs")
+    this.$store.dispatch("loadProds")
     this.$store.dispatch("oneUtilisateur")
     this.$store.dispatch("oneUtilisateurCommande")
     if (localStorage.getItem('reloaded')) {

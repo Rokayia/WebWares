@@ -81,8 +81,8 @@ myFooter,
   },
   mounted() {
     
-    this.$store.dispatch("loadUtilisateurs"),
-    this.$store.dispatch("oneUtilisateur")
+    // this.$store.dispatch("loadUtilisateurs"),
+    // this.$store.dispatch("oneUtilisateur")
   },
 };
 </script>

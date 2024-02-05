@@ -150,9 +150,9 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch("loadProds"),
-      this.$store.dispatch("loadUtilisateurs"),
-      this.$store.dispatch("oneUtilisateur");
+    // this.$store.dispatch("loadProds")
+      // this.$store.dispatch("loadUtilisateurs"),
+      // this.$store.dispatch("oneUtilisateur");
 
     if (localStorage.getItem("reloaded")) {
       localStorage.removeItem("reloaded");

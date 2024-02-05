@@ -156,8 +156,8 @@ export default {
   mounted() {
     this.categorieId = this.$route.params.id;
     console.log("categorie" + this.categorieId);
-    this.$store.dispatch("loadUtilisateurs"),
-      this.$store.dispatch("oneUtilisateur");
+    // this.$store.dispatch("loadUtilisateurs"),
+    //   this.$store.dispatch("oneUtilisateur");
   },
 };
 </script>

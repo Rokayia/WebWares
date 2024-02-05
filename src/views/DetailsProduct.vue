@@ -91,8 +91,8 @@ export default {
   mounted() {
     let prodId = this.$route.params.id;
     this.$store.dispatch("oneProd", prodId);
-    this.$store.dispatch("loadUtilisateurs"),
-    this.$store.dispatch("oneUtilisateur")
+    // this.$store.dispatch("loadUtilisateurs"),
+    // this.$store.dispatch("oneUtilisateur")
   },
 };
 </script>
