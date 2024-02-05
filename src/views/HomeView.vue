@@ -84,6 +84,8 @@ export default {
    
     deconnecterCurrentUser() {
       this.$store.commit("setCurrentUtilisateur", 0);
+      this.$store.commit("setCommandes",this.currentUtilisateurCommande);
+      this.$store.commit("setCurrentUtilisateurCommande",1);
       this.$router.push({
         name: "home"
       });
@@ -103,12 +105,16 @@ export default {
      
       return this.$store.getters.getCurrentUtilisateur;
     },
+    currentUtilisateurCommande() {
+      return this.$store.getters.getCurrentUtilisateurCommande;
+    },
 
   },
   mounted() {
    
     this.$store.dispatch("loadUtilisateurs"),
     this.$store.dispatch("oneUtilisateur")
+    this.$store.dispatch("oneUtilisateurCommande")
     if (localStorage.getItem('reloaded')) {
           localStorage.removeItem('reloaded');
     } else {

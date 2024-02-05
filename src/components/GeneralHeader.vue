@@ -36,7 +36,7 @@
             <router-link
                   :to="'/myOrder' "
                 >
-            <font-awesome-icon :icon="['fas', 'basket-shopping']" size="3x" />
+            <font-awesome-icon :icon="['fas', 'basket-shopping']" size="3x" />{{ currentUtilisateurCommande.produits.length }}
           </router-link>
             <li class="nav-link dropdown">
               <div class="circle">
@@ -184,7 +184,9 @@ export default {
     // currentUtilisateur() {
     //   return this.$store.state.getCurrentUtilisateur;
     // },
-    
+    currentUtilisateurCommande() {
+      return this.$store.getters.getCurrentUtilisateurCommande;
+    },
   },
 
   
