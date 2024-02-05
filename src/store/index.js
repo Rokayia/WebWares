@@ -321,7 +321,9 @@ export default createStore({
       let currentUtilisateurCommande = JSON.parse(
         localStorage.getItem("currentUtilisateurCommande")
       );
+     
       if (currentUtilisateurCommande) {
+        
         state.currentUtilisateurCommande = currentUtilisateurCommande;
 
         return state.currentUtilisateurCommande;
@@ -334,6 +336,7 @@ export default createStore({
       let currentUtilisateur = JSON.parse(
         localStorage.getItem("currentUtilisateur")
       );
+    
       if (currentUtilisateur) {
         state.currentUtilisateur = currentUtilisateur;
 
@@ -357,6 +360,7 @@ export default createStore({
       }
     },
     setCurrentUtilisateurCommande(state,commande) {
+
       if(commande){
         console.log("dans le commande")
         state.currentUtilisateurCommande = commande;
@@ -371,6 +375,7 @@ export default createStore({
           localStorage.getItem(`commande_${currentValue.userId}`)
         );
         if (utilisateur && utilisateur.id === commandeSelected.userId) {
+          console.log("dans le if setcur")
           state.currentUtilisateurCommande = currentValue;
           localStorage.setItem(
             `currentUtilisateurCommande`,
@@ -394,13 +399,17 @@ console.log("utilisateur avant undef" + utilisateur)
       state.utilisateurs = utilisateurs;
     },
     setCommandes(state, commande) {
-      this.getters.getCommandes.forEach(function (currentValue) {
-        if(currentValue.id==commande.id){
-          console.log("dans le if commande"+ commande.coutTotal)
-          localStorage.setItem(`commande_${currentValue.id}`, JSON.stringify(commande));
-        }
-       
-      });
+      if(commande!=undefined){
+        console.log("dans le ")
+        this.getters.getCommandes.forEach(function (currentValue) {
+          if(currentValue.id==commande.id){
+            console.log("dans le if commande"+ commande.coutTotal)
+            localStorage.setItem(`commande_${currentValue.id}`, JSON.stringify(commande));
+          }
+         
+        });
+      }
+  
      
     },
     addProd(state, prod) {
@@ -477,22 +486,22 @@ console.log("utilisateur avant undef" + utilisateur)
         .map((key) => JSON.parse(localStorage.getItem(key)));
       context.commit("setUtilisateur", users);
     },
-    // loadCommandes(context) {
-    //   //localStorage.clear();
+    loadCommandes(context) {
+      //localStorage.clear();
 
-    //   context.getters.getCommandes.forEach(function (currentValue) {
-    //     let selectedCommande = localStorage.getItem(
-    //       `commande_${currentValue.id}`
-    //     );
-    //     if (!selectedCommande) {
-    //       context.commit("addCommande", currentValue);
-    //     }
-    //   });
-    //   let commandes = Object.keys(localStorage)
-    //     .filter((key) => key.startsWith("commande_"))
-    //     .map((key) => JSON.parse(localStorage.getItem(key)));
-    //   context.commit("setCommandes", commandes);
-    // },
+      context.getters.getCommandes.forEach(function (currentValue) {
+        let selectedCommande = localStorage.getItem(
+          `commande_${currentValue.id}`
+        );
+        if (!selectedCommande) {
+          context.commit("addCommande", currentValue);
+        }
+      });
+      let commandes = Object.keys(localStorage)
+        .filter((key) => key.startsWith("commande_"))
+        .map((key) => JSON.parse(localStorage.getItem(key)));
+      context.commit("setCommandes", commandes);
+    },
     oneProd(context, prodId) {
       let selectedProd = localStorage.getItem(`prod_${prodId}`);
       console.log(selectedProd);

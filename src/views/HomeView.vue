@@ -2,7 +2,7 @@
 
 
   <div class="homepage">
-    <MyHeader :currentUtilisateur="currentUtilisateur" @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser"/>
+    <MyHeader :currentUtilisateur="currentUtilisateur" :currentUtilisateurCommande="currentUtilisateurCommande" @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser"/>
 
 
 
@@ -111,7 +111,7 @@ export default {
 
   },
   mounted() {
-   
+    this.$store.dispatch("loadCommandes");
     this.$store.dispatch("loadUtilisateurs"),
     this.$store.dispatch("oneUtilisateur")
     this.$store.dispatch("oneUtilisateurCommande")

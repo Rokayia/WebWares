@@ -1,12 +1,12 @@
 <template>
     <FormUtilisateurVue :currentUtilisateur="utilisateurs[0]"
     />
-    <InfosUtilisateurUn />
+  
 </template>
 
 <script>
 import FormUtilisateurVue from '@/components/FormUtilisateur.vue';
-import InfosUtilisateurUn from '@/store/index.js';
+
 import { mapState } from 'vuex';
 
 export default {
@@ -30,7 +30,7 @@ export default {
     },
     components: {
         FormUtilisateurVue,
-        InfosUtilisateurUn,
+       
     },
     computed: {
         ...mapState(["utilisateurs"])

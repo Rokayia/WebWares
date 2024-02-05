@@ -1,6 +1,7 @@
 <template>
   <MyHeader
     :currentUtilisateur="currentUtilisateur"
+    :currentUtilisateurCommande="currentUtilisateurCommande" 
     @deconnexionEventBtn="deconnecterCurrentUser"
     :is-visible="isHere()"
     :is-user="isUser"

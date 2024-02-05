@@ -1,6 +1,7 @@
 <template>
   <MyHeader
     :currentUtilisateur="currentUtilisateur"
+    :currentUtilisateurCommande="currentUtilisateurCommande" 
     @deconnexionEventBtn="deconnecterCurrentUser"
     :is-visible="isHere()"
     :is-user="isUser"
@@ -100,9 +101,9 @@ export default {
     deconnecterCurrentUser() {
       this.$store.commit("setCurrentUtilisateur", 0);
       this.$store.commit("setCommandes",this.currentUtilisateurCommande);
-      this.$store.commit("setCurrentUtilisateurCommande",1);
+      this.$store.commit("setCurrentUtilisateurCommande");
       this.$router.push({
-        name: "myorder",
+        name: "home",
       });
       location.reload();
     },
@@ -219,7 +220,13 @@ export default {
     this.$store.dispatch("loadProds");
     this.$store.dispatch("loadCommandes");
     this.$store.dispatch("oneUtilisateur");
-    this.$store.dispatch("oneUtilisateurCommande");
+ 
+    if (localStorage.getItem('reloaded')) {
+          localStorage.removeItem('reloaded');
+    } else {
+        localStorage.setItem('reloaded', '1');
+        location.reload();
+    }
   },
 };
 </script>
