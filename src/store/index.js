@@ -21,6 +21,12 @@ function getLastCommande() {
 }
 export default createStore({
   state: {
+
+
+    
+    
+    
+    
     categories: [
       { id: 1, name: "Mobilier d'intérieur" },
       { id: 2, name: "Luminaires" },
@@ -250,6 +256,7 @@ export default createStore({
         email: "entrepriseA@example.com",
         motDePasse: "motdepasseA",
         role: "USER",
+        
       },
       {
         id: 2,
@@ -261,11 +268,17 @@ export default createStore({
         email: "entrepriseB@example.com",
         motDePasse: "motdepasseB",
         role: "ADMIN",
+        
+
       },
     ],
     currentProduct: [],
+
+
     currentUtilisateur: {},
+
     currentUtilisateurCommande: {},
+
   },
   getters: {
     filteredProduits(state) {
@@ -278,6 +291,7 @@ export default createStore({
     getProduits(state) {
       return state.produits;
     },
+   
 
     getUtilisateurs(state) {
       let users = Object.keys(localStorage)
@@ -512,6 +526,7 @@ console.log("utilisateur avant undef" + utilisateur)
         context.commit("setCurrentUtilisateur", 0);
       }
     },
+
     oneUtilisateurCommande(context) {
       let selectedUtilisateur = localStorage.getItem(
         `currentUtilisateurCommande`
@@ -524,6 +539,15 @@ console.log("utilisateur avant undef" + utilisateur)
         context.commit("setCurrentUtilisateurCommande", 0);
       }
     },
+
   },
+
+
+
+
+
+
+
+
   modules: {},
 });
