@@ -1,6 +1,9 @@
 <template>
  
- <MyHeader :currentUtilisateur="currentUtilisateur" @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser"/>
+ <MyHeader :currentUtilisateur="currentUtilisateur"
+ :currentUtilisateurCommande="currentUtilisateurCommande" 
+  @deconnexionEventBtn="deconnecterCurrentUser" 
+  :is-visible="isHere()" :is-user="isUser"/>
   
 
 
@@ -60,6 +63,8 @@ export default {
     },   
     deconnecterCurrentUser() {
       this.$store.commit("setCurrentUtilisateur", 0);
+      this.$store.commit("setCommandes",this.currentUtilisateurCommande);
+      this.$store.commit("setCurrentUtilisateurCommande",1);
       this.$router.push({
         name: "detailsproduits"
       });
@@ -86,8 +91,8 @@ export default {
   mounted() {
     let prodId = this.$route.params.id;
     this.$store.dispatch("oneProd", prodId);
-    this.$store.dispatch("loadUtilisateurs"),
-    this.$store.dispatch("oneUtilisateur")
+    // this.$store.dispatch("loadUtilisateurs"),
+    // this.$store.dispatch("oneUtilisateur")
   },
 };
 </script>

@@ -9,9 +9,17 @@ import ConnectUser from "../views/ConnexionUser.vue";
 import InscriptionUser from "../views/InscriptionUser.vue";
 
 
+
 import DetailsView from '../views/DetailsProduct.vue'
+
+import compoRecapClient from '../views/RecapCommandePageTest.vue'
+
+
+
+
 import MyOrder from '../views/OrderUser.vue'
 import CategoriesAdminView from "../views/CategoriesProductsAdmin.vue";
+
 import CategoriesView from '../views/CategoriesProducts.vue'
 import ListProductsView from '../views/ListProducts.vue'
 
@@ -23,7 +31,20 @@ const routes = [
     component: HomeView,
   },
 
+
+
+
+
+
+  {
+    path: '/recapClient',
+    name: 'nomRecapClient',
+    component: compoRecapClient,
+},
+
+
   { path: "/mentions-legales",    name: "mentionslegales",component: MentionsLegales },
+
   {
     path: "/politique-de-confidentialite",   name: "politiquedeconfidentialite",
     component: PolitiqueDeConfidentialite,
@@ -35,6 +56,7 @@ const routes = [
     name: "connect",
     component: ConnectUser,
   },
+ 
 
   {
     path: "/inscription",
@@ -61,6 +83,7 @@ component: MyOrder},
   {
     path: "/detailsProduct/:id",
     name: "detailsproduits",
+
 
     component: DetailsView,
   },

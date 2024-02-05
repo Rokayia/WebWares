@@ -13,8 +13,20 @@ function getLastUtilisateur() {
   //  On récupère le dernier is si il existe sinon on commence à 0
   return lastUtilisateur ? parseInt(lastUtilisateur) : 0;
 }
+function getLastCommande() {
+  // Récupérer l'id du dernier utilisateur enregistré
+  let lastCommande = localStorage.getItem("lastCommandeId");
+  //  On récupère le dernier is si il existe sinon on commence à 0
+  return lastCommande ? parseInt(lastCommande) : 0;
+}
 export default createStore({
   state: {
+
+
+    
+    
+    
+    
     categories: [
       { id: 1, name: "Mobilier d'intérieur" },
       { id: 2, name: "Luminaires" },
@@ -23,7 +35,8 @@ export default createStore({
     ],
     query: "",
     lastProd: getLastProd(),
-    lastUtilisateur:getLastUtilisateur(),
+    lastUtilisateur: getLastUtilisateur(),
+    lastCommande: getLastCommande(),
     produits: [
       {
         id: 1,
@@ -211,25 +224,24 @@ export default createStore({
       },
     ],
 
-   
-    commandes : [
+    commandes: [
       {
         id: 1,
         produits: [
           { produitId: 1, quantite: 2 },
-          { produitId: 3, quantite: 1 }
+          { produitId: 3, quantite: 1 },
         ],
         coutTotal: 689.97,
-        userId: 1
+        userId: 1,
       },
       {
         id: 2,
         produits: [
           { produitId: 2, quantite: 1 },
-          { produitId: 4, quantite: 3 }
+          { produitId: 4, quantite: 3 },
         ],
         coutTotal: 539.96,
-        userId: 2
+        userId: 2,
       },
     ],
 
@@ -244,6 +256,7 @@ export default createStore({
         email: "entrepriseA@example.com",
         motDePasse: "motdepasseA",
         role: "USER",
+        
       },
       {
         id: 2,
@@ -255,10 +268,16 @@ export default createStore({
         email: "entrepriseB@example.com",
         motDePasse: "motdepasseB",
         role: "ADMIN",
+        
+
       },
     ],
     currentProduct: [],
+
+
     currentUtilisateur: {},
+
+    currentUtilisateurCommande: {},
 
   },
   getters: {
@@ -272,53 +291,103 @@ export default createStore({
     getProduits(state) {
       return state.produits;
     },
+   
 
-    getUtilisateurs(state){
+    getUtilisateurs(state) {
       let users = Object.keys(localStorage)
         .filter((key) => key.startsWith("utilisateur_"))
         .map((key) => JSON.parse(localStorage.getItem(key)));
-        console.log("getuser" + users);
-        if(users.length){
-          state.utilisateurs = users;
-        }
+      console.log("getuser" + users);
+      if (users.length) {
+        state.utilisateurs = users;
+      }
       return state.utilisateurs;
-
     },
-    getCategories(state){
+    getCommandes(state) {
+      let commandes = Object.keys(localStorage)
+        .filter((key) => key.startsWith("commande_"))
+        .map((key) => JSON.parse(localStorage.getItem(key)));
+
+      if (commandes.length) {
+        state.commandes = commandes;
+      }
+      return state.commandes;
+    },
+    getCategories(state) {
       return state.categories;
-
     },
-    
-    getCurrentUtilisateur(state){
-      let currentUtilisateur= JSON.parse(localStorage.getItem("currentUtilisateur"));
-      if(currentUtilisateur){
-        state.currentUtilisateur=currentUtilisateur;
-        console.log("dans le if getcurrent" + state.currentUtilisateur.raisonSociale)
-        return state.currentUtilisateur;
-      }else{
-        console.log("dans le else getcurrent")
+
+    getCurrentUtilisateurCommande(state) {
+      let currentUtilisateurCommande = JSON.parse(
+        localStorage.getItem("currentUtilisateurCommande")
+      );
+     
+      if (currentUtilisateurCommande) {
+        
+        state.currentUtilisateurCommande = currentUtilisateurCommande;
+
+        return state.currentUtilisateurCommande;
+      } else {
         return undefined;
       }
-     
+    },
 
-    }
+    getCurrentUtilisateur(state) {
+      let currentUtilisateur = JSON.parse(
+        localStorage.getItem("currentUtilisateur")
+      );
+    
+      if (currentUtilisateur) {
+        state.currentUtilisateur = currentUtilisateur;
+
+        return state.currentUtilisateur;
+      } else {
+        return undefined;
+      }
+    },
   },
   mutations: {
     setQuery(state, query) {
       state.query = query;
     },
     setCurrentUtilisateur(state, utilisateur) {
-      console.log("dans le set")
-      if(utilisateur==0){
-        console.log("dans le if")
-        localStorage.removeItem(`currentUtilisateur`)
-      }else{
-        console.log("dans le else")
+      console.log("dans le current");
+      if (utilisateur == 0) {
+        localStorage.removeItem(`currentUtilisateur`);
+      } else {
         state.currentUtilisateur = utilisateur;
-        console.log("currentutilisateur store" + state.currentUtilisateur)
         localStorage.setItem(`currentUtilisateur`, JSON.stringify(utilisateur));
       }
-      
+    },
+    setCurrentUtilisateurCommande(state,commande) {
+
+      if(commande){
+        console.log("dans le commande")
+        state.currentUtilisateurCommande = commande;
+        localStorage.setItem(
+          `currentUtilisateurCommande`,
+          JSON.stringify(commande)
+        );
+      }else{
+      let utilisateur = this.getters.getCurrentUtilisateur;
+      this.getters.getCommandes.forEach(function (currentValue) {
+        let commandeSelected = JSON.parse(
+          localStorage.getItem(`commande_${currentValue.userId}`)
+        );
+        if (utilisateur && utilisateur.id === commandeSelected.userId) {
+          console.log("dans le if setcur")
+          state.currentUtilisateurCommande = currentValue;
+          localStorage.setItem(
+            `currentUtilisateurCommande`,
+            JSON.stringify(currentValue)
+          );
+        }
+      });
+console.log("utilisateur avant undef" + utilisateur)
+      if (utilisateur == undefined) {
+        localStorage.removeItem(`currentUtilisateurCommande`);
+      }
+    }
     },
     setCurrentProduct(state, prod) {
       state.currentProduct = prod;
@@ -329,8 +398,21 @@ export default createStore({
     setUtilisateur(state, utilisateurs) {
       state.utilisateurs = utilisateurs;
     },
+    setCommandes(state, commande) {
+      if(commande!=undefined){
+        console.log("dans le ")
+        this.getters.getCommandes.forEach(function (currentValue) {
+          if(currentValue.id==commande.id){
+            console.log("dans le if commande"+ commande.coutTotal)
+            localStorage.setItem(`commande_${currentValue.id}`, JSON.stringify(commande));
+          }
+         
+        });
+      }
+  
+     
+    },
     addProd(state, prod) {
-
       // On incrément ele dernier id de 1
 
       state.lastProd += 1;
@@ -346,9 +428,31 @@ export default createStore({
 
       utilisateur.id = state.lastUtilisateur;
 
-      localStorage.setItem(`utilisateur_${utilisateur.id}`, JSON.stringify(utilisateur));
+      localStorage.setItem(
+        `utilisateur_${utilisateur.id}`,
+        JSON.stringify(utilisateur)
+      );
 
       localStorage.setItem("lastUtilisateurId", state.lastUtilisateur);
+    },
+    addCommande(state, commande) {
+      state.lastCommande += 1;
+
+      commande.id = state.lastCommande;
+
+      localStorage.setItem(`commande_${commande.id}`, JSON.stringify(commande));
+
+      localStorage.setItem("lastCommandeId", state.lastCommande);
+    },
+    deleteProd(state, prodId){
+      let index = state.getters.getProduits.findIndex(prod => prod.id === prodId)
+      if(index !== -1){
+        if(confirm('Voulez-vous vraiment supprimer cet produit ?')){
+          state.produits.splice(index, 1)
+          localStorage.removeItem(`prod_${prodId}`)
+            alert('Utilisateur supprimé')
+        }
+      }
     },
   },
   actions: {
@@ -365,11 +469,14 @@ export default createStore({
         .map((key) => JSON.parse(localStorage.getItem(key)));
       context.commit("setProduct", prods);
     },
+
     loadUtilisateurs(context) {
       //localStorage.clear();
-      
+
       context.getters.getUtilisateurs.forEach(function (currentValue) {
-        let selectedUtilisateur = localStorage.getItem(`utilisateur_${currentValue.id}`);
+        let selectedUtilisateur = localStorage.getItem(
+          `utilisateur_${currentValue.id}`
+        );
         if (!selectedUtilisateur) {
           context.commit("addUtilisateur", currentValue);
         }
@@ -378,6 +485,22 @@ export default createStore({
         .filter((key) => key.startsWith("utilisateur_"))
         .map((key) => JSON.parse(localStorage.getItem(key)));
       context.commit("setUtilisateur", users);
+    },
+    loadCommandes(context) {
+      //localStorage.clear();
+
+      context.getters.getCommandes.forEach(function (currentValue) {
+        let selectedCommande = localStorage.getItem(
+          `commande_${currentValue.id}`
+        );
+        if (!selectedCommande) {
+          context.commit("addCommande", currentValue);
+        }
+      });
+      let commandes = Object.keys(localStorage)
+        .filter((key) => key.startsWith("commande_"))
+        .map((key) => JSON.parse(localStorage.getItem(key)));
+      context.commit("setCommandes", commandes);
     },
     oneProd(context, prodId) {
       let selectedProd = localStorage.getItem(`prod_${prodId}`);
@@ -389,17 +512,51 @@ export default createStore({
         alert("Produit introuvable");
       }
     },
-    oneUtilisateur(context) {
-      let selectedUtilisateur= localStorage.getItem(`currentUtilisateur`);
-      console.log(selectedUtilisateur);
+    oneUtilisateurinList(context, utilisateurId) {
+      let selectedUtilisateur = localStorage.getItem(
+        `utilisateur_${utilisateurId}`
+      );
+
       if (selectedUtilisateur) {
-        console.log("dans le if oneutil")
+        let userObj = JSON.parse(selectedUtilisateur);
+
+        context.commit("setCurrentProduct", userObj);
+      } else {
+        alert("Produit introuvable");
+      }
+    },
+    oneUtilisateur(context) {
+      let selectedUtilisateur = localStorage.getItem(`currentUtilisateur`);
+
+      if (selectedUtilisateur) {
         let utilisateurObj = JSON.parse(selectedUtilisateur);
         context.commit("setCurrentUtilisateur", utilisateurObj);
       } else {
         context.commit("setCurrentUtilisateur", 0);
       }
     },
+
+    oneUtilisateurCommande(context) {
+      let selectedUtilisateur = localStorage.getItem(
+        `currentUtilisateurCommande`
+      );
+
+      if (selectedUtilisateur) {
+        let utilisateurObj = JSON.parse(selectedUtilisateur);
+        context.commit("setCurrentUtilisateurCommande", utilisateurObj);
+      } else {
+        context.commit("setCurrentUtilisateurCommande", 0);
+      }
+    },
+
   },
+
+
+
+
+
+
+
+
   modules: {},
 });

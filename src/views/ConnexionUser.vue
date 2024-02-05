@@ -1,6 +1,7 @@
 <template>
   <MyHeader
     :currentUtilisateur="currentUtilisateur"
+    :currentUtilisateurCommande="currentUtilisateurCommande" 
     @deconnexionEventBtn="deconnecterCurrentUser"
     :is-visible="isHere()"
     :is-user="isUser"
@@ -76,6 +77,8 @@ export default {
       if (this.verifUser.role === "USER") {
         console.log("dans USER");
             this.$store.commit("setCurrentUtilisateur", this.verifUser);
+            console.log("apres commiy USER");
+            this.$store.commit("setCurrentUtilisateurCommande");
             this.$router.push("/");
             trouve = true;
           } else if(this.verifUser.role === "ADMIN"){
@@ -104,9 +107,10 @@ export default {
    },
   },
     mounted() {
-    
-    this.$store.dispatch("loadUtilisateurs"),
-    this.$store.dispatch("oneUtilisateur")
+    //   this.$store.dispatch("loadCommandes");
+    // this.$store.dispatch("loadUtilisateurs"),
+    // this.$store.dispatch("oneUtilisateur")
+    // this.$store.dispatch("oneUtilisateurCommande")
   },
 };
 </script>

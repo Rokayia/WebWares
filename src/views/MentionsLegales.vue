@@ -1,5 +1,8 @@
 <template>
-    <MyHeader :currentUtilisateur="currentUtilisateur" @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser"/>
+    <MyHeader :currentUtilisateur="currentUtilisateur" 
+    :currentUtilisateurCommande="currentUtilisateurCommande" 
+    @deconnexionEventBtn="deconnecterCurrentUser" 
+    :is-visible="isHere()" :is-user="isUser"/>
   
     <div class="mentionLegal">
         <h1>Mentions Legales</h1>
@@ -50,6 +53,8 @@ myFooter,
    
     deconnecterCurrentUser() {
       this.$store.commit("setCurrentUtilisateur", 0);
+      this.$store.commit("setCommandes",this.currentUtilisateurCommande);
+      this.$store.commit("setCurrentUtilisateurCommande",1);
       this.$router.push({
         name: "mentionslegales"
       });
@@ -69,12 +74,15 @@ myFooter,
      
       return this.$store.getters.getCurrentUtilisateur;
     },
+    currentUtilisateurCommande() {
+      return this.$store.getters.getCurrentUtilisateurCommande;
+    },
 
   },
   mounted() {
     
-    this.$store.dispatch("loadUtilisateurs"),
-    this.$store.dispatch("oneUtilisateur")
+    // this.$store.dispatch("loadUtilisateurs"),
+    // this.$store.dispatch("oneUtilisateur")
   },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button :class="btnClass" @click="btnLandingPage">{{ label }}</button>
+    <button v-show="showButton" :class="btnClass" @click="btnLandingPage">{{ label }}</button>
   </div>
 </template>
 
@@ -9,6 +9,10 @@ export default {
     props:{
         label: String,
         backgroundColor: String,
+        showButton:{
+            type:Boolean,
+            default:true
+        }
 
     },
 
@@ -28,7 +32,7 @@ export default {
             'ValiderConnexion-btn':this.backgroundColor === 'ValiderConnexion',
             'ValiderInscription-btn':this.backgroundColor === 'ValiderInscription',
             'AjouterPanier-btn':this.backgroundColor === 'AjouterPanier',
-
+            'SupprimerPanier-btn':this.backgroundColor === 'SupprimerPanier',
 
           }
 
@@ -105,6 +109,17 @@ export default {
 }
 .AjouterPanier-btn{
     background-color: #7d9167;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border:none;
+    padding: 10px 30px 10px 30px;
+    margin-top: 3px;
+    border-radius: 5px;
+
+}
+.SupprimerPanier-btn{
+    background-color: red;
     color: white;
     cursor: pointer;
     font-size: 1.2rem;

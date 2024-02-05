@@ -1,11 +1,12 @@
 <template>
-   <MyHeader
+  <MyHeader
     :currentUtilisateur="currentUtilisateur"
+    :currentUtilisateurCommande="currentUtilisateurCommande" 
     @deconnexionEventBtn="deconnecterCurrentUser"
     :is-visible="isHere()"
     :is-user="isUser"
   />
-  
+
   <SearchBar v-on:click="filtered = true" />
   <div class="produits">
     <div class="prod" v-for="item in produits" :key="item.id">
@@ -14,11 +15,25 @@
         :titre="item.titre"
         :prix="item.prix"
         :moq="item.moq"
-        v-on:click="getDetails(item.id)"
-        backgroundColor="red"
+        :afficheMoq="true"
+        :affichedetails="true"
+        @detailsCardEventBtn="getDetails(item.id)"
+        backgroundColor="beige"
       >
-      <div v-if="currentUtilisateur">
-        <btnProduct label="Ajouter au panier" backgroundColor="AjouterPanier" />
+        <div v-if="currentUtilisateur">
+          <btnProduct
+            label="Ajouter au panier"
+            backgroundColor="AjouterPanier"
+            :showButton="AjouterPanier(item)"
+            @click="addToPanier(item.id)"
+          />
+
+          <btnProduct
+            label="Supprimer du panier"
+            backgroundColor="SupprimerPanier"
+            :showButton="SupprimerPanier(item)"
+            @click="removeProduct(item)"
+          />
         </div>
       </productCard>
     </div>
@@ -58,19 +73,65 @@ export default {
     },
     deconnecterCurrentUser() {
       this.$store.commit("setCurrentUtilisateur", 0);
+      this.$store.commit("setCommandes",this.currentUtilisateurCommande);
+      this.$store.commit("setCurrentUtilisateurCommande",1);
       this.$router.push({
-        name: "listproduits"
+        name: "listproduits",
       });
-    location.reload();
-   
+      location.reload();
     },
-    isHere(){
-      if(this.currentUtilisateur){
+    isHere() {
+      if (this.currentUtilisateur) {
         return true;
-      }else{
+      } else {
         return false;
       }
-    }
+    },
+    addToPanier(id) {
+
+     let prod = {};
+      prod.produitId = id;
+      prod.quantite = 1;
+      this.currentUtilisateurCommande.produits.push(prod);
+      this.$store.commit(
+        "setCurrentUtilisateurCommande",
+        this.currentUtilisateurCommande
+      );
+    },
+    removeProduct(item) {
+      let index = 0;
+      let trouve=0;
+      this.currentUtilisateurCommande.produits.forEach(function (currentValue) {
+        index++;
+        if (item.id == currentValue.produitId) {
+          trouve = index-1;
+        }
+      });
+      this.currentUtilisateurCommande.produits.splice(trouve, 1);
+
+      this.$store.commit(
+        "setCurrentUtilisateurCommande",
+        this.currentUtilisateurCommande
+      );
+    },
+    AjouterPanier(item) {
+      let bool = true;
+      this.currentUtilisateurCommande.produits.forEach(function (currentValue) {
+        if (item.id == currentValue.produitId) {
+          bool = false;
+        }
+      });
+      return bool;
+    },
+    SupprimerPanier(item) {
+      let bool = false;
+      this.currentUtilisateurCommande.produits.forEach(function (currentValue) {
+        if (item.id == currentValue.produitId) {
+          bool = true;
+        }
+      });
+      return bool;
+    },
   },
   computed: {
     produits() {
@@ -83,12 +144,22 @@ export default {
     currentUtilisateur() {
       return this.$store.getters.getCurrentUtilisateur;
     },
+    currentUtilisateurCommande() {
+      return this.$store.getters.getCurrentUtilisateurCommande;
+    },
   },
 
   mounted() {
-    this.$store.dispatch("loadProds"),
-    this.$store.dispatch("loadUtilisateurs"),
-    this.$store.dispatch("oneUtilisateur")
+    // this.$store.dispatch("loadProds")
+      // this.$store.dispatch("loadUtilisateurs"),
+      // this.$store.dispatch("oneUtilisateur");
+
+    // if (localStorage.getItem("reloaded")) {
+    //   localStorage.removeItem("reloaded");
+    // } else {
+    //   localStorage.setItem("reloaded", "1");
+    //   location.reload();
+    // }
   },
 };
 </script>

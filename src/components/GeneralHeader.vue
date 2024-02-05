@@ -1,9 +1,12 @@
 <template>
+
 <slot></slot>
 
 
-<div class="connectionUser" v-if="isUser">
-  <header>
+
+<div class="connectionUser" v-if="isUser" v-cloak>
+  <header  >
+
       <div class="logo">
         <router-link to="/">
           <img class="logoimg" src="@/assets/logo1.jpg" alt="Logo de l'application"
@@ -42,10 +45,11 @@
      
         <div v-if="isVisible">
           <ul class="nav-dropdown">
+
             <router-link
                   :to="'/myOrder' "
                 >
-            <font-awesome-icon :icon="['fas', 'basket-shopping']" size="3x" />
+            <font-awesome-icon :icon="['fas', 'basket-shopping']" size="3x" />{{ quantitePanier() }}
           </router-link>
             <li class="nav-link dropdown">
               <div class="circle">
@@ -152,6 +156,10 @@ export default {
             type: Object,
             required: true
         },
+        currentUtilisateurCommande: {
+            type: Object,
+            required: true
+        },
         isVisible:{
             type:Boolean
         },
@@ -179,7 +187,11 @@ export default {
 
             this.$emit('deconnexionEventBtn');
         },
-      
+   quantitePanier(){
+    if(this.currentUtilisateurCommande && this.currentUtilisateur){
+     return this.currentUtilisateurCommande.produits.length
+    }
+   }
     // deconnecterCurrentUser() {
     //   this.$store.commit("setCurrentUtilisateur", 0);
     //   this.$router.push({
@@ -200,8 +212,11 @@ export default {
     // currentUtilisateur() {
     //   return this.$store.state.getCurrentUtilisateur;
     // },
-    
-  },
+    // currentUtilisateurCommande() {
+    //   return this.$store.getters.getCurrentUtilisateurCommande;
+    // },
+  }
+  
 
   
   
