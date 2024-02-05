@@ -71,7 +71,7 @@ export default {
   max-width: 400px;
   width: 100%;
   min-width: 270px;
-  height: 360px;
+  height: 400px;
   margin-bottom: 10px;
 }
 .normal-card:hover {
@@ -93,6 +93,9 @@ export default {
 }
 
 
-
+.detailsCard{
+  color : black;
+  text-decoration: underline;
+}
 
 </style>

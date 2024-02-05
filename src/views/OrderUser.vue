@@ -12,7 +12,7 @@
   <h2>Votre panier</h2>
   <hr class="small-hr" />
 
-  <div class="partie-card-panier" v-if="isHere()">
+  <div class="partie-card-panier" v-if="isHere()" v-cloak>
     <!-- Si le panier n'est pas vide, afficher les produits -->
   
       <div v-for="(prod, id) in currentUtilisateurCommande.produits" :key="id">
@@ -50,6 +50,7 @@
                 </button>
                 <div class="total-prix-produit">
                   <span>Total HT : {{ totalProduct(prod, product) }} € </span>
+                 
                   <span>Total TTC : {{ totalProductTTC(prod, product) }} €</span>
                 </div>
               </div>
@@ -67,15 +68,17 @@
           <span>Total HT : {{ totalBag() }} €</span>
           <span>Total TTC : {{ totalBagTTC() }} €</span>
         </div>
-        <button class="validation">Valider</button>
+        <button class="validation" @click="toRecap()">Suivant</button>
       </div>
     </div>
   </div>
 
   <!-- Si le panier est vide, afficher "Panier vide" -->
-  <div v-else>Panier vide</div>
+  <div v-else v-cloak>Panier vide</div>
 
-  <MyFooter />
+  <div>
+    <MyFooter />
+  </div>
 </template>
 
 <script>
@@ -106,6 +109,12 @@ export default {
         name: "home",
       });
       location.reload();
+    },
+    toRecap(){
+    
+      this.$router.push({
+        name: "nomRecapClient",
+      });
     },
     isHere() {
       if (this.currentUtilisateur && this.currentUtilisateurCommande) {

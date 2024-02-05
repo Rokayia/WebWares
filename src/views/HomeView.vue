@@ -1,7 +1,7 @@
 <template>
 
 
-  <div class="homepage">
+  <div class="homepage" v-cloak>
     <MyHeader :currentUtilisateur="currentUtilisateur" :currentUtilisateurCommande="currentUtilisateurCommande" @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser"/>
 
 
@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import btnLanding from "@/components/btnLandingPage.vue";
 import myFooter from "@/components/myFooter.vue";
 import MyHeader from "@/components/GeneralHeader.vue";
@@ -108,6 +109,8 @@ export default {
     currentUtilisateurCommande() {
       return this.$store.getters.getCurrentUtilisateurCommande;
     },
+    
+    ...mapState(["commandes", "produits"]),
 
   },
   mounted() {

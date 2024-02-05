@@ -1,8 +1,7 @@
 <template>
-
   <MyHeader
     :currentUtilisateur="currentUtilisateur"
-    :currentUtilisateurCommande="currentUtilisateurCommande" 
+    :currentUtilisateurCommande="currentUtilisateurCommande"
     @deconnexionEventBtn="deconnecterCurrentUser"
     :is-visible="isHere()"
     :is-user="isUser"
@@ -21,7 +20,7 @@
             type="text"
             id="RaisonSocial"
             placeholder="WebWares"
-            v-model="checkUser.raisonSocial"
+            v-model="checkUser.raisonSociale"
           />
 
           <label for="NumeroSiret">Numéro de Siret</label>
@@ -115,7 +114,6 @@
           />
         </div>
       </div>
-
     </div>
   </div>
   <myFooter />
@@ -130,7 +128,7 @@ export default {
   data() {
     return {
       checkUser: {},
-
+      commande: {},
       error: [],
       errmail: [],
       errmp: [],
@@ -178,55 +176,64 @@ export default {
         this.errmp.length === 0 &&
         this.errconfirmmp.length === 0
       ) {
-        this.checkUser.id += this.$store.state.lastUtilisateur;
+        this.checkUser.role = "USER";
 
         this.$store.commit("addUtilisateur", this.checkUser);
+       
+        this.commande.userId = this.lastUtilisateur;
+        this.commande.coutTotal = 0;
+        this.commande.produits = [];
+
+        this.$store.commit("addCommande",this.commande);
+
+        this.$store.commit("setCurrentUtilisateur", this.checkUser);
+         
+            this.$store.commit("setCurrentUtilisateurCommande",this.commande);
+
         this.checkUser = {};
         this.error = [];
         this.errmail = [];
         this.errmp = [];
       }
+
+      this.$router.push({
+        name: "home",
+      });
     },
     deconnecterCurrentUser() {
       this.$store.commit("setCurrentUtilisateur", 0);
-      this.$store.commit("setCommandes",this.currentUtilisateurCommande);
-      this.$store.commit("setCurrentUtilisateurCommande",1);
+      this.$store.commit("setCommandes", this.currentUtilisateurCommande);
+      this.$store.commit("setCurrentUtilisateurCommande", 1);
       this.$router.push({
-        name: "inscription"
+        name: "inscription",
       });
-    location.reload();
-   
+      location.reload();
     },
-    isHere(){
-      if(this.currentUtilisateur){
+    isHere() {
+      if (this.currentUtilisateur) {
         return true;
-      }else{
+      } else {
         return false;
       }
     },
   },
   computed: {
+   lastUtilisateur() {
+      return this.$store.getters.getLastUtilisateur;
+    },
     currentUtilisateur() {
-     
       return this.$store.getters.getCurrentUtilisateur;
     },
     currentUtilisateurCommande() {
       return this.$store.getters.getCurrentUtilisateurCommande;
     },
+  },
 
-
-
-},
-  
-  mounted(){
+  mounted() {
     // this.$store.dispatch("loadUtilisateurs"),
     // this.$store.dispatch("oneUtilisateur")
- 
-  }
-
-}
-
-
+  },
+};
 </script>
 
 <style>
