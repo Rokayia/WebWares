@@ -9,6 +9,7 @@ import ConnectUser from "../views/ConnexionUser.vue";
 import InscriptionUser from "../views/InscriptionUser.vue";
 
 
+
 import DetailsView from '../views/DetailsProduct.vue'
 
 import compoRecapClient from '../views/RecapCommandePageTest.vue'
@@ -55,6 +56,7 @@ const routes = [
     name: "connect",
     component: ConnectUser,
   },
+ 
 
   {
     path: "/inscription",
