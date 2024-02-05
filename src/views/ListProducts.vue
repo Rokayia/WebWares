@@ -74,7 +74,7 @@ export default {
     deconnecterCurrentUser() {
       this.$store.commit("setCurrentUtilisateur", 0);
       this.$store.commit("setCommandes",this.currentUtilisateurCommande);
-      this.$store.commit("setCurrentUtilisateurCommande",1);
+      this.$store.commit("setCurrentUtilisateurCommande");
       this.$router.push({
         name: "listproduits",
       });
@@ -116,6 +116,7 @@ export default {
     },
     AjouterPanier(item) {
       let bool = true;
+      
       this.currentUtilisateurCommande.produits.forEach(function (currentValue) {
         if (item.id == currentValue.produitId) {
           bool = false;
@@ -154,12 +155,12 @@ export default {
       // this.$store.dispatch("loadUtilisateurs"),
       // this.$store.dispatch("oneUtilisateur");
 
-    // if (localStorage.getItem("reloaded")) {
-    //   localStorage.removeItem("reloaded");
-    // } else {
-    //   localStorage.setItem("reloaded", "1");
-    //   location.reload();
-    // }
+    if (localStorage.getItem("reloaded")) {
+      localStorage.removeItem("reloaded");
+    } else {
+      localStorage.setItem("reloaded", "1");
+      location.reload();
+    }
   },
 };
 </script>

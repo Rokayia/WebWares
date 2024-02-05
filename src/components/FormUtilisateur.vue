@@ -3,7 +3,7 @@
     <div class="containerFormulaire">
         <div class="infosUtilisateurs">
             <form action="">
-                <h3 class="titleForm">Informations utilisateur</h3>
+                <h3 class="titleForm">Informations de livraison</h3>
 
                 <div class="infosPerso">
                     
@@ -32,9 +32,9 @@
                     <input class="espacement" type="text" name="adresse" id="IdAdresse" placeholder="Adresse (exemple : 12 rue de Nulle Part)" :value="currentUtilisateur.adresse" readonly>
 
                 </div>
-                <div class="btnFormulaire">
+                <!-- <div class="btnFormulaire">
                     <button type="button">CONTINUER</button>
-                </div>
+                </div> -->
             </form>
         </div>
     </div>

@@ -105,6 +105,10 @@ export default {
      
      return this.$store.getters.getCurrentUtilisateur;
    },
+   currentUtilisateurCommande() {
+      return this.$store.getters.getCurrentUtilisateurCommande;
+    },
+
   },
     mounted() {
     //   this.$store.dispatch("loadCommandes");
