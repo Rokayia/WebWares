@@ -254,15 +254,16 @@ export default {
    
 }
 }
-}
-
-  },
-  mounted() { 
+},
+  
+  mounted(){
     this.$store.dispatch("loadUtilisateurs"),
     this.$store.dispatch("oneUtilisateur")
  
-  },
-};
+  }
+
+}
+
 
 </script>
 
