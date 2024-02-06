@@ -184,9 +184,10 @@ export default {
         this.commande.coutTotal = 0;
         this.commande.produits = [];
 
-        this.$store.commit("addCommande",this.commande);
+       
 
         this.$store.commit("setCurrentUtilisateur", this.checkUser);
+        this.$store.commit("addCommande",this.commande);
          
             this.$store.commit("setCurrentUtilisateurCommande",this.commande);
 

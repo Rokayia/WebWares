@@ -321,7 +321,7 @@ export default createStore({
 
       if (commandes.length) {
         state.commandes = commandes;
-        console.log("getcommandes" + commandes);
+        console.log("getcommandes" + state.commandes[0].id);
       }
       return state.commandes;
     },
@@ -430,7 +430,7 @@ export default createStore({
     setCommandes(state, commande) {
       if (commande != undefined) {
         this.getters.getCommandes.forEach(function (currentValue) {
-          if (currentValue.id == commande.id) {
+          if (currentValue.id == commande.id && commande.userId==currentValue.userId) {
             console.log("dans le if commande" + commande.coutTotal);
             localStorage.setItem(
               `commande_${currentValue.id}`,
@@ -507,10 +507,16 @@ export default createStore({
         localStorage.removeItem(`commande_${commandeId}`);
       }
     },
-    modifyCommandeDefault(state, commandeId) {
-      let index = this.getters.getCommandes.findIndex(
-        (commande) => commande.id === commandeId
-      );
+    modifyCommandeDefault(state, commandeId,commandeUserId) {
+      console.log("commandeId" + commandeId);
+     let index=-1
+      this.getters.getCommandes.forEach(function (currentValue) {
+     if(currentValue.id == commandeId && currentValue.userId==commandeUserId){
+       index = currentValue.id;
+     }
+      });
+
+     
       console.log("index" + index);
       if (index !== -1) {
         state.commandes[index].coutTotal=0;

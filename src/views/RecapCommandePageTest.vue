@@ -166,16 +166,17 @@ export default {
     },
     validerCommande(){
   
-  
+   let id=this.currentUtilisateurCommande.id;
  
         this.$store.commit("addCommandePrise", this.currentUtilisateurCommande);
         console.log('id current' + this.currentUtilisateurCommande.id )
-        this.$store.commit("modifyCommandeDefault", this.currentUtilisateurCommande.id);
+        this.$store.commit("modifyCommandeDefault", this.currentUtilisateurCommande.id,this.currentUtilisateurCommande.userId);
         this.currentUtilisateurCommande.coutTotal=0;
         this.currentUtilisateurCommande.produits=[]  
+        this.currentUtilisateurCommande.id=id;
         this.$store.commit("setCurrentUtilisateurCommande", this.currentUtilisateurCommande);
         this.$router.push({
-        name: "home",
+        name: "nomRecapClient",
       });
     },
     prixTotal(){
