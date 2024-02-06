@@ -194,11 +194,12 @@ export default {
         this.error = [];
         this.errmail = [];
         this.errmp = [];
-      }
-
+        
       this.$router.push({
         name: "home",
       });
+      }
+
     },
     deconnecterCurrentUser() {
       this.$store.commit("setCurrentUtilisateur", 0);
