@@ -176,7 +176,7 @@ export default {
         this.currentUtilisateurCommande.id=id;
         this.$store.commit("setCurrentUtilisateurCommande", this.currentUtilisateurCommande);
         this.$router.push({
-        name: "nomRecapClient",
+        name: "home",
       });
     },
     prixTotal(){
