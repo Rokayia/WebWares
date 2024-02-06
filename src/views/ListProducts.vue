@@ -180,4 +180,10 @@ export default {
   max-width: 400px;
   background-color: #eadfd8;
 }
+
+@media(max-width:584px){
+  .searsh input{
+    width: 200px;
+  }
+}
 </style>
