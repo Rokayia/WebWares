@@ -125,13 +125,18 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
 }
 .containerConnect {
   max-width: 600px;
-  width: 30%;
+  width: 50%;
   padding: 35px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
+  background-color: #a7c28a28;
+  box-shadow: 0px 0px 10px 1px #00000029;
 }
 .containerConnect h1 {
   color: #a7c28a;
@@ -144,6 +149,7 @@ export default {
 .containerConnect input {
   text-align: center;
   height: 40px;
+  width: 200px;
   border: none;
   outline: 2px solid #a7c28a;
   border-radius: 5px;

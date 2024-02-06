@@ -238,15 +238,15 @@ export default {
 
 <style>
 .contGeneral {
-  height: 100%;
+  min-height: 100vh;
 }
 .container-inscription {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
-  height: 600px;
+  margin-top: 30px;
+
 }
 
 .card1 {
@@ -269,20 +269,22 @@ export default {
   background-color: #f1f1f1;
   max-width: 1200px;
   width: 80%;
-  height: 100%;
+  height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .container-form label {
   margin-top: 30px;
+  font-size: 12px;
+
   text-transform: uppercase;
 }
 
 .container-form input {
   margin-top: 10px;
   text-align: center;
-  width: 50%;
+  width: 200px;
   height: 30px;
   border-radius: 5px;
   outline: none;
@@ -294,5 +296,14 @@ export default {
 
 .is-error {
   color: red;
+}
+
+@media(max-width:819px){
+  .container-form{
+    display: flex;
+    flex-direction: column;
+    height: 800px;
+    
+  }
 }
 </style>
