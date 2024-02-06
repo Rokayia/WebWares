@@ -234,6 +234,8 @@ export default {
 .logo img{
   width:90%;
   height: 90%;
+  
+  
  
 }
 header {

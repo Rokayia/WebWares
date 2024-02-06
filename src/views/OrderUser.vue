@@ -41,6 +41,11 @@
                 </div>
               </productCard>
               <div class="partie-prix">
+                <div class="total-prix-produit">
+                  <span>Total HT : {{ totalProduct(prod, product) }} € </span>
+                 
+                  <span>Total TTC : {{ totalProductTTC(prod, product) }} €</span>
+                </div>
                 <button
                   class="btn-supprimer"
                   @click="removeProduct(id),saveQuantite()"
@@ -48,11 +53,7 @@
                 >
                   Supprimer
                 </button>
-                <div class="total-prix-produit">
-                  <span>Total HT : {{ totalProduct(prod, product) }} € </span>
-                 
-                  <span>Total TTC : {{ totalProductTTC(prod, product) }} €</span>
-                </div>
+                
               </div>
             </div>
             <hr class="small-hr" />
@@ -243,27 +244,29 @@ export default {
 <style>
 .small-hr {
   width: 50%;
-  margin: 0 auto;
+  margin: 15px auto;
 }
 
 .partie-card-panier {
   background-color: white;
   border: none;
-  width: 100%;
-  max-height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-
   align-content: space-around;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
+  
+  
 }
 
 .card-panier {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  gap: 20px;
+  
 }
+
 
 .produit-panier {
   display: flex;
@@ -275,7 +278,7 @@ export default {
   border: none;
   width: 50%;
   flex: 1;
-
+  gap: 20px;
   height: 400px;
   margin-bottom: 10px;
 }
@@ -323,26 +326,44 @@ export default {
 .btn-supprimer {
   border: none;
   cursor: pointer;
-  background-color: white;
+  background-color: rgb(250, 24, 24);
   font-size: 1rem;
   font-weight: bold;
-  text-decoration: underline;
+  border-radius: 150px;
+  height: 30px;
+  width: 150px;
+  margin-top: 10px;
+  cursor: pointer;
 }
 
 .btn-supprimer:hover {
-  color: #5b7540;
+  color: white;
 }
 
 .total-panier {
   display: flex;
-  justify-content: space-around;
+ justify-content: center;
+ height: 150px;
+ gap: 50px;
+ margin-top: 25px;
+ 
 }
 .validation-panier {
-  display: block;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .total-prix-produit {
   display: flex;
   justify-content: space-around;
+  flex-direction: column;
+  gap: 15px;
+}
+.prix-validation-panier{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 .validation {
   color: white;
@@ -351,9 +372,22 @@ export default {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  font-size: 2rem;
+  font-size: 1rem;
+  margin: 20px 0px 8px 0px;
 }
 .validation:hover {
-  background-color: black;
+  border: 2px solid black;
+  transition: 0.1s;
+}
+
+@media(max-width: 971px){
+  .card-panier{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 80px;
+  }
+  .total-panier h2{
+    font-size: 1rem;
+  }
 }
 </style>

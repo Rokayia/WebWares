@@ -65,11 +65,12 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin : 100px auto;
+    margin : 35px auto;
     flex-direction: column;
-    border: 20px solid rgb(185, 185, 185);
+    border: 2px solid rgb(185, 185, 185);
+    box-shadow: 0 0 10px 0 rgb(185, 185, 185);;
     border-radius: 5px;
-    position: relative;
+    
 }
 
 .titleForm{
@@ -80,7 +81,7 @@ export default {
     align-self: flex-start;
     font-size: 25px;
 
-    margin: 100px 0px auto;
+  
 
 }
 
@@ -113,7 +114,7 @@ export default {
 .infosPerso,
 .infosAdresse,
 .btnFormulaire {
-    margin-top: 50px;
+ 
     text-align: center;
 }
 /* 
@@ -168,6 +169,20 @@ export default {
     font-size: small;
    
     
+}
+@media(max-width: 600px){
+    .containerFormulaire{
+        width: 350px;
+    }
+
+}
+@media(max-width: 600px){
+    .containerFormulaire{
+        width: 300px;
+    }
+    .titleForm{
+        font-size: 1.5rem;
+    }
 }
 
 

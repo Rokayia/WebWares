@@ -198,7 +198,7 @@ export default {
 
 <style>
 section.summary {
-  background-color: rgb(245, 245, 245);
+  background-color: #f3f3f39f;
   border:solid;
   padding: 20px;
   min-height: 200px;
@@ -206,10 +206,11 @@ section.summary {
   max-width:fit-content;
   min-width: 200px;
   text-align: center;
-  margin-right:20px;
-  margin-bottom:20px;
+  margin-bottom: 15px;
+  
 
 }
+
 
 section.summary table {
   width: 100%;
@@ -224,13 +225,14 @@ section.summary table tbody tr:last-of-type th div {
 }
 
 .recapCommande{
-    max-width: 1200px;
+  max-width: 1300px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items:center;
   flex-wrap: wrap;
   gap: 10px;
+  
 
 }
 </style>

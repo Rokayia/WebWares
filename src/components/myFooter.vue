@@ -58,7 +58,9 @@ footer{
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  font-size: 15px;
+  margin-top: 35px;
+  
   
   
   
@@ -102,18 +104,18 @@ footer{
   
 }
 
-@media (max-width:485px){
+@media (max-width:600px){
   .listeServices a{
-    font-size: 10px;
+    font-size: 11px;
   }
   .blocfooterService h3{
-    font-size: 18px;
+    font-size: 12px;
   }
   .blocfooterReseauxSociaux h3{
-    font-size: 18px;
+    font-size: 12px;
 }
 .listeMedia img{
-    width: 30px;
+    width: 25px;
 }
 }
 

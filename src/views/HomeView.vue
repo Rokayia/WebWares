@@ -171,7 +171,7 @@ export default {
 
 
 .title-btn h1 {
-  font-size: 4rem;
+  font-size: 50px;
   text-align: left;
   margin-left: 25px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
@@ -196,7 +196,7 @@ export default {
   justify-content: center;
   align-items: center;
   margin-top: 10px;
-  height: 750px;
+  padding-bottom: 20px;
   margin: 0 auto;
 }
 .containerFormContact {
@@ -246,7 +246,7 @@ export default {
 }
 .cardRightFormContact textarea {
   width: 80%;
-  height: 50%;
+  height: 200px;
   resize: none;
 }
 
@@ -274,7 +274,6 @@ export default {
 /* MediaQuery */
 @media (max-width: 850px) {
   .containerGe {
-    height: 900px;
     padding-bottom: 20px;
   }
   .title-btn h1 {
@@ -311,6 +310,7 @@ export default {
     width: 600px;
     height: 100%;
   }
+  
 }
 
 @media (max-width: 655px) {
