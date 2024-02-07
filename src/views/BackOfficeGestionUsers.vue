@@ -7,17 +7,23 @@
   </div>
     <div class="containerGeneralGestionUser">
         <div class="cadre">
-        <div class="cardsGestionUser" v-for="(element,index ) in utilisateurs" :key="index">
+        <div class="cardsGestionUser" v-for="(element,index ) in utilisateurs" :key="index" v-bind="element.active" >
             
 
             <h3>{{ element.raisonSociale }}</h3>
+            <h3>{{ element.siret }}</h3>
+            <h3>{{ element.email }}</h3>
+            <h3>{{ element.adresse }}</h3>
+            <h3>{{ element.ville }}</h3>
+            <h3>{{ element.codePostal }}</h3>
+            
             <!-- faire un toggle button -->
-            <div class="boxChangement" >
+            <div class="boxChangement"  >
                 <div class="boxRaisonSocial">
            <p>USER</p>
         </div>
-            <label class="switch"  > 
-            <input type="checkbox" v-bind="element.active" @click="ToggleEvent(element)"/>
+            <label class="switch" > 
+            <input type="checkbox" @click="ToggleEvent(element)"  />
             <span class="slider round"></span>
             </label>
             <div class="boxAdmin">
@@ -44,7 +50,9 @@ export default {
 
     data(){
         return{
-
+         
+         
+         
         
         }
     },
@@ -55,13 +63,16 @@ export default {
     },
 
     methods:{
-
+    
       ToggleEvent(toto){
+        
             toto.active=!toto.active
             if(toto.active){
               toto.role= "ADMIN";
+          
             }
             else{
+              
               toto.role="USER"
             }
 
@@ -93,13 +104,15 @@ this.$store.dispatch("loadRoles")
 <style>
 
 .titleAfficheListUsers{
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .containerGeneralGestionUser{
     
     width: 100%;
-    min-height: 100vh;   
+    min-height: 100vh;
+    
+   
 }
 .cadre{
     max-width: 1100px;
@@ -210,6 +223,17 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+@media(max-width: 450px){
+      .titleAfficheListUsers{
+        font-size: 12px;
+      }
+      .containerGeneralGestionUser{
+        font-size: 10px;
+      }
+    }
+
+
 
 
 </style>
