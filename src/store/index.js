@@ -652,22 +652,7 @@ state.roles=roles;
         .map((key) => JSON.parse(localStorage.getItem(key)));
       context.commit("setCommandes", commandes);
     },
-    loadCategories(context) {
-      //localStorage.clear();
-
-      context.getters.getCategories.forEach(function (currentValue) {
-        let selectedCategorie = localStorage.getItem(
-          `categorie_${currentValue.id}`
-        );
-        if (selectedCategorie == null) {
-          context.commit("addCategorie", currentValue);
-        }
-      });
-      let commandes = Object.keys(localStorage)
-        .filter((key) => key.startsWith("categorie_"))
-        .map((key) => JSON.parse(localStorage.getItem(key)));
-      context.commit("setCategories", commandes);
-    },
+    
     oneProd(context, prodId) {
       let selectedProd = localStorage.getItem(`prod_${prodId}`);
       console.log(selectedProd);
