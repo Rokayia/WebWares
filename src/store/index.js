@@ -25,6 +25,12 @@ function getLastCommandePrise() {
   //  On récupère le dernier is si il existe sinon on commence à 0
   return lastCommandePrise ? parseInt(lastCommandePrise) : 0;
 }
+function getLastCategorie() {
+  // Récupérer l'id du dernier utilisateur enregistré
+  let lastCategorie = localStorage.getItem("lastCategorieId");
+  //  On récupère le dernier is si il existe sinon on commence à 0
+  return lastCategorie ? parseInt(lastCategorie) : 0;
+}
 export default createStore({
   state: {
     categories: [
@@ -38,6 +44,7 @@ export default createStore({
     lastUtilisateur: getLastUtilisateur(),
     lastCommande: getLastCommande(),
     lastCommandePrise: getLastCommandePrise(),
+    lastCategorie:getLastCategorie(),
     produits: [
       {
         id: 1,
@@ -46,6 +53,7 @@ export default createStore({
         description: "Table à manger en bois massif avec finition élégante.",
         prix: 299.99,
         moq: 5,
+        stock: 1500,
         categorieId: 1,
       },
       {
@@ -55,6 +63,7 @@ export default createStore({
         description: "Lampe avec un design moderne et éclairage ajustable.",
         prix: 129.99,
         moq: 10,
+        stock: 1500,
         categorieId: 2,
       },
       {
@@ -64,6 +73,7 @@ export default createStore({
         description: "Tapis doux en laine avec motif géométrique.",
         prix: 89.99,
         moq: 20,
+        stock: 1500,
         categorieId: 3,
       },
       {
@@ -73,6 +83,7 @@ export default createStore({
         description: "Vase éthnique en argile avec motifs gravés à la main.",
         prix: 49.99,
         moq: 20,
+        stock: 1500,
         categorieId: 4,
       },
       {
@@ -82,6 +93,7 @@ export default createStore({
         description: "Canapé vert sapin en velour avec un design moderne .",
         prix: 399.99,
         moq: 4,
+        stock: 1500,
         categorieId: 1,
       },
       {
@@ -91,6 +103,7 @@ export default createStore({
         description: "Lampe blanche avec un bout en bois",
         prix: 59.99,
         moq: 10,
+        stock: 1500,
         categorieId: 2,
       },
       {
@@ -100,6 +113,7 @@ export default createStore({
         description: "Tapis rustique fin avec des couleurs orangées.",
         prix: 89.99,
         moq: 20,
+        stock: 1500,
         categorieId: 3,
       },
       {
@@ -109,6 +123,7 @@ export default createStore({
         description: "Grand vase neutre blanc de forme ovale.",
         prix: 49.99,
         moq: 25,
+        stock: 1500,
         categorieId: 4,
       },
       {
@@ -118,6 +133,7 @@ export default createStore({
         description: "Canapé en cuir de couleur camel, 3 places .",
         prix: 299.99,
         moq: 6,
+        stock: 1500,
         categorieId: 1,
       },
       {
@@ -127,6 +143,7 @@ export default createStore({
         description: "Lampe moderne d'extérieur ovale en bois",
         prix: 89.99,
         moq: 15,
+        stock: 1500,
         categorieId: 2,
       },
       {
@@ -136,6 +153,7 @@ export default createStore({
         description: "Tapis gris en laine en forme d'éléphant",
         prix: 79.99,
         moq: 15,
+        stock: 1500,
         categorieId: 3,
       },
       {
@@ -145,6 +163,7 @@ export default createStore({
         description: "Vase style velour bleu marine.",
         prix: 99.99,
         moq: 13,
+        stock: 1500,
         categorieId: 4,
       },
 
@@ -155,6 +174,7 @@ export default createStore({
         description: "Table murale en bois avec deux accorche dorée.",
         prix: 29.99,
         moq: 10,
+        stock: 1500,
         categorieId: 1,
       },
       {
@@ -164,6 +184,7 @@ export default createStore({
         description: "Lampe métallique noir style rétro.",
         prix: 59.99,
         moq: 12,
+        stock: 1500,
         categorieId: 2,
       },
       {
@@ -173,6 +194,7 @@ export default createStore({
         description: "Tapis épais vert sapin rectangulaire",
         prix: 89.99,
         moq: 20,
+        stock: 1500,
         categorieId: 3,
       },
       {
@@ -182,6 +204,7 @@ export default createStore({
         description: "Vase en bois forme ovale.",
         prix: 79.99,
         moq: 15,
+        stock: 1500,
         categorieId: 4,
       },
 
@@ -192,6 +215,7 @@ export default createStore({
         description: "Table de chevet blanche avec 3 pieds en bois.",
         prix: 39.99,
         moq: 10,
+        stock: 1500,
         categorieId: 1,
       },
       {
@@ -202,6 +226,7 @@ export default createStore({
           "Lampe moderne d'intérieur avec une forme originale en bois",
         prix: 99.99,
         moq: 10,
+        stock: 1500,
         categorieId: 2,
       },
       {
@@ -211,6 +236,7 @@ export default createStore({
         description: "Tapis léger en fourrure de couleur beige",
         prix: 69.99,
         moq: 20,
+        stock: 1500,
         categorieId: 3,
       },
       {
@@ -221,6 +247,7 @@ export default createStore({
           "Vase en verre de couleur vert clair avec des formes géométriques.",
         prix: 99.99,
         moq: 20,
+        stock: 1500,
         categorieId: 4,
       },
     ],
@@ -282,6 +309,7 @@ export default createStore({
       coutTotal:0,
       userId: 0,
     },
+    roles:[]
   },
   getters: {
     filteredProduits(state) {
@@ -336,9 +364,32 @@ export default createStore({
       return state.commandesPrises;
     },
     getCategories(state) {
+      let categories = Object.keys(localStorage)
+      .filter((key) => key.startsWith("categorie_"))
+      .map((key) => JSON.parse(localStorage.getItem(key)));
+
+    if (categories.length) {
+      state.categories = categories;
+    }
       return state.categories;
     },
+    getRoles(state) {
+      let users = Object.keys(localStorage)
+      .filter((key) => key.startsWith("utilisateur_"))
+      .map((key) => JSON.parse(localStorage.getItem(key)));
+      let roles=[];
+    users.forEach(function (currentValue) {
+   if(currentValue.role=="ADMIN"){
+    roles.push(true);
+   }else{
+    roles.push(false);
+   }
+state.roles=roles;
 
+    });
+
+    return state.roles
+    },
     getCurrentUtilisateurCommande(state) {
       let currentUtilisateurCommande = JSON.parse(
         localStorage.getItem("currentUtilisateurCommande")
@@ -471,6 +522,15 @@ export default createStore({
       localStorage.setItem(`commande_${commande.id}`, JSON.stringify(commande));
 
       localStorage.setItem("lastCommandeId", state.lastCommande);
+    },   
+     addCategorie(state, categorie) {
+      state.lastCategorie += 1;
+
+      categorie.id = state.lastCategorie;
+
+      localStorage.setItem(`categorie_${categorie.id}`, JSON.stringify(categorie));
+
+      localStorage.setItem("lastCategorieId", state.lastCategorie);
     },
     addCommandePrise(state, commande) {
       state.lastCommandePrise += 1;
@@ -574,6 +634,22 @@ export default createStore({
         .filter((key) => key.startsWith("commande_"))
         .map((key) => JSON.parse(localStorage.getItem(key)));
       context.commit("setCommandes", commandes);
+    },
+    loadCategories(context) {
+      //localStorage.clear();
+
+      context.getters.getCategories.forEach(function (currentValue) {
+        let selectedCategorie = localStorage.getItem(
+          `categorie_${currentValue.id}`
+        );
+        if (selectedCategorie == null) {
+          context.commit("addCategorie", currentValue);
+        }
+      });
+      let commandes = Object.keys(localStorage)
+        .filter((key) => key.startsWith("categorie_"))
+        .map((key) => JSON.parse(localStorage.getItem(key)));
+      context.commit("setCategories", commandes);
     },
     oneProd(context, prodId) {
       let selectedProd = localStorage.getItem(`prod_${prodId}`);

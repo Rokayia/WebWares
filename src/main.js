@@ -17,6 +17,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 
 
+
 /* add icons to the library */
 library.add(faUser)
 library.add(faBasketShopping)

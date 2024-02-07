@@ -102,8 +102,8 @@
         /></router-link>
       </div>
       <nav class="navbar">
-        <router-link to="/categorieProductAdmin">Utilisateurs</router-link>
-        <router-link to="/categorieProductAdmin">Tous les Produits</router-link>
+        <router-link to="/backofficegestionuser">Utilisateurs</router-link>
+        <router-link to="/backofficegestionproduits">Tous les Produits</router-link>
         <router-link to="/categorieProductAdmin">Catégories</router-link>
         <router-link to="/categorieProductAdmin">Commandes</router-link>
    

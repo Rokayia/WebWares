@@ -9,6 +9,7 @@
 <script>
 export default {
   name: 'App',
+  
   computed: { 
     commandes(){
       return this.$store.state.commandes

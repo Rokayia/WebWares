@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-
+import TestView from "../views/TestVue.vue";
 import MentionsLegales from "../views/MentionsLegales.vue";
 import PolitiqueDeConfidentialite from "../views/PolitiqueDeConfidentialité.vue";
 import ConditionsUtilisation from "../views/ConditionsUtilisation.vue";
@@ -22,6 +22,8 @@ import CategoriesAdminView from "../views/CategoriesProductsAdmin.vue";
 
 import CategoriesView from '../views/CategoriesProducts.vue'
 import ListProductsView from '../views/ListProducts.vue'
+import BackOfficeGestionUsersView from '../views/BackOfficeGestionUsers.vue'
+import BackOfficeGestionProduitsView from '../views/BackOfficeGestionProduits.vue'
 
 
 const routes = [
@@ -31,6 +33,11 @@ const routes = [
     component: HomeView,
   },
 
+  {
+    path: "/test",
+    name: "test",
+    component: TestView,
+  },
 
 
 
@@ -93,6 +100,18 @@ component: MyOrder},
     name: "categorieproduitsadmin",
 
     component: CategoriesAdminView,
+  },
+  {
+    path: "/backofficegestionuser",
+    name: "backofficegestionuser",
+
+    component: BackOfficeGestionUsersView,
+  },
+  {
+    path: "/backofficegestionproduits",
+    name: "backofficegestionproduits",
+
+    component: BackOfficeGestionProduitsView,
   },
 ];
 
