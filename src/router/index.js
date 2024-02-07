@@ -109,12 +109,7 @@ component: MyOrder},
 
     component: CategoriesAdminView,
   },
-  {
-    path: "/backofficegestionuser",
-    name: "backofficegestionuser",
 
-    component: BackOfficeGestionUsersView,
-  },
   {
     path: "/backofficegestionproduits",
     name: "backofficegestionproduits",
