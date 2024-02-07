@@ -103,10 +103,12 @@
     
       </div>
       <nav class="navbar">
+
         <input type='checkbox' id='check' />
         <span class="menu">
         <router-link to="/ListUsers">Utilisateurs</router-link>
-        <router-link to="/categorieProductAdmin">Tous les Produits</router-link>
+        <router-link to="/backofficegestionproduits">Tous les Produits</router-link>
+
         <router-link to="/categorieProductAdmin">Catégories</router-link>
         <router-link to="/categorieProductAdmin">Commandes</router-link>
    
