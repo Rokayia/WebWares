@@ -314,7 +314,7 @@ export default createStore({
   getters: {
     filteredProduits(state) {
       if (!state.query) return state.produits;
-      let query = state.query.toLowerCase();
+      let query = state.query.toLowerCase();   
       return state.produits.filter((user) =>
         user.titre.toLowerCase().includes(query.toLowerCase())
       );
@@ -601,6 +601,23 @@ state.roles=roles;
         .filter((key) => key.startsWith("prod_"))
         .map((key) => JSON.parse(localStorage.getItem(key)));
       context.commit("setProduct", prods);
+    },
+
+    loadCategories(context) {
+
+
+      context.getters.getCategories.forEach(function (currentValue) {
+        let selectedCategorie = localStorage.getItem(
+          `categorie_${currentValue.id}`
+        );
+        if (selectedCategorie == null) {
+          context.commit("addCategorie", currentValue);
+        }
+      });
+      let commandes = Object.keys(localStorage)
+        .filter((key) => key.startsWith("categorie_"))
+        .map((key) => JSON.parse(localStorage.getItem(key)));
+      context.commit("setCategories", commandes);
     },
 
     loadUtilisateurs(context) {
