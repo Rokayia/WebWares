@@ -22,8 +22,12 @@ import CategoriesAdminView from "../views/CategoriesProductsAdmin.vue";
 
 import CategoriesView from '../views/CategoriesProducts.vue'
 import ListProductsView from '../views/ListProducts.vue'
-import BackOfficeGestionUsersView from '../views/BackOfficeGestionUsers.vue'
+
+
 import BackOfficeGestionProduitsView from '../views/BackOfficeGestionProduits.vue'
+
+
+import ListUsers from "../views/BackOfficeGestionUsers.vue";
 
 
 const routes = [
@@ -94,7 +98,11 @@ component: MyOrder},
 
     component: DetailsView,
   },
-
+  {
+  path: "/ListUsers",
+  name: "ListUsers",
+  component: ListUsers,
+  },
   {
     path: "/categorieProductAdmin",
     name: "categorieproduitsadmin",

@@ -100,10 +100,15 @@
         <router-link to="/">
           <img class="logoimg" src="@/assets/logo1.jpg" alt="Logo de l'application"
         /></router-link>
+    
       </div>
       <nav class="navbar">
-        <router-link to="/backofficegestionuser">Utilisateurs</router-link>
+
+        <input type='checkbox' id='check' />
+        <span class="menu">
+        <router-link to="/ListUsers">Utilisateurs</router-link>
         <router-link to="/backofficegestionproduits">Tous les Produits</router-link>
+
         <router-link to="/categorieProductAdmin">Catégories</router-link>
         <router-link to="/categorieProductAdmin">Commandes</router-link>
    
@@ -112,10 +117,10 @@
             
               <li class="nav-link dropdown">
                 <div class="circle">
-                  <span style=" color: Tomato;">
-                  <font-awesome-icon :icon="['fas', 'user']" size="3x" /> </span>
+                  <span class="iconUserAdmin" style=" color: Tomato;">
+                  <font-awesome-icon :icon="['fas', 'user']" size="2x" /> </span>
                 </div>
-                <ul class="dropdown-content">
+                <ul class="dropdown-content4">
                   <router-link
                     :to="'/categorieProductAdmin' "
                     class="nav-link"
@@ -131,6 +136,9 @@
               </li>
             </ul>
           </div>
+          <label for="check" class="close-menu"><font-awesome-icon :icon="['fas', 'xmark']" size="1x"/></label>
+        </span>
+        <label for="check" class="open-menu"><font-awesome-icon :icon="['fas', 'bars']" size="2x" /></label>
       </nav>
     </header>
     </div>
@@ -264,13 +272,12 @@ header {
 ul.nav-dropdown2 {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 18px;
+  
   
  
 }
-ul.nav-dropdown2 a{
- color: #7D9167;
-}
+
 a {
     font-weight: bold;
     color: #3b3b3b;
@@ -294,13 +301,11 @@ a {
 .menu {
 display: flex;
 justify-content: space-around;
-
 width: 100%;
 gap: 50px;
+
 }
-.menu a:hover{
-  color:#7D9167;
-}
+
 
 .menu li a{
   display: inline-block;
@@ -332,18 +337,13 @@ gap: 50px;
     top: 20px;
     right: 20px;
 }
- 
-
-  a:hover {
-    color:darkslategrey;
-  }
   .nav-link {
     text-decoration: none;
     font-weight: bold;
     color: #3b3b3b;
     display: inline;
     margin: 0 ;
-    
+  
   }
 
 
@@ -351,46 +351,68 @@ gap: 50px;
   .nav-dropdown {
     list-style: none;
     padding: 0;
-   
-    
+  
   }
 
   .dropdown {
     position: relative;
     
-    
-
   }
   .dropdown:hover {
     color:peru;
     
-    
-
   }
-
+  
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: #fdfcfc;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-   
     padding: 0;
     font-size: 0.8rem;
-    
-    
+    height: 207px;
+    width: 150px;
+    right: -30px;
     
   }
-  .dropdown-content2{
+  .dropdown-content4{
     display: none;
-    color: #7D9167;
-    background-color: #f1f1f1;
+    position: absolute;
+    background-color: #fdfcfc;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    
+    padding: 0;
     font-size: 0.8rem;
+    height: 207px;
+    width: 150px;
+    right: -30px;
 
   }
+  .dropdown:hover .dropdown-content4{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    right: -30px;
+    height: 80px;
+    width: 150px;
+    gap: 20px;
+    position: absolute;
+  } 
+  .dropdown-content2 {
+    display: none;
+    color: #7D9167;
+    background-color:#7d916771;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    font-size: 0.8rem;
+    right: -100px;
+
+  }
+  .dropdown-content2 a:hover{
+    color: white;
+  }
   
-  .dropdown:hover .dropdown-content2 {
+  
+  .dropdown:hover .dropdown-content2  {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -401,16 +423,17 @@ gap: 50px;
     gap: 20px;
     position: absolute;
     
-
+    
   }
+
+  
 
   .dropdown-content a {
-    display: block;
-    // padding: 10px;
+    display: flex;
+    margin: 5px auto;
+     //padding: 10px;
   }
-  .dropdown-content a:hover {
-    color:#7D9167;
-  }
+  
 
   .dropdown-content div {
     display: block;
@@ -418,9 +441,9 @@ gap: 50px;
   }
   .dropdown-content div:hover {
     background-color: #b892064d;
-    color: #9abf72;
+    
   }
-  .dropdown:hover .dropdown-content {
+  .dropdown:hover .dropdown-content  {
     display: block;
   }
 
@@ -436,9 +459,10 @@ gap: 50px;
   align-items: center;
   justify-content: center;
   position: relative;
+  cursor: pointer;
   color: #7D9167;
+  
 }
-
 
 .open-menu , .close-menu {
     position: absolute;
@@ -459,32 +483,84 @@ gap: 50px;
 
 #check {display: none;}
 
-@media(max-width: 971px){
+.navbar{
+  
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  gap: 25px;
+  position: relative;
+  
+  
+}
+
+@media(max-width: 1187px){
+  .dropdown:hover .dropdown-content4 {
+    right: 0px;
+  }
+}
+@media(max-width:987px){
+  .dropdown:hover .dropdown-content2 {
+    right: -10px;
+  }
+ 
+ 
+}
+
+@media(max-width: 800px){
     .menu {
         flex-direction: column;
         align-items: center;
+        justify-content:center;
+        font-size: 1.5rem;
+        gap: 50px;
         width: 100%;
-        height: 45vh;
+        height: 100%;
         position: fixed;
         top: 0;
         right: -100%;
         z-index: 100;
         background-color: rgb(128, 128, 128);
         transition: all 0.2s ease-in-out;
+        
        
     }
+   
     .nav-link {
       padding: 0px;
     }
-  
     
-
+  .circle{
+    width: 65px;
+    height: 65px;
+  }
+  
+  .dropdown-content{
+    
+    right: -20px;
+    height: 200px;
+  }
+  ul.nav-dropdown2 {
+    display: flex;
+    left: 0;
+    top:0;
+    position: absolute;
+    padding: 15px;
+    font-size: 15px;
+    
+  }
+ 
+ 
     .open-menu , .close-menu {
       display: block;
     }
     #check:checked ~ .menu {
       right: 0;
     }
+   
   
 }
 
