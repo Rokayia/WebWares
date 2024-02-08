@@ -1,7 +1,7 @@
 <template>
   <MyHeader
     :currentUtilisateur="currentUtilisateur"
-    :currentUtilisateurCommande="currentUtilisateurCommande" 
+    :currentUtilisateurCommande="currentUtilisateurCommande"
     @deconnexionEventBtn="deconnecterCurrentUser"
     :is-visible="isHere()"
     :is-user="isUser"
@@ -21,19 +21,24 @@
         backgroundColor="beige"
       >
         <div v-if="currentUtilisateur">
-          <btnProduct
-            label="Ajouter au panier"
-            backgroundColor="AjouterPanier"
-            :showButton="AjouterPanier(item)"
-            @click="addToPanier(item.id)"
-          />
+          <div v-if="stockDispoProd(item)">
+            <btnProduct
+              label="Ajouter au panier"
+              backgroundColor="AjouterPanier"
+              :showButton="AjouterPanier(item)"
+              @click="addToPanier(item.id)"
+            />
 
-          <btnProduct
-            label="Supprimer du panier"
-            backgroundColor="SupprimerPanier"
-            :showButton="SupprimerPanier(item)"
-            @click="removeProduct(item)"
-          />
+            <btnProduct
+              label="Supprimer du panier"
+              backgroundColor="SupprimerPanier"
+              :showButton="SupprimerPanier(item)"
+              @click="removeProduct(item)"
+            />
+          </div>
+          <div v-else>
+            <div class="stockFini">plus de stock</div>
+          </div>
         </div>
       </productCard>
     </div>
@@ -55,6 +60,8 @@ export default {
       filtered: false,
       isConnected: false,
       isUser: true,
+      stockDispo: true,
+      // itemCommande:0,
     };
   },
   components: {
@@ -66,14 +73,34 @@ export default {
   },
   methods: {
     getImgUrl(pic) {
-      return require("../assets/" + pic.image);
+      if (pic.image.length < 21) {
+        return require("../assets/" + pic.image);
+      } else {
+        return pic.image;
+      }
+    },
+    stockDispoProd(item) {
+      let itemCommande = 0;
+
+      this.commandePrises.forEach(function (commande) {
+        commande.produits.forEach(function (prod) {
+          if (item.id == prod.produitId) {
+            itemCommande += prod.quantite;
+          }
+        });
+      });
+      if (item.stock <= itemCommande) {
+        return false;
+      } else {
+        return true;
+      }
     },
     getDetails(prodId) {
       this.$router.push({ name: "detailsproduits", params: { id: prodId } });
     },
     deconnecterCurrentUser() {
       this.$store.commit("setCurrentUtilisateur", 0);
-      this.$store.commit("setCommandes",this.currentUtilisateurCommande);
+      this.$store.commit("setCommandes", this.currentUtilisateurCommande);
       this.$store.commit("setCurrentUtilisateurCommande");
       this.$router.push({
         name: "listproduits",
@@ -88,8 +115,7 @@ export default {
       }
     },
     addToPanier(id) {
-
-     let prod = {};
+      let prod = {};
       prod.produitId = id;
       prod.quantite = 1;
       this.currentUtilisateurCommande.produits.push(prod);
@@ -100,11 +126,11 @@ export default {
     },
     removeProduct(item) {
       let index = 0;
-      let trouve=0;
+      let trouve = 0;
       this.currentUtilisateurCommande.produits.forEach(function (currentValue) {
         index++;
         if (item.id == currentValue.produitId) {
-          trouve = index-1;
+          trouve = index - 1;
         }
       });
       this.currentUtilisateurCommande.produits.splice(trouve, 1);
@@ -116,7 +142,7 @@ export default {
     },
     AjouterPanier(item) {
       let bool = true;
-      
+
       this.currentUtilisateurCommande.produits.forEach(function (currentValue) {
         if (item.id == currentValue.produitId) {
           bool = false;
@@ -148,12 +174,15 @@ export default {
     currentUtilisateurCommande() {
       return this.$store.getters.getCurrentUtilisateurCommande;
     },
+    commandePrises() {
+      return this.$store.getters.getCommandesPrises;
+    },
   },
 
   mounted() {
     // this.$store.dispatch("loadProds")
-      // this.$store.dispatch("loadUtilisateurs"),
-      // this.$store.dispatch("oneUtilisateur");
+    // this.$store.dispatch("loadUtilisateurs"),
+    // this.$store.dispatch("oneUtilisateur");
 
     if (localStorage.getItem("reloaded")) {
       localStorage.removeItem("reloaded");
@@ -180,9 +209,14 @@ export default {
   max-width: 400px;
   background-color: #eadfd8;
 }
+.stockFini {
+  margin-top: 10px;
+  color: red;
+  font-size: larger;
+}
 
-@media(max-width:584px){
-  .searsh input{
+@media (max-width: 584px) {
+  .searsh input {
     width: 200px;
   }
 }

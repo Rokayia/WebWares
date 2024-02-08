@@ -37,7 +37,9 @@
                     -
                   </button>
                   <h2 class="quantite-compteur">{{ prod.quantite }}</h2>
-                  <button class="btn-compteur"  @click="ajoutQuantite(id),saveQuantite() ">+</button>
+                  <button class="btn-compteur"  @click="ajoutQuantite(id),saveQuantite() "
+                  v-bind:disabled="calculStockRestant(product,prod)"
+                  >+</button>
                 </div>
               </productCard>
               <div class="partie-prix">
@@ -83,7 +85,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+
 import MyHeader from "@/components/GeneralHeader.vue";
 import MyFooter from "@/components/myFooter.vue";
 import productCard from "@/components/ProdCard.vue";
@@ -111,6 +113,20 @@ export default {
       });
       location.reload();
     },
+    calculStockRestant(item,product){
+      let itemCommande = 0;
+
+this.commandePrises.forEach(function (commande) {
+  commande.produits.forEach(function (prod) {
+    if (item.id == prod.produitId) {
+      itemCommande += prod.quantite;
+    }
+  });
+});
+itemCommande += product.quantite;
+let stockrestant= item.stock - itemCommande;
+      return stockrestant === 0;
+    },
     toRecap(){
     
       this.$router.push({
@@ -125,12 +141,7 @@ export default {
       }
     },
     ajoutQuantite(id){
-    //   console.log("prod;QUANTITE"+prod.quantite )
-    // let prodadd =prod.quantite+1;
-    // console.log("prod;QUANTITE"+prodadd )
   
-    //   this.currentUtilisateurCommande.produits[id].quantite= prodadd;
-    //   this.$store.commit("setCurrentUtilisateurCommande",this.currentUtilisateurCommande);
       return  this.currentUtilisateurCommande.produits[id].quantite++;
     },
     saveQuantite(){
@@ -201,17 +212,19 @@ export default {
       return prod ? prod.titre : "Produit introuvable";
     },
     getImgUrl(pic) {
-      return require("../assets/" + pic.image);
+      if (pic.image.length < 21) {
+        return require("../assets/" + pic.image);
+      } else {
+        return pic.image;
+      }
     },
     getcommandes() {
       console.log("commandes" + this.commandes[0].produits);
     },
     // Supprime un produit du panier
     removeProduct(id) {
-           this.currentUtilisateurCommande.produits.splice(id, 1)
-    
+           this.currentUtilisateurCommande.produits.splice(id, 1)    
     },
-
   },
   computed: {
     // Utilisation de mapState pour utiliser commandes depuis le store Vuex
@@ -222,8 +235,12 @@ export default {
       return this.$store.getters.getCurrentUtilisateurCommande;
     },
 
-    ...mapState(["commandes", "produits"]),
-    ...mapGetters(["filteredProduits"]),
+    produits() {
+        return this.$store.getters.getProduits; 
+    },
+    commandePrises() {
+      return this.$store.getters.getCommandesPrises;
+    },
     // Utilisez cette méthode computed pour accéder à la méthode totalBag depuis le store
   },
   mounted() {

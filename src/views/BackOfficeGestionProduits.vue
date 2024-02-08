@@ -30,7 +30,7 @@
               </td>
               <td>{{ item.titre }}</td>
               <td>{{ item.prix }}</td>
-              <td>{{ item.moq }}</td>
+              <td>{{ item.moq }} x </td>
               <td>{{ item.stock }}</td>
               <td>{{ item.description }}</td>
 
@@ -376,9 +376,8 @@ width: fit-content;
   margin:0 auto
  
 }
-.listeProduitsAdmin{
- 
-}
+
+
 .imageModalContainer{
   display: flex;
   justify-content: center;
