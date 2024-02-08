@@ -1,14 +1,15 @@
 <template>
   <h3>Vue.js Convert Image to Base64</h3>
 
-    <input type="file" @change="convertToBase64" accept="image/*" />
-    <br />
-    <div v-if="showImage">
-      <img :src="base64textString" :alt="imageName" />
+    <div class="image">
+      <input type="file" @change="convertToBase64" accept="image/*" />
+      <br />
+      <div v-if="showImage">
+        <img :src="base64textString" :alt="imageName" />
+      </div>
+      <br />
+      <textarea v-model="base64textString" rows="5"></textarea>
     </div>
-    <br />
-    <textarea v-model="base64textString" rows="5"></textarea>
- 
 </template>
 
 <script>
@@ -30,10 +31,12 @@ export default {
           reader.onload = () => {
             this.base64textString = reader.result;
             this.showImage = true;
+            localStorage.setItem('base64image',this.base64textString)
           };
           reader.onerror = (error) => {
             console.log('Error: ', error);
           };
+        
         }
       }
 

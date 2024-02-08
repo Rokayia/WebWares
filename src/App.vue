@@ -12,7 +12,7 @@ export default {
   
   computed: { 
     commandes(){
-      return this.$store.state.commandes
+      return this.$store.getters.getCommandes
     },
 
   }
