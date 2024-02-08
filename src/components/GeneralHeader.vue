@@ -49,7 +49,8 @@
             <router-link
                   :to="'/myOrder' "
                 >
-            <font-awesome-icon :icon="['fas', 'basket-shopping']" size="2x" />{{ quantitePanier() }}
+            <font-awesome-icon :icon="['fas', 'basket-shopping']" size="2x" />
+            {{ quantitePanier() }} 
           </router-link>
             <li class="nav-link dropdown">
               <div class="circle">
@@ -110,7 +111,7 @@
         <router-link to="/backofficegestionproduits">Tous les Produits</router-link>
 
         <router-link to="/categorieProductAdmin">Catégories</router-link>
-        <router-link to="/categorieProductAdmin">Commandes</router-link>
+        <router-link to="/recapLivraison">Commandes</router-link>
    
           <div v-if="isVisible">
             <ul class="nav-dropdown">

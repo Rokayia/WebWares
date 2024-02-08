@@ -12,7 +12,7 @@ import DetailsView from '../views/DetailsProduct.vue'
 
 import compoRecapClient from '../views/RecapCommandePageTest.vue'
 
-
+import RecapLivraison from '../views/LivraisonBackOffice.vue'
 
 
 import PageModificationCategories from '@/views/PageModificationCategories.vue'
@@ -49,6 +49,11 @@ const routes = [
   },
 
 
+  {
+    path: '/RecapLivraison',
+    name: 'RecapLivraison',
+    component: RecapLivraison,
+},
 
   //  {
   //   path: '/modalUser',

@@ -92,8 +92,10 @@ export default {
 },
 mounted() {
 
-this.$store.dispatch("loadUtilisateurs")
+  this.$store.dispatch("loadCommandes");
 this.$store.dispatch("loadRoles")
+
+  
 
 
 }
