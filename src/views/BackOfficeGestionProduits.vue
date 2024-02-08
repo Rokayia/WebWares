@@ -48,11 +48,14 @@
                   @click="ModifierProd(item)"
                 />
 
-                <btnProduct
-                  label="Supprimer"
-                  backgroundColor="SupprimerBackOffice"
-                />
-              </td>
+
+            <btnProduct
+              label="Supprimer" 
+              backgroundColor="SupprimerPanier" 
+              @click="remove(item.id)"
+           
+            /></td>
+
             </tr>
           </tbody>
         </table>
@@ -255,6 +258,7 @@ export default {
       imageName: "",
       showImage: false,
       idModified: 0,
+
     };
   },
   components: {
@@ -276,6 +280,7 @@ export default {
     getDetails(prodId) {
       this.$router.push({ name: "detailsproduits", params: { id: prodId } });
     },
+
     closeModalFlag() {
       this.showModalFlag = false;
     },
@@ -318,6 +323,12 @@ export default {
         console.log("Error: ", error);
       };
     },
+
+    // Supprime un produit du panier
+    remove(prodId){
+            this.$store.commit('deleteProd',prodId)
+          }
+
   },
   computed: {
     produits() {

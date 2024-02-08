@@ -8,11 +8,14 @@ import ConditionsUtilisation from "../views/ConditionsUtilisation.vue";
 import ConnectUser from "../views/ConnexionUser.vue";
 import InscriptionUser from "../views/InscriptionUser.vue";
 
-
-
 import DetailsView from '../views/DetailsProduct.vue'
 
 import compoRecapClient from '../views/RecapCommandePageTest.vue'
+
+
+
+
+import PageModificationCategories from '@/views/PageModificationCategories.vue'
 
 
 
@@ -44,6 +47,11 @@ const routes = [
   },
 
 
+  {
+    path: '/page-modification-categories',
+    name: 'PageModificationCategories',
+    component: PageModificationCategories
+  },
 
 
 
