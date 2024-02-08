@@ -23,7 +23,7 @@
            <p>USER</p>
         </div>
             <label class="switch" > 
-            <input type="checkbox" @click="ToggleEvent(element)"  />
+            <input type="checkbox" @click="ToggleEvent(element)" :checked="index === 1 && element.role === 'ADMIN'" />
             <span class="slider round"></span>
             </label>
             <div class="boxAdmin">
