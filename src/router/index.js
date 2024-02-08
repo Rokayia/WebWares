@@ -14,7 +14,7 @@ import DetailsView from '../views/DetailsProduct.vue'
 
 import compoRecapClient from '../views/RecapCommandePageTest.vue'
 
-
+import RecapLivraison from '../views/LivraisonBackOffice.vue'
 
 
 import MyOrder from '../views/OrderUser.vue'
@@ -33,6 +33,11 @@ const routes = [
 
 
 
+  {
+    path: '/RecapLivraison',
+    name: 'RecapLivraison',
+    component: RecapLivraison,
+},
 
 
 
