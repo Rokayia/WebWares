@@ -66,14 +66,15 @@ export default {
     
       ToggleEvent(toto){
         
-            toto.active=!toto.active
-            if(toto.active){
+            
+            if(toto.active===true){
               toto.role= "ADMIN";
-          
+              toto.active=!toto.active
             }
             else{
               
               toto.role="USER"
+              toto.active=!toto.active
             }
 
             this.$store.commit('setUtilisateur',toto)
