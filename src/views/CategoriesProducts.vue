@@ -1,7 +1,7 @@
 <template>
   <MyHeader
     :currentUtilisateur="currentUtilisateur"
-    :currentUtilisateurCommande="currentUtilisateurCommande" 
+    :currentUtilisateurCommande="currentUtilisateurCommande"
     @deconnexionEventBtn="deconnecterCurrentUser"
     :is-visible="isHere()"
     :is-user="isUser"
@@ -24,19 +24,24 @@
             backgroundColor="beige"
           >
             <div v-if="currentUtilisateur">
-              <btnProduct
-                label="Ajouter au panier"
-                backgroundColor="AjouterPanier"
-                :showButton="AjouterPanier(item)"
-                @click="addToPanier(item.id)"
-              />
+              <div v-if=" stockDispoProd(item)">
+                <btnProduct
+                  label="Ajouter au panier"
+                  backgroundColor="AjouterPanier"
+                  :showButton="AjouterPanier(item)"
+                  @click="addToPanier(item.id)"
+                />
 
-              <btnProduct
-                label="Supprimer du panier"
-                backgroundColor="SupprimerPanier"
-                :showButton="SupprimerPanier(item)"
-                @click="removeProduct(item)"
-              />
+                <btnProduct
+                  label="Supprimer du panier"
+                  backgroundColor="SupprimerPanier"
+                  :showButton="SupprimerPanier(item)"
+                  @click="removeProduct(item)"
+                />
+              </div>
+              <div v-else>
+                <div class="stockFini">plus de stock</div>
+              </div>
             </div>
           </productCard>
         </div>
@@ -67,17 +72,44 @@ export default {
     btnProduct,
   },
   computed: {
-    ...mapState(["produits", "categories"]),
+    ...mapState(["categories"]),
     currentUtilisateur() {
       return this.$store.getters.getCurrentUtilisateur;
     },
     currentUtilisateurCommande() {
       return this.$store.getters.getCurrentUtilisateurCommande;
     },
+    produits() {
+        return this.$store.getters.getProduits;
+
+    },
+    commandePrises() {
+      return this.$store.getters.getCommandesPrises;
+    },
   },
   methods: {
     getImgUrl(pic) {
-      return require("../assets/" + pic.image);
+      if (pic.image.length < 21) {
+        return require("../assets/" + pic.image);
+      } else {
+        return pic.image;
+      }
+    },
+    stockDispoProd(item) {
+      let itemCommande = 0;
+
+      this.commandePrises.forEach(function (commande) {
+        commande.produits.forEach(function (prod) {
+          if (item.id == prod.produitId) {
+            itemCommande += prod.quantite;
+          }
+        });
+      });
+      if (item.stock <= itemCommande) {
+        return false;
+      } else {
+        return true;
+      }
     },
     getNomCategorie() {
       let titre = "lal";
@@ -90,6 +122,9 @@ export default {
       return titre;
     },
     getDetails(prodId) {
+      if(prodId<10){
+        this.stockDispo=false
+      }
       this.$router.push({ name: "detailsproduits", params: { id: prodId } });
     },
     deconnecterCurrentUser() {
@@ -156,13 +191,17 @@ export default {
   mounted() {
     this.categorieId = this.$route.params.id;
     console.log("categorie" + this.categorieId);
-    // this.$store.dispatch("loadUtilisateurs"),
-    //   this.$store.dispatch("oneUtilisateur");
+
   },
 };
 </script>
 
 <style>
+.stockFini{
+  margin-top: 10px;
+  color:red;
+  font-size: larger;
+}
 .produits {
   margin: 0 auto;
   max-width: 1200px;
