@@ -33,6 +33,8 @@ export default {
             'ValiderInscription-btn':this.backgroundColor === 'ValiderInscription',
             'AjouterPanier-btn':this.backgroundColor === 'AjouterPanier',
             'SupprimerPanier-btn':this.backgroundColor === 'SupprimerPanier',
+            'ModifierBackOffice-btn':this.backgroundColor === 'ModifierBackOffice',
+            'SupprimerBackOffice-btn':this.backgroundColor === 'SupprimerBackOffice',
 
           }
 
@@ -43,6 +45,32 @@ export default {
 </script>
 
 <style>
+.ModifierBackOffice-btn{
+    background-color: rgb(218, 182, 91);
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border:none;
+    padding: 9px;
+    margin: 10px;
+    width:110px;
+    border-radius: 5px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+     
+}
+.SupprimerBackOffice-btn{
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border:none;
+    padding: 9px;
+    margin: 10px;
+    width:110px;
+    border-radius: 5px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+     
+}
 .EnSavoirPlus-btn{
     background-color: #7d9167;
     color: white;

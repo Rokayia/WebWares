@@ -320,6 +320,13 @@ export default createStore({
       );
     },
     getProduits(state) {
+      let prods = Object.keys(localStorage)
+        .filter((key) => key.startsWith("prod_"))
+        .map((key) => JSON.parse(localStorage.getItem(key)));
+   
+      if (prods.length) {
+        state.produits = prods;
+      }
       return state.produits;
     },
     getLastUtilisateur(state) {
@@ -472,8 +479,19 @@ state.roles=roles;
     setCurrentProduct(state, prod) {
       state.currentProduct = prod;
     },
-    setProduct(state, prods) {
-      state.produits = prods;
+    setOneProduct(state, prod) {
+      console.log("dans le if prod" + prod.titre);
+      if (prod != undefined) {
+        this.getters.getProduits.forEach(function (currentValue) {
+          if (currentValue.id == prod.id) {
+            console.log("dans le if prod" + prod.titre);
+            localStorage.setItem(
+              `prod_${currentValue.id}`,
+              JSON.stringify(prod)
+            );
+          }
+        });
+      }
     },
     setUtilisateur(state, utilisateurs) {
       state.utilisateurs = utilisateurs;
@@ -636,7 +654,7 @@ state.roles=roles;
       context.commit("setCommandes", commandes);
     },
     loadCategories(context) {
-      //localStorage.clear();
+  
 
       context.getters.getCategories.forEach(function (currentValue) {
         let selectedCategorie = localStorage.getItem(
