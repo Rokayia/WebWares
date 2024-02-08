@@ -48,8 +48,9 @@
             />
 
             <btnProduct
-              label="Supprimer"
-              backgroundColor="SupprimerPanier"
+              label="Supprimer" 
+              backgroundColor="SupprimerPanier" 
+              @click="remove(item.id)"
            
             /></td>
             </tr>
@@ -100,6 +101,7 @@ export default {
   data() {
     return {
       filtered: false,
+    
     };
   },
   components: {
@@ -115,6 +117,10 @@ export default {
     getDetails(prodId) {
       this.$router.push({ name: "detailsproduits", params: { id: prodId } });
     },
+    // Supprime un produit du panier
+    remove(prodId){
+            this.$store.commit('deleteProd',prodId)
+          }
   },
   computed: {
     produits() {
