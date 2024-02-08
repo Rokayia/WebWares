@@ -486,8 +486,17 @@ state.roles=roles;
         });
       }
     },
-    setUtilisateur(state, utilisateurs) {
-      state.utilisateurs = utilisateurs;
+    setUtilisateur(state, utilisateur) {
+      if (utilisateur != undefined) {
+        this.getters.getUtilisateurs.forEach(function (currentValue) {
+          if (currentValue.id == utilisateur.id && utilisateur.raisonSociale==currentValue.raisonSociale) {    
+            localStorage.setItem(
+              `utilisateur_${currentValue.id}`,
+              JSON.stringify(utilisateur)
+            );
+          }
+        });
+      }
     },
     setCommandes(state, commande) {
       if (commande != undefined) {

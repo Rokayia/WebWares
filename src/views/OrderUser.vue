@@ -186,9 +186,7 @@ let stockrestant= item.stock - itemCommande;
     },
     totalBagTTC() {
       const tauxTVA = 20;
-
-      let total = 0;
-   
+      let total = 0; 
         total += this.currentUtilisateurCommande.produits.reduce((subtotal, prod) => {
           const produit = this.produits.find((p) => p.id === prod.produitId);
 
