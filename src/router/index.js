@@ -33,6 +33,8 @@ import BackOfficeGestionProduitsView from '../views/BackOfficeGestionProduits.vu
 import ListUsers from "../views/BackOfficeGestionUsers.vue";
 
 
+// import pageModalUser from '@/components/ModalUser.vue'
+
 const routes = [
   {
     path: "/",
@@ -45,6 +47,15 @@ const routes = [
     name: "test",
     component: TestView,
   },
+
+
+
+  //  {
+  //   path: '/modalUser',
+  //   name: 'test',
+  //   component: pageModalUser,
+  // },
+
 
 
   {
