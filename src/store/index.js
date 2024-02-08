@@ -463,14 +463,7 @@ state.roles=roles;
             }
           }
         });
-        // if (trouve == false) {
-        //   console.log("pas la");
-        //   let commande = state.currentUtilisateurCommande;
-        //   console.log("comande " + commande );
-        //   commande.userId= utilisateur.userId;
-        //   localStorage.setItem("currentUtilisateurCommande", commande);
-     
-        // }
+
         if (utilisateur == undefined) {
           localStorage.removeItem(`currentUtilisateurCommande`);
         }
@@ -563,7 +556,7 @@ state.roles=roles;
       localStorage.setItem("lastCommandePriseId", state.lastCommandePrise);
     },
     deleteProd(state, prodId) {
-      let index = state.getters.getProduits.findIndex(
+      let index = this.getters.getProduits.findIndex(
         (prod) => prod.id === prodId
       );
 
@@ -571,7 +564,6 @@ state.roles=roles;
         if (confirm("Voulez-vous vraiment supprimer cet produit ?")) {
           state.produits.splice(index, 1);
           localStorage.removeItem(`prod_${prodId}`);
-          alert("Utilisateur supprimé");
         }
       }
     },
@@ -669,23 +661,6 @@ state.roles=roles;
         .filter((key) => key.startsWith("commande_"))
         .map((key) => JSON.parse(localStorage.getItem(key)));
       context.commit("setCommandes", commandes);
-    },
-
-    loadCategories(context) {
-  
-
-      context.getters.getCategories.forEach(function (currentValue) {
-        let selectedCategorie = localStorage.getItem(
-          `categorie_${currentValue.id}`
-        );
-        if (selectedCategorie == null) {
-          context.commit("addCategorie", currentValue);
-        }
-      });
-      let commandes = Object.keys(localStorage)
-        .filter((key) => key.startsWith("categorie_"))
-        .map((key) => JSON.parse(localStorage.getItem(key)));
-      context.commit("setCategories", commandes);
     },
 
     oneProd(context, prodId) {
