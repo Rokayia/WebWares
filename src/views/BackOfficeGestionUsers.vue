@@ -23,7 +23,7 @@
            <p>USER</p>
         </div>
             <label class="switch" > 
-            <input type="checkbox" @click="ToggleEvent(element)" :checked="index === 1 && element.role === 'ADMIN'" />
+            <input type="checkbox" @click="ToggleEvent(element)" :checked=" element.role === 'ADMIN'" />
             <span class="slider round"></span>
             </label>
             <div class="boxAdmin">
@@ -76,7 +76,7 @@ export default {
               toto.role="USER"
             }
 
-            this.$store.commit('setUtilisateur',this.utilisateurs)
+            this.$store.commit('setUtilisateur',toto)
             
         },
     },
@@ -92,7 +92,7 @@ export default {
 },
 mounted() {
 
-  this.$store.dispatch("loadCommandes");
+  this.$store.dispatch("loadUtilisateurs");
 this.$store.dispatch("loadRoles")
 
   
