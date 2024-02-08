@@ -51,7 +51,7 @@
 
             <btnProduct
               label="Supprimer" 
-              backgroundColor="SupprimerPanier" 
+              backgroundColor="SupprimerBackOffice" 
               @click="remove(item.id)"
            
             /></td>
