@@ -486,6 +486,18 @@ state.roles=roles;
         });
       }
     },
+    setOneCategorie(state, categ) {
+      if (categ != undefined) {
+        this.getters.getCategories.forEach(function (currentValue) {
+          if (currentValue.id == categ.id) {
+            localStorage.setItem(
+              `categorie_${currentValue.id}`,
+              JSON.stringify(categ)
+            );
+          }
+        });
+      }
+    },
     setUtilisateur(state, utilisateur) {
       if (utilisateur != undefined) {
         this.getters.getUtilisateurs.forEach(function (currentValue) {
@@ -505,6 +517,19 @@ state.roles=roles;
             console.log("dans le if commande" + commande.coutTotal);
             localStorage.setItem(
               `commande_${currentValue.id}`,
+              JSON.stringify(commande)
+            );
+          }
+        });
+      }
+    },
+    setCommandesPrise(state, commande) {
+      if (commande != undefined) {
+        this.getters.getCommandes.forEach(function (currentValue) {
+          if (currentValue.id == commande.id && commande.userId==currentValue.userId) {
+            console.log("dans le if commande" + commande.coutTotal);
+            localStorage.setItem(
+              `commandePrise_${currentValue.id}`,
               JSON.stringify(commande)
             );
           }
@@ -573,6 +598,18 @@ state.roles=roles;
         if (confirm("Voulez-vous vraiment supprimer cet produit ?")) {
           state.produits.splice(index, 1);
           localStorage.removeItem(`prod_${prodId}`);
+        }
+      }
+    },
+    deleteCategorie(state, categId) {
+      let index = this.getters.getCategories.findIndex(
+        (categ) => categ.id === categId
+      );
+
+      if (index !== -1) {
+        if (confirm("Voulez-vous vraiment supprimer cet produit ?")) {
+          state.categories.splice(index, 1);
+          localStorage.removeItem(`categorie_${categId}`);
         }
       }
     },

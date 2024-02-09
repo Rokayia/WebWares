@@ -52,7 +52,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import btnProduct from "@/components/btnLandingPage.vue";
 import productCard from "@/components/ProdCard.vue";
 import myFooter from "@/components/myFooter.vue";
@@ -72,7 +71,9 @@ export default {
     btnProduct,
   },
   computed: {
-    ...mapState(["categories"]),
+    categories() {
+      return this.$store.getters.getCategories;
+    },
     currentUtilisateur() {
       return this.$store.getters.getCurrentUtilisateur;
     },
