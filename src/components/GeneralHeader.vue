@@ -110,7 +110,7 @@
         <router-link to="/ListUsers">Utilisateurs</router-link>
         <router-link to="/backofficegestionproduits">Tous les Produits</router-link>
 
-        <router-link to="/categorieProductAdmin">Catégories</router-link>
+        <router-link to="/page-modification-categories">Catégories</router-link>
         <router-link to="/recapLivraison">Commandes</router-link>
    
           <div v-if="isVisible">
