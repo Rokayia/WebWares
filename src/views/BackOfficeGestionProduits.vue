@@ -148,23 +148,23 @@
 
   <Modal :is-visible="showModifModalFlag" @close="showModifModalFlag=false">
     <div class="containerModal">
-      <form>
+      <form class="formModalModif">
         <h2>Modifier {{ nouveauProdModif.titre }}</h2>
         <div class="info_Modal">
-          <label for="editName">Titre : </label><br />
+          <label for="editName">Titre : </label>
           <input type="text" id="editName" v-model="nouveauProdModif.titre" />
         </div>
 
-        <br />
+        
 <div class="info_Modal">
   
-          <label for="editPrice">Prix produit:</label><br />
+          <label for="editPrice">Prix produit:</label>
           <input type="number" id="editPrice" v-model="nouveauProdModif.prix" />
 </div>
-        <br />
+        
 
         <div class="info_Modal">
-          <label for="editQuantity">Quantité de stock disponible:</label><br />
+          <label for="editQuantity">Quantité de stock disponible:</label>
           <input
             type="number"
             id="editQuantity"
@@ -172,44 +172,44 @@
           />
           
         </div>
-        <br />
+       
 
         <div class=" info_Modal imageModalContainer">
           <div>
             <p>Image produit:</p>
              <img class="imageModal" :src="getImgUrl(nouveauProdModif)"  />
           </div>
-           <br>
-           <div>
+           
+           <div class="divimgModal" >
              <p>Modifier l'image :</p>  
                        <input type="file" @change="convertToBase64" accept="image/*" />
            </div>
-          <br />
+          
       
           <div v-if="showImage">
             <img class="imageModal" :src="base64textString" :alt="imageName" />
           </div>
-          <br />
+          
        
         </div>
 
         <div class="info_Modal">
-          <label for="editMoq">Quantité minimale de commande:</label><br />
+          <label for="editMoq">Quantité minimale de commande:</label>
           <input
             type="number"
             id="editQuantity"
             v-model="nouveauProdModif.moq"
           />
         </div>
-        <br />
+        
 
         <div class="info_Modal">
-          <label for="editDesc">Description : </label><br />
+          <label for="editDesc">Description : </label>
           <input type="text" id="editDesc" v-model="nouveauProdModif.description" />
         </div>
 <div class="info_Modal">
   
-          <label for="editCategory">Catégorie produit:</label><br />
+          <label for="editCategory">Catégorie produit:</label>
           <select id="editCategory" v-model="nouveauProdModif.categorieId">
             <option
               v-for="categorie in categories"
@@ -220,10 +220,8 @@
             </option></select
           >
 </div>
-        
-        <br />
 
-        <br /><br />
+      
         <btnProduct
         label="Modifier"
         backgroundColor="ModifierBackOffice"
@@ -383,13 +381,45 @@ width: fit-content;
 .imageProdAdmin {
   max-width: 100px;
 }
+.divimgModal{
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  
+}
+.divimgModal  input{
+  
+ width: 70%;
+ text-align: center;
+  
+  
+}
 
 .imageModal {
   max-width: 100px;
 }
 
 .info_Modal{
-  margin-bottom:20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.info_Modal input, select{
+  text-align: center;
+  width: 50%;
+}
+.formModalModif{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+.formModalModif h2{
+  margin: 0px 0px 15px 0px;
 }
 
 </style>
