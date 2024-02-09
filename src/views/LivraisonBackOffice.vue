@@ -14,7 +14,7 @@
     <div class="cadreTitle" v-for="(commande, id) in commandePrises" :key="id" v-bind="commande.active" > 
    <div class="User">    
           <div class="Userss" v-for="(use, id) in utilisateurs" :key="id" >
-                      <div v-if="commande.id == use.id" >
+                      <div v-if="commande.userId == use.id" >
                     
                         {{ use.raisonSociale }}
            
@@ -62,7 +62,7 @@
     
     
     <div class="PrixToto-User">
-                Total: {{commande.coutTotal }} €
+                Total: {{commande.coutTotal.toFixed(2) }} €
                 </div> 
     
                   <div class="livre" >
@@ -146,7 +146,12 @@ export default {
 
     this.$store.dispatch("loadCommandes");
     
-
+    if (localStorage.getItem('reloaded')) {
+          localStorage.removeItem('reloaded');
+    } else {
+        localStorage.setItem('reloaded', '1');
+        location.reload();
+    }
 
 
 
