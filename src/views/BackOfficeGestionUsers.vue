@@ -64,20 +64,18 @@ export default {
 
     methods:{
     
-      ToggleEvent(toto){
-        
-            
-            if(toto.active===true){
-              toto.role= "ADMIN";
-              toto.active=!toto.active
+      ToggleEvent(element){
+     
+            if(element.active===false || element.role==='USER'){
+              element.active=!element.active
+              element.role= "ADMIN";
             }
             else{
-              
-              toto.role="USER"
-              toto.active=!toto.active
+              element.role="USER"
+              element.active=!element.active
             }
 
-            this.$store.commit('setUtilisateur',toto)
+            this.$store.commit('setUtilisateur',element)
             
         },
     },
