@@ -1,5 +1,8 @@
 <template>
-    <MyHeader :currentUtilisateur="currentUtilisateur" @deconnexionEventBtn="deconnecterCurrentUser"  :is-user="isUser" :is-visible="isHere()"/>
+    <MyHeader
+     :currentUtilisateur="currentUtilisateur" 
+     @deconnexionEventBtn="deconnecterCurrentUser" 
+      :is-user="isUser" :is-visible="isHere()"/>
   
 
   <div>hello</div>

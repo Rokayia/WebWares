@@ -11,7 +11,7 @@
         <p class="lvr">Livraison</p>
     </div>
   
-    <div class="cadreTitle" v-for="(commande, id) in commandes" :key="id" v-bind="commande.active" > 
+    <div class="cadreTitle" v-for="(commande, id) in commandePrises" :key="id" v-bind="commande.active" > 
    <div class="User">    
           <div class="Userss" v-for="(use, id) in utilisateurs" :key="id" >
                       <div v-if="commande.id == use.id" >
@@ -114,7 +114,7 @@ export default {
              
             }
      
-             this.$store.commit('setCommandes',liv)
+             this.$store.commit('setCommandesPrise',liv)
     },
 
     
@@ -129,10 +129,12 @@ export default {
       utilisateurs() {
     return this.$store.getters.getUtilisateurs;
     },
-   
-     commandes(){
-    return this.$store.getters.getCommandes
+    commandePrises() {
+      return this.$store.getters.getCommandesPrises;
     },
+    //  commandes(){
+    // return this.$store.getters.getCommandes
+    // },
     produits() {
 
     return this.$store.getters.getProduits;

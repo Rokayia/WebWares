@@ -135,10 +135,9 @@
         </div><br />
 
         <br /><br />
-        <input
-          type="button"
-          value="Enregistrer"
-          class="btn btn-success"
+        <btnProduct
+        label="Ajouter"
+        backgroundColor="AjouterPanier"
           @click="AjoutProd()"
         />
       </form>
@@ -290,7 +289,6 @@ export default {
     },
     AjoutProd() {
       this.nouveauProd.image = this.base64textString;
-      console.log("nouveauProd" + this.nouveauProd + this.nouveauProd.titre);
       this.$store.commit("addProd", this.nouveauProd);
       this.showModalFlag = false;
       location.reload();
@@ -324,7 +322,6 @@ export default {
       };
     },
 
-    // Supprime un produit du panier
     remove(prodId){
             this.$store.commit('deleteProd',prodId)
           }
