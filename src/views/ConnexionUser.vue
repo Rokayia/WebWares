@@ -84,7 +84,7 @@ export default {
           } else if(this.verifUser.role === "ADMIN"){
             console.log("dans ADMIN");
             this.$store.commit("setCurrentUtilisateur", this.verifUser);
-            this.$router.push("/categorieProductAdmin");
+            this.$router.push("/ListUsers");
             
           }
     },
