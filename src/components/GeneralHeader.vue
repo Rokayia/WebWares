@@ -50,7 +50,7 @@
                   :to="'/myOrder' "
                 >
             <font-awesome-icon :icon="['fas', 'basket-shopping']" size="2x" />
-            {{ quantitePanier() }} 
+            <!-- {{ quantitePanier() }}  -->
           </router-link>
             <li class="nav-link dropdown">
               <div class="circle">
@@ -198,6 +198,7 @@ export default {
         },
    quantitePanier(){
     if(this.currentUtilisateurCommande && this.currentUtilisateur){
+
      return this.currentUtilisateurCommande.produits.length
     }
    }

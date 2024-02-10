@@ -37,43 +37,49 @@
   
   <style>
   .modal-overlay{
-      
       position: fixed;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      background-color: rgba(0, 0, 0, 0.616);
-  
+      background-color: rgba(0, 0, 0, 0.616);  
+      height: 100vh;                                         
       width: 100%;
       display: flex;
-      justify-content: center;
+      justify-content: center;                                             
       align-items: center;
       margin-top: 0px;
   }
   
-  .modal{max-width: 600px;
-    height: 100%;
-    width: 100%;
+  .modal{
+      max-width: 600px;
+      width: 100%;
       background-color: white;
-      margin-top: 10px;
       border-radius:10px;
       box-shadow: 0 5px 10px rgba(0,0,0,0.5);
-      max-height: 700px;
+      max-height: 650px;
+      position: relative;
+      margin: 5px;
+      font-family: cursive;
   }
   .iconModalClose{
-   position: absolute;
-     top: 10px;
-     right: 10px;
+    position: absolute;
+     right: 0;
+     margin: 8px;
      cursor: pointer;
      color: black;
      font-size: 25px;
      z-index: 10;
   }
-  .containerModal{
-    height: 100%;
-    width: 100%;
-  
-   
-    
+  @media  (max-width: 630px) {
+    .modal{
+        width: 100%;
+    }
+    .formModalModif h2 {
+        font-size: 1rem;
+    }
+    .info_Modal {
+       width: 100%;
+    }
+
   }
   </style>
