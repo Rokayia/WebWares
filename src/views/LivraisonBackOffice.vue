@@ -8,14 +8,29 @@
   />
   <div class="boxEnGlobal">
     <h1>COMMANDES</h1>
-    <div class="bar">
-      <p class="etps">Entreprises</p>
-      <p class="prd">Produits</p>
-      <p class="prx">Prix</p>
-      <p class="qt">Quantite</p>
-      <p class="ttl">Total</p>
-      <p class="lvr">Livraison</p>
-    </div>
+
+   
+  
+    <div class="cadreTitle" v-for="(commande, id) in commandePrises" :key="id" v-bind="commande.active" > 
+   <div class="User">    
+          <div class="Userss" v-for="(use, id) in utilisateurs" :key="id" >
+                      <div v-if="commande.userId == use.id" >
+                    
+                        {{ use.raisonSociale }}
+           
+             
+              
+            </div>
+   </div></div>
+ 
+<div class="titre1">
+    
+        <div class="tt" v-for="(prod , index) in commande.produits" :key="index">
+        
+         
+        <div v-for="product in produits" :key="product.id">
+            
+
 
     <div
       class="cadreTitle"
@@ -35,17 +50,44 @@
         <div class="tt" v-for="(prod, index) in commande.produits" :key="index">
           <div v-for="product in produits" :key="product.id">
             <div class="tru" v-if="prod.produitId == product.id">
-              <div class="titre">
-                {{ product.titre }}
-              </div>
 
-              <div class="prix">{{ product.prix }} €</div>
+               <div class="titre5"> 
+            
+                 {{ product.titre }}
+                </div>
+                
+                <div class="prix">
+                {{ product.prix }} €
+                </div>
 
-              <div class="quantite">
-                {{ prod.quantite }}
-              </div>
-            </div>
-          </div>
+                <div class="quantite">
+                 {{ prod.quantite }} x {{ product.moq }}
+             
+                </div>
+
+                
+                
+                
+                </div> 
+             
+         
+           </div>
+          
+        
+        </div> 
+            
+    </div>
+    
+    
+    
+    <div class="PrixToto-User">
+                Total: {{commande.coutTotal.toFixed(2) }} €
+                </div> 
+    
+                  <div class="livre">
+                    <label for="">Livraison:</label>
+            <input type="checkbox"  @click="checkLivraison(commande)" :checked="commande.livraison === 'livré'"/>
+
         </div>
       </div>
 
@@ -154,73 +196,92 @@ export default {
 .titre1 {
   width: 100%;
 }
-.bar {
-  width: 100%;
-  height: 20px;
-  display: flex;
-  margin-bottom: 15px;
-  margin-top: 30px;
-}
 
-.bar .etps {
-  width: 28%;
+
+.boxEnGlobal{
+    min-height: 100vh;
+    max-width: 1100px;
+    width: 100%;
+    gap: 50px;
+    margin: 30px auto;
+       
 }
-.bar .prd {
-  width: 27%;
-}
-.bar .prx,
-.qt {
-  width: 14%;
-}
-.bar .ttl {
-  width: 14%;
-}
-.boxEnGlobal {
-  min-height: 100vh;
-  max-width: 1100px;
-  width: 100%;
-  gap: 50px;
-  margin: 30px auto;
-}
-.cadreTitle {
-  margin-top: 15px;
-  min-height: 80px;
-  display: flex;
-  background-color: rgba(128, 128, 128, 0.349);
-  color: black;
-  font-family: cursive;
+.cadreTitle{
+    margin-top: 15px;
+    min-height: 80px;
+    display: block;
+    background-color: #f1f1ef5b;
+    color: black;
+    font-family: cursive;  
+    text-transform: uppercase;
+    box-shadow: 0px 0px 10px 0px rgba(10, 125, 129, 0.192);
+    
+
 }
 .tru {
   min-height: 10vh;
   display: flex;
 }
 
-.User,
-.titre {
-  width: 50%;
-  border: 1px solid white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 1px;
+
+.User {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(237,219,174);
 }
-.quantite,
-.PrixToto-User,
-.prix {
-  width: 25%;
-  border: 1px solid white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 1px;
+
+ .titre5{
+    width: 50%;
+    border: 1px solid rgba(10, 125, 129, 0.192);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1px;
+    
+    
+    
 }
-.livre {
-  width: 10%;
-  background-color: grey;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid white;
-  margin: 1px;
+.PrixToto-User{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.quantite , .prix{
+    width: 25%;
+    border: 1px solid rgba(10, 125, 129, 0.192);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1px;
+
+}
+.livre{
+    width: 100%;
+    background-color: rgba(10, 125, 129, 0.192);
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+
+@media (max-width: 995px) {
+   
+    .cadreTitle{
+        display: block;
+        margin: 15px auto;
+        width: 80%;
+    }
+    
+}
+@media (max-width: 540px){
+    .cadreTitle{
+        font-size: 0.8rem;
+    }
+
 }
 </style>
