@@ -13,7 +13,7 @@
               <th>Image</th>
               <th>Titre</th>
               <th>Prix</th>
-              <th>Quantité minimale de commande</th>
+              <th>Qty min de commande</th>
               <th>Stock</th>
               <th>Description</th>
               <th>Categorie</th>
@@ -28,16 +28,16 @@
               <td class="image">
                 <img class="imageProdAdmin" :src="getImgUrl(item)" />
               </td>
-              <td>{{ item.titre }}</td>
-              <td>{{ item.prix }}</td>
-              <td>{{ item.moq }} x </td>
-              <td>{{ item.stock }}</td>
-              <td>{{ item.description }}</td>
+              <td data-label="Titre: ">{{ item.titre }}</td>
+              <td data-label="Prix: ">{{ item.prix }}</td>
+              <td data-label="Qty min de commande : ">{{ item.moq }} x </td>
+              <td data-label="Stock: ">{{ item.stock }}</td>
+              <td data-label="Description: ">{{ item.description }}</td>
 
               <div v-for="categorie in categories" :key="categorie.id" >
                 <div v-if="categorie.id == item.categorieId">
                   <div class="categProdAdmin">
-                    <td >{{ categorie.name }}</td>
+                    <td  data-label="Categorie: ">{{ categorie.name }}</td>
                   </div>
                 </div>
               </div>
@@ -355,28 +355,36 @@ export default {
 </script>
 
 <style>
-.categProdAdmin{
+.titreGestionProduits{
+  margin-top: 20px;
+}
+
+.listeProduitsAdmin{
+  font-family: cursive;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.categProdAdmin {
+height: 150px;
 display: flex;
 justify-content: center;
 align-items: center;
-padding-top: 40px;
-}
-.prodAdmin{
-  background-color: rgba(128, 128, 128, 0.349);
-  margin-bottom: 10px;
-}
-.AfficheListProduits {
 
-width: fit-content;
-  margin:0 auto
+}
+tr th {
+  background-color: #dab65b7e;
+  height: 25px;
+  width: 200px;
+}
+.tableAdmin{
+  margin:0 auto;
+ 
  
 }
-
-
-.imageModalContainer{
-  display: flex;
-  justify-content: center;
-  gap: 20px;
+.prodAdmin{
+  background-color: #F1F1EF;
+  margin-bottom:  10px ;
 }
 .imageProdAdmin {
   max-width: 100px;
@@ -388,18 +396,16 @@ width: fit-content;
   justify-content: center;
   align-items: center;
   
-  
 }
 .divimgModal  input{
-  
  width: 70%;
  text-align: center;
-  
   
 }
 
 .imageModal {
   max-width: 100px;
+  
 }
 
 .info_Modal{
@@ -410,16 +416,46 @@ width: fit-content;
 }
 .info_Modal input, select{
   text-align: center;
-  width: 50%;
+  max-width: 300px;
+  width: 100%;
+  
+  border: 1px solid #DAB65B;
 }
 .formModalModif{
   display: flex;
   flex-direction: column;
   gap: 12px;
-  width: 100%;
+ 
+ 
 }
 .formModalModif h2{
-  margin: 0px 0px 15px 0px;
+  margin: 25px 0px 0px 0px;
 }
+
+
+@media (max-width: 850px) { 
+  table thead{
+  display: none;
+  }
+
+  table tr{
+display: block;
+
+}
+table td {
+display: block;
+
+}
+
+.categProdAdmin{
+  height: 50px;
+}
+table td:before {
+content: attr(data-label);
+font-weight: bold;
+}
+
+}
+
 
 </style>

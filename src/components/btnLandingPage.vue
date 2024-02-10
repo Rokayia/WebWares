@@ -52,7 +52,7 @@ export default {
     font-size: 1.2rem;
     border:none;
     padding: 9px;
-    margin: 10px;
+    margin-bottom: 15px;
     width:110px;
     border-radius: 5px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
