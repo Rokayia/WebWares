@@ -1,7 +1,12 @@
 <template>
   
-    <MyHeader/>
-
+  <MyHeader
+    :currentUtilisateur="currentUtilisateur"
+    :currentUtilisateurCommande="currentUtilisateurCommande"
+    @deconnexionEventBtn="deconnecterCurrentUser"
+    :is-visible="isHere()"
+    :is-user="isUser()"
+  />
   <div class="titleAfficheListUsers">
     <h1>Liste Utilisateurs</h1>
   </div>
@@ -63,7 +68,29 @@ export default {
     },
 
     methods:{
-    
+      isUser(){
+      if(this.currentUtilisateur && this.currentUtilisateur.role=='ADMIN'){
+        return false;
+      }else{
+        return true;
+      }
+    },
+    deconnecterCurrentUser() {
+      this.$store.commit("setCurrentUtilisateur", 0);
+      this.$store.commit("setCommandes",this.currentUtilisateurCommande);
+      this.$store.commit("setCurrentUtilisateurCommande",1);
+      this.$router.push({
+        name: "home"
+      });
+   
+    },
+    isHere(){
+      if(this.currentUtilisateur){
+        return true;
+      }else{
+        return false;
+      }
+    },
       ToggleEvent(element){
      
             if(element.active===false || element.role==='USER'){
@@ -87,14 +114,26 @@ export default {
     roles() {
       return this.$store.getters.getRoles;
     },
+    currentUtilisateur() {
+      return this.$store.getters.getCurrentUtilisateur;
+    },
+    currentUtilisateurCommande() {
+      return this.$store.getters.getCurrentUtilisateurCommande;
+    },
 
 },
 mounted() {
 
   this.$store.dispatch("loadUtilisateurs");
 this.$store.dispatch("loadRoles")
+this.$store.dispatch("loadCategories");
+if (localStorage.getItem('reloaded')) {
+          localStorage.removeItem('reloaded');
+    } else {
+        localStorage.setItem('reloaded', '1');
+        location.reload();
+    }
 
-  
 
 
 }

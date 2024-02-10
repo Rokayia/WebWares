@@ -192,7 +192,12 @@ export default {
   mounted() {
     this.categorieId = this.$route.params.id;
     console.log("categorie" + this.categorieId);
-
+    if (localStorage.getItem('reloaded')) {
+          localStorage.removeItem('reloaded');
+    } else {
+        localStorage.setItem('reloaded', '1');
+        location.reload();
+    }
   },
 };
 </script>

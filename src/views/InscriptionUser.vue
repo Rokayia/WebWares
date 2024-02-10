@@ -4,7 +4,7 @@
     :currentUtilisateurCommande="currentUtilisateurCommande"
     @deconnexionEventBtn="deconnecterCurrentUser"
     :is-visible="isHere()"
-    :is-user="isUser"
+    :is-user="isUser()"
   />
 
   <div class="contGeneral">
@@ -134,7 +134,7 @@ export default {
       errmp: [],
       errconfirmmp: [],
       isConnected: false,
-      isUser: true,
+      // isUser: true,
     };
   },
   components: {
@@ -144,6 +144,13 @@ export default {
   },
 
   methods: {
+    isUser(){
+      if(this.currentUtilisateur && this.currentUtilisateur.role=='ADMIN'){
+        return false;
+      }else{
+        return true;
+      }
+    },
     getSiret() {
       this.error = [];
       this.errmail = [];

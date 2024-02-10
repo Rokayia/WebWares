@@ -523,6 +523,19 @@ state.roles=roles;
         });
       }
     },
+    setProduct(state, prod) {
+      if (prod != undefined) {
+        this.getters.getProduits.forEach(function (currentValue) {
+          if (currentValue.id == prod.id && prod.titre==currentValue.titre) {
+          
+            localStorage.setItem(
+              `prod_${currentValue.id}`,
+              JSON.stringify(prod)
+            );
+          }
+        });
+      }
+    },
     setCommandesPrise(state, commande) {
       if (commande != undefined) {
         this.getters.getCommandes.forEach(function (currentValue) {
@@ -660,8 +673,6 @@ state.roles=roles;
     },
 
     loadCategories(context) {
-
-
       context.getters.getCategories.forEach(function (currentValue) {
         let selectedCategorie = localStorage.getItem(
           `categorie_${currentValue.id}`

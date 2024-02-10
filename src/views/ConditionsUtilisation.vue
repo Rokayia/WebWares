@@ -5,7 +5,7 @@
     :currentUtilisateurCommande="currentUtilisateurCommande" 
     @deconnexionEventBtn="deconnecterCurrentUser"
     :is-visible="isHere()"
-    :is-user="isUser"
+    :is-user="isUser()"
   />
   
     <div class="utilisation">
@@ -41,7 +41,7 @@ export default {
     data() {
     return {
       isConnected: false,
-      isUser: true,
+      // isUser: true,
     };
   },
     components: {
@@ -51,7 +51,13 @@ export default {
 
     ,
   methods:{
-   
+    isUser(){
+      if(this.currentUtilisateur && this.currentUtilisateur.role=='ADMIN'){
+        return false;
+      }else{
+        return true;
+      }
+    },
     deconnecterCurrentUser() {
       this.$store.commit("setCurrentUtilisateur", 0);
       this.$store.commit("setCommandes",this.currentUtilisateurCommande);

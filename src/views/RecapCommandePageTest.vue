@@ -4,7 +4,7 @@
     :currentUtilisateurCommande="currentUtilisateurCommande"
     @deconnexionEventBtn="deconnecterCurrentUser"
     :is-visible="isHere()"
-    :is-user="isUser"
+    :is-user="isUser()"
   />
   <div v-if="currentUtilisateur" class="recapCommande">
       <FormUtilisateurVue :currentUtilisateur="currentUtilisateur" />
@@ -76,21 +76,9 @@ import MyFooter from "@/components/myFooter.vue";
 export default {
   data() {
     return {
-      utilisateurs: [
-        {
-          id: 1,
-          raisonSociale: "Entreprise A",
-          siret: "12345678901234",
-          adresse: "123 Rue de la République",
-          codePostal: "75001",
-          ville: "Paris",
-          email: "entrepriseA@example.com",
-          motDePasse: "motdepasseA",
-          role: "USER",
-        },
-      ],
+
       isConnected: false,
-      isUser: true,
+      // isUser: true,
       produitSelected: {},
     };
   },
@@ -114,6 +102,13 @@ export default {
   
   },
   methods: {
+    isUser(){
+      if(this.currentUtilisateur && this.currentUtilisateur.role=='ADMIN'){
+        return false;
+      }else{
+        return true;
+      }
+    },
     deconnecterCurrentUser() {
       this.$store.commit("setCurrentUtilisateur", 0);
       this.$store.commit("setCommandes", this.currentUtilisateurCommande);

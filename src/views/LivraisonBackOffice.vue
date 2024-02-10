@@ -1,7 +1,14 @@
 <template>
-    <MyHeader/>
+  <MyHeader
+    :currentUtilisateur="currentUtilisateur"
+    :currentUtilisateurCommande="currentUtilisateurCommande"
+    @deconnexionEventBtn="deconnecterCurrentUser"
+    :is-visible="isHere()"
+    :is-user="isUser()"
+  />
   <div class="boxEnGlobal">
     <h1>COMMANDES</h1>
+
    
   
     <div class="cadreTitle" v-for="(commande, id) in commandePrises" :key="id" v-bind="commande.active" > 
@@ -24,7 +31,26 @@
         <div v-for="product in produits" :key="product.id">
             
 
+
+    <div
+      class="cadreTitle"
+      v-for="(commande, id) in commandePrises"
+      :key="id"
+      v-bind="commande.active"
+    >
+      <div class="User">
+        <div class="Userss" v-for="(use, id) in utilisateurs" :key="id">
+          <div v-if="commande.userId == use.id">
+            {{ use.raisonSociale }}
+          </div>
+        </div>
+      </div>
+
+      <div class="titre1">
+        <div class="tt" v-for="(prod, index) in commande.produits" :key="index">
+          <div v-for="product in produits" :key="product.id">
             <div class="tru" v-if="prod.produitId == product.id">
+
                <div class="titre5"> 
             
                  {{ product.titre }}
@@ -61,67 +87,81 @@
                   <div class="livre">
                     <label for="">Livraison:</label>
             <input type="checkbox"  @click="checkLivraison(commande)" :checked="commande.livraison === 'livré'"/>
+
         </div>
-   
+      </div>
+
+      <div class="PrixToto-User">
+        Total: {{ commande.coutTotal.toFixed(2) }} €
+      </div>
+
+      <div class="livre">
+        <input
+          type="checkbox"
+          @click="checkLivraison(commande)"
+          :checked="commande.livraison === 'livré'"
+        />
+      </div>
     </div>
-    
-</div>
-  
+  </div>
+
   <myFooter />
 </template>
 
 <script>
-
-import MyHeader from '@/components/GeneralHeader.vue'
-import myFooter from '@/components/myFooter.vue'
-
-
-
+import MyHeader from "@/components/GeneralHeader.vue";
+import myFooter from "@/components/myFooter.vue";
 
 export default {
+  data() {
+    return {};
+  },
 
-    data(){
-        return{
+  components: {
+    MyHeader,
+    myFooter,
+  },
 
-           
-
-        }
+  methods: {
+    isUser(){
+      if(this.currentUtilisateur && this.currentUtilisateur.role=='ADMIN'){
+        return false;
+      }else{
+        return true;
+      }
     },
-
+    deconnecterCurrentUser() {
+      this.$store.commit("setCurrentUtilisateur", 0);
+      this.$store.commit("setCommandes",this.currentUtilisateurCommande);
+      this.$store.commit("setCurrentUtilisateurCommande",1);
+      this.$router.push({
+        name: "mentionslegales"
+      });
+    location.reload();
    
-    components: {
-        MyHeader,
-        myFooter,
-        
     },
-
-    methods:{
-    checkLivraison(liv){
-        liv.active=!liv.active
-            if(liv.active){
-              liv.livraison= "livré";
-           
-            }
-            else{
-              
-              liv.livraison="non livré"
-             
-            }
-     
-             this.$store.commit('setCommandesPrise',liv)
+    isHere(){
+      if(this.currentUtilisateur){
+        return true;
+      }else{
+        return false;
+      }
     },
+    checkLivraison(liv) {
+      liv.active = !liv.active;
+      if (liv.active) {
+        liv.livraison = "livré";
+      } else {
+        liv.livraison = "non livré";
+      }
 
-    
- 
-    
-     
-   
-},
+      this.$store.commit("setCommandesPrise", liv);
+    },
+  },
 
-        computed: {
-            
-      utilisateurs() {
-    return this.$store.getters.getUtilisateurs;
+  computed: {
+    utilisateurs() {
+      return this.$store.getters.getUtilisateurs;
     },
     commandePrises() {
       return this.$store.getters.getCommandesPrises;
@@ -130,39 +170,33 @@ export default {
     // return this.$store.getters.getCommandes
     // },
     produits() {
-
-    return this.$store.getters.getProduits;
-}
-   
-  
+      return this.$store.getters.getProduits;
+    },
+    currentUtilisateur() {
+      return this.$store.getters.getCurrentUtilisateur;
+    },
+    currentUtilisateurCommande() {
+      return this.$store.getters.getCurrentUtilisateurCommande;
+    },
   },
   mounted() {
-
     this.$store.dispatch("loadCommandes");
-    
-    if (localStorage.getItem('reloaded')) {
-          localStorage.removeItem('reloaded');
+
+    if (localStorage.getItem("reloaded")) {
+      localStorage.removeItem("reloaded");
     } else {
-        localStorage.setItem('reloaded', '1');
-        location.reload();
+      localStorage.setItem("reloaded", "1");
+      location.reload();
     }
-
-
-
-}
-  
-
-
-    
-
-}
+  },
+};
 </script>
 
 <style>
-.titre1{
-   width: 100%;
-   
+.titre1 {
+  width: 100%;
 }
+
 
 .boxEnGlobal{
     min-height: 100vh;
@@ -182,11 +216,13 @@ export default {
     text-transform: uppercase;
     box-shadow: 0px 0px 10px 0px rgba(10, 125, 129, 0.192);
     
+
 }
-.tru{
-    min-height: 10vh;  
-    display: flex;
+.tru {
+  min-height: 10vh;
+  display: flex;
 }
+
 
 .User {
     width: 100%;
@@ -248,6 +284,4 @@ export default {
     }
 
 }
-
-
 </style>

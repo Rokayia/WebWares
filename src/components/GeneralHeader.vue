@@ -13,8 +13,6 @@
         /></router-link>
       </div>
   
-
-
 <nav class="partie-nav">
    
       <ul class="nav-bar">
@@ -31,7 +29,7 @@
               <div v-for="category in categories" :key="category.id">
                 <router-link
                   :to="'/categorieProduct/:' + category.id"
-                  v-on:click="getCatégories(category.id)"
+                  @click="getCatégories(category.id)"
                   class="nav-link"
                 >
                   {{ category.name }}
@@ -185,6 +183,7 @@ export default {
         name: "categorieproduits",
         params: { id: categoriesId },
       });
+
     },
     getUser() {
     console.log("getuserheader"+this.currentUtilisateur.raisonSociale);
@@ -217,7 +216,7 @@ export default {
 
   computed: {
     categories() {
-      return this.$store.state.categories;
+      return this.$store.getters.getCategories;
     },
     // currentUtilisateur() {
     //   return this.$store.state.getCurrentUtilisateur;
