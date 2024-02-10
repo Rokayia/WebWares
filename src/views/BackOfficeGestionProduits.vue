@@ -1,5 +1,11 @@
 <template>
-  <MyHeader />
+  <MyHeader
+    :currentUtilisateur="currentUtilisateur"
+    :currentUtilisateurCommande="currentUtilisateurCommande"
+    @deconnexionEventBtn="deconnecterCurrentUser"
+    :is-visible="isHere()"
+    :is-user="isUser()"
+  />
   <div class="AfficheListProduits">
     <h1 class="titreGestionProduits">Gestion des produits</h1>
     
@@ -71,7 +77,7 @@
 
   <!-- Ajouter modal -->
 
-  <Modal :is-visible="showModalFlag" @close="showModalFlag=false">
+  <Modal :is-visible="showModalFlag" @close="closeModalFlag()">
     <div class="containerModal">
       <form>
         <h2>Ajouter un produit</h2>
@@ -146,7 +152,7 @@
 
   <!-- Modifier modal -->
 
-  <Modal :is-visible="showModifModalFlag" @close="showModifModalFlag=false">
+  <Modal :is-visible="showModifModalFlag" @close="closeModalFlag()">
     <div class="containerModal">
       <form class="formModalModif">
         <h2>Modifier {{ nouveauProdModif.titre }}</h2>
@@ -266,6 +272,29 @@ export default {
     Modal,
   },
   methods: {
+    isUser(){
+      if(this.currentUtilisateur && this.currentUtilisateur.role=='ADMIN'){
+        return false;
+      }else{
+        return true;
+      }
+    },
+    deconnecterCurrentUser() {
+      this.$store.commit("setCurrentUtilisateur", 0);
+      this.$store.commit("setCommandes",this.currentUtilisateurCommande);
+      this.$store.commit("setCurrentUtilisateurCommande",1);
+      this.$router.push({
+        name: "home"
+      });
+  
+    },
+    isHere(){
+      if(this.currentUtilisateur){
+        return true;
+      }else{
+        return false;
+      }
+    },
     getImgUrl(pic) {
 
       if (pic.image.length < 21) {
@@ -279,7 +308,10 @@ export default {
     },
 
     closeModalFlag() {
+      this.base64textString="";
+      this.showImage = false;
       this.showModalFlag = false;
+      this.showModifModalFlag = false;
     },
     ouvrirModal() {
       this.imgBase = localStorage.getItem(`base64image`);
@@ -288,6 +320,7 @@ export default {
     AjoutProd() {
       this.nouveauProd.image = this.base64textString;
       this.$store.commit("addProd", this.nouveauProd);
+      this.base64textString="";
       this.showModalFlag = false;
       location.reload();
     },
@@ -301,6 +334,7 @@ export default {
         this.nouveauProdModif.image = this.base64textString;
       }
       this.$store.commit("setOneProduct", this.nouveauProdModif);
+      this.base64textString="";
       this.showModifModalFlag = false;
       location.reload();
  

@@ -4,7 +4,7 @@
     :currentUtilisateurCommande="currentUtilisateurCommande"
     @deconnexionEventBtn="deconnecterCurrentUser"
     :is-visible="isHere()"
-    :is-user="isUser"
+    :is-user="isUser()"
   />
 
   <SearchBar v-on:click="filtered = true" />
@@ -59,7 +59,7 @@ export default {
     return {
       filtered: false,
       isConnected: false,
-      isUser: true,
+      // isUser: true,
       stockDispo: true,
       // itemCommande:0,
     };
@@ -72,6 +72,13 @@ export default {
     btnProduct,
   },
   methods: {
+    isUser(){
+      if(this.currentUtilisateur && this.currentUtilisateur.role=='ADMIN'){
+        return false;
+      }else{
+        return true;
+      }
+    },
     getImgUrl(pic) {
       if (pic.image.length < 21) {
         return require("../assets/" + pic.image);

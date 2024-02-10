@@ -3,7 +3,7 @@
  <MyHeader :currentUtilisateur="currentUtilisateur"
  :currentUtilisateurCommande="currentUtilisateurCommande" 
   @deconnexionEventBtn="deconnecterCurrentUser" 
-  :is-visible="isHere()" :is-user="isUser"/>
+  :is-visible="isHere()" :is-user="isUser()"/>
   
 
 
@@ -48,7 +48,7 @@ export default {
   data() {
     return {
       isConnected: false,
-      isUser: true,
+      // isUser: true,
     };
   },
   components: {
@@ -57,6 +57,13 @@ export default {
     myFooter,
   },
   methods: {
+    isUser(){
+      if(this.currentUtilisateur && this.currentUtilisateur.role=='ADMIN'){
+        return false;
+      }else{
+        return true;
+      }
+    },
     getImgUrl(pic) {
     
       return require("../assets/" + pic);

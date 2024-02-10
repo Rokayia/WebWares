@@ -4,7 +4,7 @@
     :currentUtilisateurCommande="currentUtilisateurCommande" 
     @deconnexionEventBtn="deconnecterCurrentUser"
     :is-visible="isHere()"
-    :is-user="isUser"
+    :is-user=" IsUser()"
   />
 
   <div class="containerConnexion">
@@ -46,7 +46,7 @@ export default {
       verifUser: {},
       erreur: "",
       isConnected: false,
-      isUser: true,
+      // isUser: true,
     };
   },
 
@@ -57,6 +57,13 @@ export default {
   },
 
   methods: {
+    IsUser(){
+      if(this.currentUtilisateur && this.currentUtilisateur.role=='USER'){
+        return true;
+      }else{
+        return false;
+      }
+    },
     ValiderUser() {
       let trouve = false;
       this.utilisateurs.forEach((user) => {
@@ -111,6 +118,7 @@ export default {
 
   },
     mounted() {
+      // this.$store.dispatch("loadProds")
     //   this.$store.dispatch("loadCommandes");
     // this.$store.dispatch("loadUtilisateurs"),
     // this.$store.dispatch("oneUtilisateur")

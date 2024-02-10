@@ -2,7 +2,7 @@
 
 
   <div class="homepage" v-cloak>
-    <MyHeader :currentUtilisateur="currentUtilisateur" :currentUtilisateurCommande="currentUtilisateurCommande" @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser"/>
+    <MyHeader :currentUtilisateur="currentUtilisateur" :currentUtilisateurCommande="currentUtilisateurCommande" @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser()"/>
 
 
 
@@ -71,7 +71,7 @@ export default {
   data() {
     return {
       isConnected: false,
-      isUser: true,
+      // isUser: true,
     };
   },
 
@@ -82,7 +82,13 @@ export default {
     btnLanding,
   },
   methods:{
-   
+    isUser(){
+      if(this.currentUtilisateur && this.currentUtilisateur.role=='ADMIN'){
+        return false;
+      }else{
+        return true;
+      }
+    },
     deconnecterCurrentUser() {
       this.$store.commit("setCurrentUtilisateur", 0);
       this.$store.commit("setCommandes",this.currentUtilisateurCommande);

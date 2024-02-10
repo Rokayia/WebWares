@@ -1,6 +1,11 @@
 <template>
-  <MyHeader />
-
+   <MyHeader
+    :currentUtilisateur="currentUtilisateur"
+    :currentUtilisateurCommande="currentUtilisateurCommande"
+    @deconnexionEventBtn="deconnecterCurrentUser"
+    :is-visible="isHere()"
+    :is-user="isUser()"
+  />
   <div class="containerCategorie">
     <h2 class="titre">Récapitulatifs des catégories</h2>
     <div class="boutonAjouter">
@@ -108,14 +113,39 @@ export default {
   },
 
   computed: {
+    currentUtilisateur() {
+      return this.$store.getters.getCurrentUtilisateur;
+    },
+    currentUtilisateurCommande() {
+      return this.$store.getters.getCurrentUtilisateurCommande;
+    },
     categories() {
       return this.$store.getters.getCategories;
     },
   },
-  mounted() {
-    this.$store.dispatch("loadCategories");
-  },
   methods: {
+    isUser(){
+      if(this.currentUtilisateur && this.currentUtilisateur.role=='ADMIN'){
+        return false;
+      }else{
+        return true;
+      }
+    },
+    deconnecterCurrentUser() {
+      this.$store.commit("setCurrentUtilisateur", 0);
+      this.$store.commit("setCommandes",this.currentUtilisateurCommande);
+      this.$store.commit("setCurrentUtilisateurCommande",1);
+      this.$router.push({
+        name: "home"
+      });
+    },
+    isHere(){
+      if(this.currentUtilisateur){
+        return true;
+      }else{
+        return false;
+      }
+    },
     ouvrirModal() {
       this.showModalFlag = true;
     },

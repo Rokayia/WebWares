@@ -2,7 +2,7 @@
     <MyHeader
      :currentUtilisateur="currentUtilisateur" 
      @deconnexionEventBtn="deconnecterCurrentUser" 
-      :is-user="isUser" :is-visible="isHere()"/>
+      :is-user="isUser()" :is-visible="isHere()"/>
   
 
   <div>hello</div>
@@ -16,7 +16,7 @@ export default {
     data() {
     return {
       isConnected: false,
-      isUser: false,
+      // isUser: false,
     };
   },
   components: {
@@ -25,13 +25,18 @@ export default {
    
   },
   methods:{
-   
+    isUser(){
+      if(this.currentUtilisateur && this.currentUtilisateur.role=='ADMIN'){
+        return false;
+      }else{
+        return true;
+      }
+    },
     deconnecterCurrentUser() {
       this.$store.commit("setCurrentUtilisateur", 0);
       this.$router.push({
         name: "home"
       });
-    location.reload();
    
     },
     isHere(){
