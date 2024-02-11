@@ -203,23 +203,30 @@ export default {
 
 <style>
 .produits {
-  margin: 0 auto;
-  max-width: 1200px;
-  width: 100%;
+
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: 10px;
+  justify-content: center;
+  width: 100%;
+  
+  
+ 
 }
 
 .prod {
   max-width: 400px;
-  background-color: #eadfd8;
+
+ 
 }
 .stockFini {
   margin-top: 10px;
   color: red;
   font-size: larger;
+}
+.normal-card h2{
+  font-size: 1rem;
+  margin-bottom: 8px;
+  margin-top: 10px;
 }
 
 @media (max-width: 584px) {

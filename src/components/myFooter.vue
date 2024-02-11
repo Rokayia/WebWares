@@ -48,6 +48,7 @@ footer{
     width: 100%;
     background-color: #eadfd8;
     color: #333;
+    
 } 
 
 .footerContainer{

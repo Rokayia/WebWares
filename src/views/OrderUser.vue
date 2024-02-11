@@ -275,8 +275,12 @@ let stockrestant= item.stock - itemCommande;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-content: space-around;
+ margin: 15px auto;
   margin-bottom: 50px;
+  max-width: 1200px;
+  width: 100%;
+  
+ 
   
   
 }
@@ -285,7 +289,11 @@ let stockrestant= item.stock - itemCommande;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   gap: 20px;
+
+ 
+
   
 }
 
@@ -294,19 +302,20 @@ let stockrestant= item.stock - itemCommande;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  align-content: center;
   align-items: center;
+  justify-content: center;
   background-color: white;
   border: none;
-  width: 50%;
-  flex: 1;
+
+
   gap: 20px;
   height: 400px;
   margin-bottom: 10px;
+ 
 }
 .produit-panier img {
   padding-top: 10px;
-  max-width: 300px;
+  max-width: 200px;
   max-height: 150px;
   height: 100%;
 }
@@ -410,6 +419,11 @@ let stockrestant= item.stock - itemCommande;
   }
   .total-panier h2{
     font-size: 1rem;
+  }
+}
+@media(max-width: 971px){
+  .produit-panier{
+    font-size: 0.8rem;
   }
 }
 </style>

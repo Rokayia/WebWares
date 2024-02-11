@@ -254,7 +254,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin: 30px 0px 30px 0px;
 
 }
 
@@ -273,15 +273,18 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 }
 .container-form {
-  background-color: #f1f1f1;
+  background-color: rgb(241,245,237);
   max-width: 1200px;
   width: 80%;
   height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0px 0px 10px 1px #00000029;
+  margin-top: 20px;
 }
 .container-form label {
   margin-top: 30px;
@@ -298,20 +301,27 @@ export default {
   border-radius: 5px;
   outline: none;
   border: none;
+  outline: 2px solid #a7c28a;
 }
 .container-form input:focus {
   outline: 2px solid #7d9167;
 }
+.error{
+width:250px;
+
+}
 
 .is-error {
   color: red;
+  font-size: 0.8rem;
 }
 
 @media(max-width:819px){
   .container-form{
     display: flex;
     flex-direction: column;
-    height: 800px;
+    height: 100%;
+  
     
   }
 }
