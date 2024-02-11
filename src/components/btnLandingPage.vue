@@ -142,7 +142,7 @@ export default {
     font-size: 1.2rem;
     border:none;
     padding: 10px 30px 10px 30px;
-    margin-top: 3px;
+    margin-top: 10px;
     border-radius: 5px;
 
 }

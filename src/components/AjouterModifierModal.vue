@@ -52,6 +52,7 @@
   
   .modal{
       max-width: 600px;
+      height: 650px;
       width: 100%;
       background-color: white;
       border-radius:10px;
@@ -60,6 +61,7 @@
       position: relative;
       margin: 5px;
       font-family: cursive;
+      
   }
   .iconModalClose{
     position: absolute;

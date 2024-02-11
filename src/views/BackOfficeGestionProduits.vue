@@ -73,56 +73,56 @@
 
   <Modal :is-visible="showModalFlag" @close="showModalFlag=false">
     <div class="containerModal">
-      <form>
+      <form class="ajoutform">
         <h2>Ajouter un produit</h2>
         <div class="info_Modal">
-          <label for="editName">Titre : </label><br />
+          <label for="editName">Titre : </label>
           <input type="text" id="editName" v-model="nouveauProd.titre" />
         </div>
 
-        <br />
+        
 
         <div class="info_Modal">
-          <label for="editPrice">Prix produit:</label><br />
+          <label for="editPrice">Prix produit:</label>
           <input type="number" id="editPrice" v-model="nouveauProd.prix" />
         </div>
-        <br />
+      
 
         <div class="info_Modal">
-          <label for="editQuantity">Quantité de stock disponible:</label><br />
+          <label for="editQuantity">Quantité de stock disponible:</label>
           <input
             type="number"
             id="editQuantity"
             v-model="nouveauProd.stock"
           />
-        </div><br />
+        </div>
 
         <div class=" info_Modal image">
-          <label for="editimage">Image du produit:</label><br />
+          <label for="editimage">Image du produit:</label>
           <input type="file" @change="convertToBase64" accept="image/*" />
-          <br />
+          
           <div v-if="showImage">
             <img class="imageModal" :src="base64textString" :alt="imageName" />
           </div>
-          <br />
+          
         </div>
 
         <div class="info_Modal">
-          <label for="editMoq">Quantité minimale de commande:</label><br />
+          <label for="editMoq">Quantité minimale de commande:</label>
           <input
             type="number"
             id="editQuantity"
             v-model="nouveauProd.moq"
           />
-        </div><br />
+        </div>
 <div class="info_Modal">
   
-          <label for="editDesc">Description : </label><br />
+          <label for="editDesc">Description : </label>
           <input type="text" id="editDesc" v-model="nouveauProd.description" />
 </div>
 
         <div class="info_Modal">
-          <label for="editCategory">Catégorie produit:</label><br />
+          <label for="editCategory">Catégorie produit:</label>
           <select id="editCategory" v-model="nouveauProd.categorieId">
             <option
               v-for="categorie in categories"
@@ -132,9 +132,9 @@
               {{ categorie.name }}
             </option></select
           >
-        </div><br />
+        </div>
 
-        <br /><br />
+        
         <btnProduct
         label="Ajouter"
         backgroundColor="AjouterPanier"
@@ -174,7 +174,7 @@
         </div>
        
 
-        <div class=" info_Modal imageModalContainer">
+        <div class=" info_Modal-imageModalContainer">
           <div>
             <p>Image produit:</p>
              <img class="imageModal" :src="getImgUrl(nouveauProdModif)"  />
@@ -358,6 +358,10 @@ export default {
 .titreGestionProduits{
   margin-top: 20px;
 }
+.ajoutform .info_Modal{
+  margin-bottom: 10px;
+}
+
 
 .listeProduitsAdmin{
   font-family: cursive;
@@ -402,9 +406,25 @@ tr th {
  text-align: center;
   
 }
+.containerModal{
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  
+
+}
+.info_Modal-imageModalContainer{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
 
 .imageModal {
   max-width: 100px;
+  height: 100px;
   
 }
 
