@@ -7,6 +7,7 @@
     :is-user="isUser()"
   />
   <div class="containerCategorie">
+    <div class="ctncat">
     <h2 class="titre">Récapitulatifs des catégories</h2>
     <div class="boutonAjouter">
       <btnProduct
@@ -37,6 +38,7 @@
         />
       </div>
     </div>
+  </div>
     <!-- <div class="containerAjout">
 
             <input
@@ -53,6 +55,7 @@
 
     <Modal :is-visible="showModalFlag" @close="showModalFlag = false">
       <div class="containerModal">
+        
         <form>
           <h2>Ajouter une catégorie</h2>
           <div class="info_Modal">
@@ -66,12 +69,13 @@
             @click="ajouterCategorie()"
           />
         </form>
+      
       </div>
     </Modal>
 
 
     <Modal :is-visible="showModifModalFlag" @close="showModifModalFlag=false">
-        <form>
+        <form class="centerform">
           <h2>Modifier une catégorie</h2>
           <div class="info_Modal">
             <label for="editName">Nom de la catégorie : </label><br />
@@ -172,76 +176,92 @@ export default {
 .containerModifCategories {
   display: flex;
   align-items: center;
+  width: 90%;
+  font-family: cursive;
+  text-transform: uppercase ;
+  background-color: #e2dac71c;
+  margin-top: 30px;
+  
+  
+ 
+}
+.boutonAjouter{
+  width: 100%;
+  
+  display: flex;
+  justify-content: flex-end;
+  
 }
 .affichage {
   margin-top: 15px;
   min-height: 40px;
-  width: 500px;
-  text-align: start;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding-left: 10px;
-  background-color: rgba(128, 128, 128, 0.349);
+  background-color: #F1F1EF;
   color: black;
   font-family: cursive;
 }
-.boutonAjouter {
-  width: 750px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-}
+
 .containerCategorie {
   /* background-color: #333; */
-  width: 100%;
-  margin: 0 auto;
-  height: 100vh;
-  color: #333;
+
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  max-width: 1000px;
+  
+ 
 }
-@media screen and (max-width: 1200px) {
-  .container {
-    width: 90%;
-  }
-}
-/* .containerCategories {
-    background-color : blue;
-    
-}
-
-
-.affichage {
-    background-color: chocolate;
-} */
-.containerAjout {
-  margin: 10px;
-  /* background-color : green; */
-}
-.containerAjout button {
-  margin-left: 10px;
-  /* background-color : green; */
-}
-.containerAjout input {
-  margin-right: 10px;
-  /* background-color : green; */
-  border-radius: 5px;
-}
-.btnAjout {
-  background-color: rgb(255, 210, 143);
-  margin-right: 10px;
-  width: 200px;
-  height: 30px;
-  border-radius: 15px;
-}
-
-.titre {
-  margin-top: 50px;
-}
-.modifSupp {
-  margin: 10px;
+.ctncat{
+  max-width: 1200px;
+  width: 100%;;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 30px;
+ 
 }
+.ctncat h2{
+  font-size: 2rem;
+}
+.centerform{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  
+}
+@media (max-width:765px) {
+  .boutonAjouter{
+
+  
+  display: flex;
+  justify-content: center;
+  
+  
+}
+
+
+}
+@media (max-width:500px){
+  .containerModifCategories{
+   display: flex;
+   flex-direction: column;
+   margin-top: 10px;
+  }
+  .ctncat h2{
+  font-size: 1.5rem;
+  margin: 2px;
+  margin-bottom: 25px;
+}
+  
+}
+
+
 </style>
