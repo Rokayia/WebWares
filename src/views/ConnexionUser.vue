@@ -3,8 +3,8 @@
     :currentUtilisateur="currentUtilisateur"
     :currentUtilisateurCommande="currentUtilisateurCommande" 
     @deconnexionEventBtn="deconnecterCurrentUser"
-    :is-visible="isHere()"
-    :is-user=" IsUser()"
+    :is-visible="false"
+    :is-user=" true"
   />
 
   <div class="containerConnexion">
