@@ -1,44 +1,21 @@
 <template>
-  <MyHeader
-    :currentUtilisateur="currentUtilisateur"
-    :currentUtilisateurCommande="currentUtilisateurCommande"
-    @deconnexionEventBtn="deconnecterCurrentUser"
-    :is-visible="isHere()"
-    :is-user="isUser"
-  />
+  <MyHeader :currentUtilisateur="currentUtilisateur" :currentUtilisateurCommande="currentUtilisateurCommande"
+    @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser" />
 
   <div class="categorie">
     <h1 class="titreCategorie">{{ getNomCategorie() }}</h1>
-
     <div class="produitsCategorie">
       <div class="prod" v-for="item in produits" :key="item.id">
         <div v-if="item.categorieId == this.categorieId">
-          <productCard
-            :image="getImgUrl(item)"
-            :titre="item.titre"
-            :prix="item.prix"
-            :moq="item.moq"
-            :afficheMoq="true"
-            :affichedetails="true"
-            :affichePrix="isHere()"
-            @detailsCardEventBtn="getDetails(item.id)"
-            backgroundColor="beige"
-          >
+          <productCard :image="getImgUrl(item)" :titre="item.titre" :prix="item.prix" :moq="item.moq" :afficheMoq="true"
+            :affichedetails="true" :affichePrix="isHere()" @detailsCardEventBtn="getDetails(item.id)"
+            backgroundColor="beige">
             <div v-if="currentUtilisateur">
-              <div v-if=" stockDispoProd(item)">
-                <btnProduct
-                  label="Ajouter au panier"
-                  backgroundColor="AjouterPanier"
-                  :showButton="AjouterPanier(item)"
-                  @click="addToPanier(item.id)"
-                />
-
-                <btnProduct
-                  label="Supprimer du panier"
-                  backgroundColor="SupprimerPanier"
-                  :showButton="SupprimerPanier(item)"
-                  @click="removeProduct(item)"
-                />
+              <div v-if="stockDispoProd(item)">
+                <btnProduct label="Ajouter au panier" backgroundColor="AjouterPanier" :showButton="AjouterPanier(item)"
+                  @click="addToPanier(item.id)" />
+                <btnProduct label="Supprimer du panier" backgroundColor="SupprimerPanier"
+                  :showButton="SupprimerPanier(item)" @click="removeProduct(item)" />
               </div>
               <div v-else>
                 <div class="stockFini">plus de stock</div>
@@ -50,6 +27,7 @@
     </div>
   </div>
   <myFooter />
+ 
 </template>
 
 <script>
@@ -82,7 +60,7 @@ export default {
       return this.$store.getters.getCurrentUtilisateurCommande;
     },
     produits() {
-        return this.$store.getters.getProduits;
+      return this.$store.getters.getProduits;
 
     },
     commandePrises() {
@@ -124,8 +102,8 @@ export default {
       return titre;
     },
     getDetails(prodId) {
-      if(prodId<10){
-        this.stockDispo=false
+      if (prodId < 10) {
+        this.stockDispo = false
       }
       this.$router.push({ name: "detailsproduits", params: { id: prodId } });
     },
@@ -139,7 +117,7 @@ export default {
       location.reload();
     },
     isHere() {
-  
+
       if (this.currentUtilisateur) {
         return true;
       } else {
@@ -191,31 +169,39 @@ export default {
       return bool;
     },
   },
+  beforeRouteUpdate(to, from, next) {
+  if (to.params.id !== from.params.id) {
+    this.categorieId = to.params.id;
+    // this.loadProductsByCategory(to.params.id);
+  }
+  
+  next();
+},
   mounted() {
     this.categorieId = this.$route.params.id;
     if (localStorage.getItem('reloaded')) {
-          localStorage.removeItem('reloaded');
+      localStorage.removeItem('reloaded');
     } else {
-        localStorage.setItem('reloaded', '1');
-        location.reload();
+      localStorage.setItem('reloaded', '1');
+      location.reload();
     }
   },
- 
+
 };
 </script>
 
 <style>
-
-.produitsCategorie{
+.produitsCategorie {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
   gap: 5px;
 }
-.stockFini{
+
+.stockFini {
   margin-top: 10px;
-  color:red;
+  color: red;
   font-size: larger;
 }
 
@@ -224,10 +210,10 @@ export default {
   margin: 30px 0px 30px 0px;
   text-transform: uppercase;
 }
+
 .categorie {
   margin-bottom: 10px;
-  min-height:100vh;
+  min-height: 100vh;
   margin: 15px auto;
 }
-
 </style>

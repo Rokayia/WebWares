@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import TestView from "../views/TestVue.vue";
 import MentionsLegales from "../views/MentionsLegales.vue";
 import PolitiqueDeConfidentialite from "../views/PolitiqueDeConfidentialité.vue";
 import ConditionsUtilisation from "../views/ConditionsUtilisation.vue";
@@ -21,7 +20,6 @@ import PageModificationCategories from '@/views/PageModificationCategories.vue'
 
 
 import MyOrder from '../views/OrderUser.vue'
-import CategoriesAdminView from "../views/CategoriesProductsAdmin.vue";
 
 import CategoriesView from '../views/CategoriesProducts.vue'
 import ListProductsView from '../views/ListProducts.vue'
@@ -33,8 +31,6 @@ import BackOfficeGestionProduitsView from '../views/BackOfficeGestionProduits.vu
 import ListUsers from "../views/BackOfficeGestionUsers.vue";
 
 
-// import pageModalUser from '@/components/ModalUser.vue'
-
 const routes = [
   {
     path: "/",
@@ -43,24 +39,10 @@ const routes = [
   },
 
   {
-    path: "/test",
-    name: "test",
-    component: TestView,
-  },
-
-
-  {
     path: '/RecapLivraison',
     name: 'RecapLivraison',
     component: RecapLivraison,
 },
-
-  //  {
-  //   path: '/modalUser',
-  //   name: 'test',
-  //   component: pageModalUser,
-  // },
-
 
 
   {
@@ -126,12 +108,6 @@ component: MyOrder},
   path: "/ListUsers",
   name: "ListUsers",
   component: ListUsers,
-  },
-  {
-    path: "/categorieProductAdmin",
-    name: "categorieproduitsadmin",
-
-    component: CategoriesAdminView,
   },
 
   {

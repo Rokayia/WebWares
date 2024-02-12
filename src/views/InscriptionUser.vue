@@ -1,11 +1,6 @@
 <template>
-  <MyHeader
-    :currentUtilisateur="currentUtilisateur"
-    :currentUtilisateurCommande="currentUtilisateurCommande"
-    @deconnexionEventBtn="deconnecterCurrentUser"
-    :is-visible="isHere()"
-    :is-user="isUser()"
-  />
+  <MyHeader :currentUtilisateur="currentUtilisateur" :currentUtilisateurCommande="currentUtilisateurCommande"
+    @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser()" />
 
   <div class="contGeneral">
     <div class="container-inscription">
@@ -13,105 +8,40 @@
       <p>Déjà Inscrit ? Connectez-vous</p>
       <div class="container-form">
         <div class="card1">
-          <label for="RaisonSocial"
-            >Raison sociale (nom complet de l’entreprise)</label
-          >
-          <input
-            type="text"
-            id="RaisonSocial"
-            placeholder="WebWares"
-            v-model="checkUser.raisonSociale"
-          />
+          <label for="RaisonSocial">Raison sociale (nom complet de l’entreprise)</label>
+          <input type="text" id="RaisonSocial" placeholder="WebWares" v-model="checkUser.raisonSociale" />
 
           <label for="NumeroSiret">Numéro de Siret</label>
-          <input
-            type="number"
-            id="NumeroSiret"
-            placeholder="ex: 12345678901234"
-            v-model="checkUser.siret"
-            :class="{ 'is-error': error }"
-          />
+          <input type="number" id="NumeroSiret" placeholder="ex: 12345678901234" v-model="checkUser.siret"
+            :class="{ 'is-error': error }" />
           <div class="error" v-if="error.length">
-            <span
-              v-for="(errors, index) in error"
-              :key="index"
-              class="is-error"
-              >{{ errors }}</span
-            >
+            <span v-for="(errors, index) in error" :key="index" class="is-error">{{ errors }}</span>
           </div>
 
           <label for="Adresse">Adresse complete de l’entreprise </label>
-          <input
-            type="text"
-            id=""
-            placeholder="Adresse"
-            v-model="checkUser.adresse"
-          />
-          <input
-            type="number"
-            id=""
-            placeholder="Code postal"
-            v-model="checkUser.codePostal"
-          />
-          <input
-            type="text"
-            id="Adresse"
-            placeholder="Ville"
-            v-model="checkUser.ville"
-          />
+          <input type="text" id="" placeholder="Adresse" v-model="checkUser.adresse" />
+          <input type="number" id="" placeholder="Code postal" v-model="checkUser.codePostal" />
+          <input type="text" id="Adresse" placeholder="Ville" v-model="checkUser.ville" />
         </div>
         <div class="card2">
           <label for="email">ADRESSE EMAIL</label>
-          <input
-            type="text"
-            id="email"
-            placeholder="Mail"
-            v-model="checkUser.email"
-          />
+          <input type="text" id="email" placeholder="Mail" v-model="checkUser.email" />
           <div class="error" v-if="errmail.length">
-            <span
-              v-for="(errmail, index) in errmail"
-              :key="index"
-              class="is-error"
-              >{{ errmail }}</span
-            >
+            <span v-for="(errmail, index) in errmail" :key="index" class="is-error">{{ errmail }}</span>
           </div>
 
           <label for="password">MOT DE PASSE</label>
-          <input
-            type="password"
-            placeholder="Votre mot de passe"
-            id="password"
-            v-model="checkUser.motDePasse"
-          />
+          <input type="password" placeholder="Votre mot de passe" id="password" v-model="checkUser.motDePasse" />
           <div class="error" v-if="errmp.length">
-            <span
-              v-for="(errmp, index) in errmp"
-              :key="index"
-              class="is-error"
-              >{{ errmp }}</span
-            >
+            <span v-for="(errmp, index) in errmp" :key="index" class="is-error">{{ errmp }}</span>
           </div>
           <label for="ConfirmPassword">CONFIRMATION DE MOT DE PASSE</label>
-          <input
-            type="password"
-            placeholder="Confirmez votre mot de passe"
-            id="ConfirmPassword"
-            v-model="checkUser.confirmPassword"
-          />
+          <input type="password" placeholder="Confirmez votre mot de passe" id="ConfirmPassword"
+            v-model="checkUser.confirmPassword" />
           <div class="error" v-if="errconfirmmp.length">
-            <span
-              v-for="(errconfmp, index) in errconfirmmp"
-              :key="index"
-              class="is-error"
-              >{{ errconfmp }}</span
-            >
+            <span v-for="(errconfmp, index) in errconfirmmp" :key="index" class="is-error">{{ errconfmp }}</span>
           </div>
-          <BtnInscription
-            label="VALIDER"
-            backgroundColor="ValiderInscription"
-            @click="getSiret()"
-          />
+          <BtnInscription label="VALIDER" backgroundColor="ValiderInscription" @click="getSiret()" />
         </div>
       </div>
     </div>
@@ -134,7 +64,6 @@ export default {
       errmp: [],
       errconfirmmp: [],
       isConnected: false,
-      // isUser: true,
     };
   },
   components: {
@@ -144,10 +73,10 @@ export default {
   },
 
   methods: {
-    isUser(){
-      if(this.currentUtilisateur && this.currentUtilisateur.role=='ADMIN'){
+    isUser() {
+      if (this.currentUtilisateur && this.currentUtilisateur.role == 'ADMIN') {
         return false;
-      }else{
+      } else {
         return true;
       }
     },
@@ -186,26 +115,26 @@ export default {
         this.checkUser.role = "USER";
 
         this.$store.commit("addUtilisateur", this.checkUser);
-       
+
         this.commande.userId = this.lastUtilisateur;
         this.commande.coutTotal = 0;
         this.commande.produits = [];
 
-       
+
 
         this.$store.commit("setCurrentUtilisateur", this.checkUser);
-        this.$store.commit("addCommande",this.commande);
-         
-            this.$store.commit("setCurrentUtilisateurCommande",this.commande);
+        this.$store.commit("addCommande", this.commande);
+
+        this.$store.commit("setCurrentUtilisateurCommande", this.commande);
 
         this.checkUser = {};
         this.error = [];
         this.errmail = [];
         this.errmp = [];
-        
-      this.$router.push({
-        name: "home",
-      });
+
+        this.$router.push({
+          name: "home",
+        });
       }
 
     },
@@ -227,7 +156,7 @@ export default {
     },
   },
   computed: {
-   lastUtilisateur() {
+    lastUtilisateur() {
       return this.$store.getters.getLastUtilisateur;
     },
     currentUtilisateur() {
@@ -237,11 +166,6 @@ export default {
       return this.$store.getters.getCurrentUtilisateurCommande;
     },
   },
-
-  mounted() {
-    // this.$store.dispatch("loadUtilisateurs"),
-    // this.$store.dispatch("oneUtilisateur")
-  },
 };
 </script>
 
@@ -249,6 +173,7 @@ export default {
 .contGeneral {
   min-height: 100vh;
 }
+
 .container-inscription {
   display: flex;
   flex-direction: column;
@@ -266,6 +191,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
 .card2 {
   width: 50%;
   height: 100%;
@@ -275,8 +201,9 @@ export default {
   align-items: center;
   margin-bottom: 20px;
 }
+
 .container-form {
-  background-color: rgb(241,245,237);
+  background-color: rgb(241, 245, 237);
   max-width: 1200px;
   width: 80%;
   height: 500px;
@@ -286,6 +213,7 @@ export default {
   box-shadow: 0px 0px 10px 1px #00000029;
   margin-top: 20px;
 }
+
 .container-form label {
   margin-top: 30px;
   font-size: 12px;
@@ -303,11 +231,13 @@ export default {
   border: none;
   outline: 2px solid #a7c28a;
 }
+
 .container-form input:focus {
   outline: 2px solid #7d9167;
 }
-.error{
-width:250px;
+
+.error {
+  width: 250px;
 
 }
 
@@ -316,13 +246,13 @@ width:250px;
   font-size: 0.8rem;
 }
 
-@media(max-width:819px){
-  .container-form{
+@media(max-width:819px) {
+  .container-form {
     display: flex;
     flex-direction: column;
     height: 100%;
-  
-    
+
+
   }
 }
 </style>

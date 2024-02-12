@@ -4,10 +4,7 @@
  :currentUtilisateurCommande="currentUtilisateurCommande" 
   @deconnexionEventBtn="deconnecterCurrentUser" 
   :is-visible="isHere()" :is-user="isUser()"/>
-  
-
-
-  <div class="details">
+    <div class="details">
 <div class="titreDetails">
     
   <h1>
@@ -50,7 +47,6 @@ export default {
   data() {
     return {
       isConnected: false,
-      // isUser: true,
     };
   },
   components: {
@@ -67,7 +63,6 @@ export default {
       }
     },
     getImgUrl(pic) {
-    
       return require("../assets/" + pic);
     },   
     deconnecterCurrentUser() {
@@ -100,8 +95,6 @@ export default {
   mounted() {
     let prodId = this.$route.params.id;
     this.$store.dispatch("oneProd", prodId);
-    // this.$store.dispatch("loadUtilisateurs"),
-    // this.$store.dispatch("oneUtilisateur")
   },
 };
 </script>

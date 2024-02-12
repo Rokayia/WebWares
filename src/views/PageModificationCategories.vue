@@ -1,61 +1,29 @@
 <template>
-   <MyHeader
-    :currentUtilisateur="currentUtilisateur"
-    :currentUtilisateurCommande="currentUtilisateurCommande"
-    @deconnexionEventBtn="deconnecterCurrentUser"
-    :is-visible="isHere()"
-    :is-user="isUser()"
-  />
+  <MyHeader :currentUtilisateur="currentUtilisateur" :currentUtilisateurCommande="currentUtilisateurCommande"
+    @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser()" />
   <div class="containerCategorie">
     <div class="ctncat">
-    <h2 class="titre">Récapitulatifs des catégories</h2>
-    <div class="boutonAjouter">
-      <btnProduct
-        label="Ajouter une catégorie"
-        backgroundColor="AjouterPanier"
-        @click="ouvrirModal()"
-      />
-    </div>
-
-    <div
-      class="containerModifCategories"
-      v-for="(categorie, index) in categories"
-      :key="index"
-    >
-      <div class="affichage">
-        {{ categorie.name }}
+      <h2 class="titre">Récapitulatifs des catégories</h2>
+      <div class="boutonAjouter">
+        <btnProduct label="Ajouter une catégorie" backgroundColor="AjouterPanier" @click="ouvrirModal()" />
       </div>
-      <div class="modifSupp">
-        <btnProduct
-          label="Supprimer"
-          backgroundColor="SupprimerBackOffice"
-          @click="effacerDuLocalStorage(categorie.id)"
-        />
-        <btnProduct
-          label="Modifier"
-          backgroundColor="ModifierBackOffice"
-          @click="modifierDansLocalStorage(categorie)"
-        />
+
+      <div class="containerModifCategories" v-for="(categorie, index) in categories" :key="index">
+        <div class="affichage">
+          {{ categorie.name }}
+        </div>
+        <div class="modifSupp">
+          <btnProduct label="Supprimer" backgroundColor="SupprimerBackOffice"
+            @click="effacerDuLocalStorage(categorie.id)" />
+          <btnProduct label="Modifier" backgroundColor="ModifierBackOffice"
+            @click="modifierDansLocalStorage(categorie)" />
+        </div>
       </div>
     </div>
-  </div>
-    <!-- <div class="containerAjout">
-
-            <input
-            class="ajouterClass"
-            id="nouvelElement"
-            type="text"
-            v-model="nouvelElement"
-            />
-            
-            
-        </div> -->
-
-    <!-- Ajouter modal -->
 
     <Modal :is-visible="showModalFlag" @close="showModalFlag = false">
       <div class="containerModal">
-        
+
         <form>
           <h2>Ajouter une catégorie</h2>
           <div class="info_Modal">
@@ -63,31 +31,23 @@
             <input type="text" id="editName" v-model="nouvelleCategorie.name" />
           </div>
           <br /><br />
-          <btnProduct
-            label="Ajouter"
-            backgroundColor="AjouterPanier"
-            @click="ajouterCategorie()"
-          />
+          <btnProduct label="Ajouter" backgroundColor="AjouterPanier" @click="ajouterCategorie()" />
         </form>
-      
+
       </div>
     </Modal>
 
 
-    <Modal :is-visible="showModifModalFlag" @close="showModifModalFlag=false">
-        <form class="centerform">
-          <h2>Modifier une catégorie</h2>
-          <div class="info_Modal">
-            <label for="editName">Nom de la catégorie : </label><br />
-            <input type="text" id="editName" v-model="categorieModif.name" />
-          </div>
-          <br /><br />
-          <btnProduct
-            label="Ajouter"
-            backgroundColor="AjouterPanier"
-            @click="enregistrerModif()"
-          />
-        </form>
+    <Modal :is-visible="showModifModalFlag" @close="showModifModalFlag = false">
+      <form class="centerform">
+        <h2>Modifier une catégorie</h2>
+        <div class="info_Modal">
+          <label for="editName">Nom de la catégorie : </label><br />
+          <input type="text" id="editName" v-model="categorieModif.name" />
+        </div>
+        <br /><br />
+        <btnProduct label="Ajouter" backgroundColor="AjouterPanier" @click="enregistrerModif()" />
+      </form>
     </Modal>
   </div>
 
@@ -128,25 +88,25 @@ export default {
     },
   },
   methods: {
-    isUser(){
-      if(this.currentUtilisateur && this.currentUtilisateur.role=='ADMIN'){
+    isUser() {
+      if (this.currentUtilisateur && this.currentUtilisateur.role == 'ADMIN') {
         return false;
-      }else{
+      } else {
         return true;
       }
     },
     deconnecterCurrentUser() {
       this.$store.commit("setCurrentUtilisateur", 0);
-      this.$store.commit("setCommandes",this.currentUtilisateurCommande);
-      this.$store.commit("setCurrentUtilisateurCommande",1);
+      this.$store.commit("setCommandes", this.currentUtilisateurCommande);
+      this.$store.commit("setCurrentUtilisateurCommande", 1);
       this.$router.push({
         name: "home"
       });
     },
-    isHere(){
-      if(this.currentUtilisateur){
+    isHere() {
+      if (this.currentUtilisateur) {
         return true;
-      }else{
+      } else {
         return false;
       }
     },
@@ -178,20 +138,22 @@ export default {
   align-items: center;
   width: 90%;
   font-family: cursive;
-  text-transform: uppercase ;
+  text-transform: uppercase;
   background-color: #e2dac71c;
   margin-top: 30px;
-  
-  
- 
+
+
+
 }
-.boutonAjouter{
+
+.boutonAjouter {
   width: 100%;
-  
+
   display: flex;
   justify-content: flex-end;
-  
+
 }
+
 .affichage {
   margin-top: 15px;
   min-height: 40px;
@@ -213,55 +175,60 @@ export default {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  
- 
+
+
 }
-.ctncat{
+
+.ctncat {
   max-width: 1200px;
-  width: 100%;;
+  width: 100%;
+  ;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin-top: 30px;
- 
+
 }
-.ctncat h2{
+
+.ctncat h2 {
   font-size: 2rem;
 }
-.centerform{
+
+.centerform {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   height: 100%;
-  
+
 }
+
 @media (max-width:765px) {
-  .boutonAjouter{
-
-  
-  display: flex;
-  justify-content: center;
-  
-  
-}
+  .boutonAjouter {
 
 
-}
-@media (max-width:500px){
-  .containerModifCategories{
-   display: flex;
-   flex-direction: column;
-   margin-top: 10px;
+    display: flex;
+    justify-content: center;
+
+
   }
-  .ctncat h2{
-  font-size: 1.5rem;
-  margin: 2px;
-  margin-bottom: 25px;
-}
-  
-}
 
 
+}
+
+@media (max-width:500px) {
+  .containerModifCategories {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  .ctncat h2 {
+    font-size: 1.5rem;
+    margin: 2px;
+    margin-bottom: 25px;
+  }
+
+}
 </style>
