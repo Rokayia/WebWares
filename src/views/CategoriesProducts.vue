@@ -10,7 +10,7 @@
   <div class="categorie">
     <h1 class="titreCategorie">{{ getNomCategorie() }}</h1>
 
-    <div class="produits">
+    <div class="produitsCategorie">
       <div class="prod" v-for="item in produits" :key="item.id">
         <div v-if="item.categorieId == this.categorieId">
           <productCard
@@ -205,6 +205,14 @@ export default {
 </script>
 
 <style>
+
+.produitsCategorie{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  gap: 5px;
+}
 .stockFini{
   margin-top: 10px;
   color:red;
