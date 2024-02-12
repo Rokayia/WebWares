@@ -17,6 +17,7 @@
         :moq="item.moq"
         :afficheMoq="true"
         :affichedetails="true"
+        :affichePrix="isHere()"
         @detailsCardEventBtn="getDetails(item.id)"
         backgroundColor="beige"
       >

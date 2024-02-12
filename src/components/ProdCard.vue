@@ -6,7 +6,7 @@
     </div>
 
     <h2>{{ titre }}</h2>
-    <p>
+    <p v-show="affichePrix">
       <strong> {{ prix }} €</strong>
     </p>
     <p v-show="afficheMoq">Quantité minimale de commande : {{ moq }}</p>
@@ -23,6 +23,7 @@ export default {
     prix: Number,
     moq: Number,
     afficheMoq:Boolean,
+    affichePrix:Boolean,
     affichedetails:Boolean,
     backgroundColor: String,
     afficherParagraphe: {

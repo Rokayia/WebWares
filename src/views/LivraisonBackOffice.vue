@@ -90,7 +90,7 @@ export default {
             this.$store.commit("setCommandes", this.currentUtilisateurCommande);
             this.$store.commit("setCurrentUtilisateurCommande", 1);
             this.$router.push({
-                name: "mentionslegales"
+                name: "home"
             });
             location.reload();
 

@@ -20,6 +20,7 @@
             :moq="item.moq"
             :afficheMoq="true"
             :affichedetails="true"
+            :affichePrix="isHere()"
             @detailsCardEventBtn="getDetails(item.id)"
             backgroundColor="beige"
           >
@@ -113,7 +114,7 @@ export default {
       }
     },
     getNomCategorie() {
-      let titre = "lal";
+      let titre = "";
       let cat = this.categorieId;
       this.categories.forEach(function (currentValue) {
         if (cat == currentValue.id) {
@@ -138,6 +139,7 @@ export default {
       location.reload();
     },
     isHere() {
+  
       if (this.currentUtilisateur) {
         return true;
       } else {
@@ -191,7 +193,6 @@ export default {
   },
   mounted() {
     this.categorieId = this.$route.params.id;
-    console.log("categorie" + this.categorieId);
     if (localStorage.getItem('reloaded')) {
           localStorage.removeItem('reloaded');
     } else {
@@ -199,6 +200,7 @@ export default {
         location.reload();
     }
   },
+ 
 };
 </script>
 
@@ -223,5 +225,7 @@ export default {
 }
 .categorie {
   margin-bottom: 10px;
+  min-height:100vh;
+  margin: 15px auto;
 }
 </style>

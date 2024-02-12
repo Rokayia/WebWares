@@ -27,6 +27,8 @@
         :titre="currentProduct.titre"
         :prix="currentProduct.prix"
         :moq="currentProduct.moq"
+        :affichePrix="isHere()"
+        :afficheMoq="true"
         backgroundColor="white"
       >
         <p class="description">{{ currentProduct.description }}</p>

@@ -28,8 +28,8 @@
             <ul class="dropdown-content">
               <div v-for="category in categories" :key="category.id">
                 <router-link
-                  :to="'/categorieProduct/:' + category.id"
-                  @click="getCatégories(category.id)"
+                  :to="'/categorieProduct/' + category.id"
+                  @click="getCategories(category.id)"
                   class="nav-link"
                 >
                   {{ category.name }}
@@ -48,7 +48,7 @@
                   :to="'/myOrder' "
                 >
             <font-awesome-icon :icon="['fas', 'basket-shopping']" size="2x" />
-            <!-- {{ quantitePanier() }}  -->
+            {{ quantitePanier() }} 
           </router-link>
             <li class="nav-link dropdown">
               <div class="circle">
@@ -121,12 +121,12 @@
                 </div>
                 <ul class="dropdown-content4">
                   <router-link
-                    :to="'/categorieProductAdmin' "
+                    :to="'/' "
                     class="nav-link"
                   >
                   Bienvenue, {{ currentUtilisateur.raisonSociale }}
                   </router-link>
-                  <router-link to="/categorieProductAdmin"
+                  <router-link to="/"
                   @click="methGeneralEvent"
                   >
                     Déconnexion
@@ -157,7 +157,7 @@
 
    
 export default {
- 
+
  props: {
     currentUtilisateur: {
             type: Object,
@@ -178,10 +178,12 @@ export default {
 
 
   methods: {
-    getCatégories(categoriesId) {
+    getCategories(categoriesId) {
+      // this.$emit('changeCategorie')
+      console.log("categ router" + categoriesId)
       this.$router.push({
         name: "categorieproduits",
-        params: { id: categoriesId },
+        params: { id: categoriesId }
       });
 
     },
@@ -201,34 +203,16 @@ export default {
      return this.currentUtilisateurCommande.produits.length
     }
    }
-    // deconnecterCurrentUser() {
-    //   this.$store.commit("setCurrentUtilisateur", 0);
-    //   this.$router.push({
-    //     name: "home"
-    //   });
 
-   
-    // },
-
-  
-},
+  },
 
 
   computed: {
     categories() {
       return this.$store.getters.getCategories;
     },
-    // currentUtilisateur() {
-    //   return this.$store.state.getCurrentUtilisateur;
-    // },
-    // currentUtilisateurCommande() {
-    //   return this.$store.getters.getCurrentUtilisateurCommande;
-    // },
   }
-  
 
-  
-  
 };
 </script>
 
@@ -371,7 +355,6 @@ gap: 50px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     padding: 0;
     font-size: 0.8rem;
-    height: 207px;
     width: 150px;
     right: -30px;
     
