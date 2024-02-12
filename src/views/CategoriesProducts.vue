@@ -210,22 +210,16 @@ export default {
   color:red;
   font-size: larger;
 }
-.produits {
-  margin: 0 auto;
-  max-width: 1200px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
+
+
 .titreCategorie {
-  margin: 0 auto;
-  margin-bottom: 10px;
+  margin: 30px 0px 30px 0px;
+  text-transform: uppercase;
 }
 .categorie {
   margin-bottom: 10px;
   min-height:100vh;
   margin: 15px auto;
 }
+
 </style>

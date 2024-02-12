@@ -9,7 +9,7 @@
     <p v-show="affichePrix">
       <strong> {{ prix }} €</strong>
     </p>
-    <p v-show="afficheMoq">Quantité minimale de commande : {{ moq }}</p>
+    <p class="qtyMin" v-show="afficheMoq">Quantité minimale de commande : {{ moq }}</p>
     <slot></slot>
   </div>
 </template>
@@ -51,39 +51,45 @@ export default {
 
 <style>
 .xxl-card {
-  background-color: white;
-  border: 1px solid;
-  max-width: 600px;
-  width: 100%;
   max-height: 70vh;
+  padding: 40px;
+  width: 70%;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.3);
+  margin: 0 auto;
   
+}
+.xxl-card .image{
+  width: 100%;
   
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  
-
+}
+ .image img{
+  width: 100%;
 }
 
 .normal-card {
-  background-color: #eadfd8;
-  border: 1px solid;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.13);
   max-width: 400px;
   width: 100%;
   min-width: 270px;
   height: 400px;
-  margin-bottom: 10px;
+  margin-bottom: 10px; 
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
 }
 .normal-card:hover {
   margin-top: -0.5rem;
   margin-bottom: 0.5rem;
   box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.3);
 }
+.normal-card .image{
+  width: 220px;
+  height: 220px;
+ 
+}
 .normal-card img {
-  padding-top: 10px;
-  max-width: 400px;
-  max-height: 200px;
+  width: 100%;
   height: 100%;
 }
 .xxl-card img {
@@ -97,6 +103,9 @@ export default {
 .detailsCard{
   color : black;
   text-decoration: underline;
+}
+.qtyMin{
+  font-size: 0.8rem;
 }
 
 </style>

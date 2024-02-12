@@ -108,20 +108,30 @@ export default {
 
 <style>
 .details {
-  margin: 10vh auto;
-  max-width: 1200px;
-  width: 100%;
+  margin: 55px auto;
+  min-height: 70vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  
+ 
 }
 .description {
-  font-size: larger;
-  color: rgb(8, 131, 8);
+  color: rgb(125,145,103);
   font-weight: bold;
-
-  padding-bottom: 10px;
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
+.titreDetails{
+  
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .titreDetails h1{
+    font-size: 1.5rem;
+  }
 }
 
 </style>
