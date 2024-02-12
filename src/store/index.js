@@ -53,7 +53,7 @@ export default createStore({
         description: "Table à manger en bois massif avec finition élégante.",
         prix: 299.99,
         moq: 5,
-        stock: 1500,
+        stock: 15,
         categorieId: 1,
       },
       {
@@ -63,7 +63,7 @@ export default createStore({
         description: "Lampe avec un design moderne et éclairage ajustable.",
         prix: 129.99,
         moq: 10,
-        stock: 1500,
+        stock: 15,
         categorieId: 2,
       },
       {
@@ -73,7 +73,7 @@ export default createStore({
         description: "Tapis doux en laine avec motif géométrique.",
         prix: 89.99,
         moq: 20,
-        stock: 1500,
+        stock: 15,
         categorieId: 3,
       },
       {
@@ -83,7 +83,7 @@ export default createStore({
         description: "Vase éthnique en argile avec motifs gravés à la main.",
         prix: 49.99,
         moq: 20,
-        stock: 1500,
+        stock: 15,
         categorieId: 4,
       },
       {
@@ -93,7 +93,7 @@ export default createStore({
         description: "Canapé vert sapin en velour avec un design moderne .",
         prix: 399.99,
         moq: 4,
-        stock: 1500,
+        stock: 15,
         categorieId: 1,
       },
       {
@@ -103,7 +103,7 @@ export default createStore({
         description: "Lampe blanche avec un bout en bois",
         prix: 59.99,
         moq: 10,
-        stock: 1500,
+        stock: 15,
         categorieId: 2,
       },
       {
@@ -113,7 +113,7 @@ export default createStore({
         description: "Tapis rustique fin avec des couleurs orangées.",
         prix: 89.99,
         moq: 20,
-        stock: 1500,
+        stock: 15,
         categorieId: 3,
       },
       {
@@ -123,7 +123,7 @@ export default createStore({
         description: "Grand vase neutre blanc de forme ovale.",
         prix: 49.99,
         moq: 25,
-        stock: 1500,
+        stock: 15,
         categorieId: 4,
       },
       {
@@ -133,7 +133,7 @@ export default createStore({
         description: "Canapé en cuir de couleur camel, 3 places .",
         prix: 299.99,
         moq: 6,
-        stock: 1500,
+        stock: 15,
         categorieId: 1,
       },
       {
@@ -143,7 +143,7 @@ export default createStore({
         description: "Lampe moderne d'extérieur ovale en bois",
         prix: 89.99,
         moq: 15,
-        stock: 1500,
+        stock: 15,
         categorieId: 2,
       },
       {
@@ -153,7 +153,7 @@ export default createStore({
         description: "Tapis gris en laine en forme d'éléphant",
         prix: 79.99,
         moq: 15,
-        stock: 1500,
+        stock: 15,
         categorieId: 3,
       },
       {
@@ -163,7 +163,7 @@ export default createStore({
         description: "Vase style velour bleu marine.",
         prix: 99.99,
         moq: 13,
-        stock: 1500,
+        stock: 15,
         categorieId: 4,
       },
 
@@ -174,7 +174,7 @@ export default createStore({
         description: "Table murale en bois avec deux accorche dorée.",
         prix: 29.99,
         moq: 10,
-        stock: 1500,
+        stock: 15,
         categorieId: 1,
       },
       {
@@ -184,7 +184,7 @@ export default createStore({
         description: "Lampe métallique noir style rétro.",
         prix: 59.99,
         moq: 12,
-        stock: 1500,
+        stock: 15,
         categorieId: 2,
       },
       {
@@ -194,7 +194,7 @@ export default createStore({
         description: "Tapis épais vert sapin rectangulaire",
         prix: 89.99,
         moq: 20,
-        stock: 1500,
+        stock: 15,
         categorieId: 3,
       },
       {
@@ -204,7 +204,7 @@ export default createStore({
         description: "Vase en bois forme ovale.",
         prix: 79.99,
         moq: 15,
-        stock: 1500,
+        stock: 15,
         categorieId: 4,
       },
 
@@ -215,7 +215,7 @@ export default createStore({
         description: "Table de chevet blanche avec 3 pieds en bois.",
         prix: 39.99,
         moq: 10,
-        stock: 1500,
+        stock: 15,
         categorieId: 1,
       },
       {
@@ -226,7 +226,7 @@ export default createStore({
           "Lampe moderne d'intérieur avec une forme originale en bois",
         prix: 99.99,
         moq: 10,
-        stock: 1500,
+        stock: 15,
         categorieId: 2,
       },
       {
@@ -236,7 +236,7 @@ export default createStore({
         description: "Tapis léger en fourrure de couleur beige",
         prix: 69.99,
         moq: 20,
-        stock: 1500,
+        stock: 15,
         categorieId: 3,
       },
       {
@@ -247,7 +247,7 @@ export default createStore({
           "Vase en verre de couleur vert clair avec des formes géométriques.",
         prix: 99.99,
         moq: 20,
-        stock: 1500,
+        stock: 15,
         categorieId: 4,
       },
     ],
