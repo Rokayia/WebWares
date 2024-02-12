@@ -331,7 +331,6 @@ export default createStore({
     },
     getLastUtilisateur(state) {
       let lastUser = JSON.parse(localStorage.getItem("lastUtilisateurId"));
-      console.log("getlasuser" + lastUser);
       if (lastUser) {
         state.lastUtilisateur = lastUser;
       }
@@ -343,7 +342,7 @@ export default createStore({
       let users = Object.keys(localStorage)
         .filter((key) => key.startsWith("utilisateur_"))
         .map((key) => JSON.parse(localStorage.getItem(key)));
-      console.log("getuser" + users);
+
       if (users.length) {
         state.utilisateurs = users;
       }
@@ -356,7 +355,6 @@ export default createStore({
 
       if (commandes.length) {
         state.commandes = commandes;
-        console.log("getcommandes" + state.commandes[0].id);
       }
       return state.commandes;
     },
@@ -428,7 +426,6 @@ state.roles=roles;
       state.query = query;
     },
     setCurrentUtilisateur(state, utilisateur) {
-      console.log("dans le current");
       if (utilisateur == 0) {
         localStorage.removeItem(`currentUtilisateur`);
       } else {
@@ -437,9 +434,7 @@ state.roles=roles;
       }
     },
     setCurrentUtilisateurCommande(state, commande) {
-      let trouve = false;
       if (commande) {
-        console.log("dans le commande" + commande);
         state.currentUtilisateurCommande = commande;
         localStorage.setItem(
           `currentUtilisateurCommande`,
@@ -453,8 +448,6 @@ state.roles=roles;
           );
           if (commandeSelected != null) {
             if (utilisateur && utilisateur.id === commandeSelected.userId) {
-              trouve = true;
-              console.log("dans le if setcur" + trouve);
               state.currentUtilisateurCommande = currentValue;
               localStorage.setItem(
                 `currentUtilisateurCommande`,
@@ -473,11 +466,9 @@ state.roles=roles;
       state.currentProduct = prod;
     },
     setOneProduct(state, prod) {
-      console.log("dans le if prod" + prod.titre);
       if (prod != undefined) {
         this.getters.getProduits.forEach(function (currentValue) {
           if (currentValue.id == prod.id) {
-            console.log("dans le if prod" + prod.titre);
             localStorage.setItem(
               `prod_${currentValue.id}`,
               JSON.stringify(prod)
@@ -514,7 +505,6 @@ state.roles=roles;
       if (commande != undefined) {
         this.getters.getCommandes.forEach(function (currentValue) {
           if (currentValue.id == commande.id && commande.userId==currentValue.userId) {
-            console.log("dans le if commande" + commande.coutTotal);
             localStorage.setItem(
               `commande_${currentValue.id}`,
               JSON.stringify(commande)
@@ -540,7 +530,6 @@ state.roles=roles;
       if (commande != undefined) {
         this.getters.getCommandes.forEach(function (currentValue) {
           if (currentValue.id == commande.id && commande.userId==currentValue.userId) {
-            console.log("dans le if commande" + commande.coutTotal);
             localStorage.setItem(
               `commandePrise_${currentValue.id}`,
               JSON.stringify(commande)
@@ -630,23 +619,18 @@ state.roles=roles;
       let index = this.getters.getCommandes.findIndex(
         (commande) => commande.id === commandeId
       );
-      console.log("index" + index);
       if (index !== -1) {
         state.commandes.splice(index, 1);
         localStorage.removeItem(`commande_${commandeId}`);
       }
     },
     modifyCommandeDefault(state, commandeId,commandeUserId) {
-      console.log("commandeId" + commandeId);
      let index=-1
       this.getters.getCommandes.forEach(function (currentValue) {
      if(currentValue.id == commandeId && currentValue.userId==commandeUserId){
        index = currentValue.id;
      }
       });
-
-     
-      console.log("index" + index);
       if (index !== -1) {
         state.commandes[index].coutTotal=0;
         state.commandes[index].produits=[];
@@ -660,9 +644,7 @@ state.roles=roles;
       //localStorage.clear();
       context.getters.getProduits.forEach(function (currentValue) {
         let selectedProd = localStorage.getItem(`prod_${currentValue.id}`);
-        console.log("selected" + selectedProd);
         if (selectedProd == null) {
-          console.log("dans le add prod");
           context.commit("addProd", currentValue);
         }
       });
@@ -722,7 +704,6 @@ state.roles=roles;
 
     oneProd(context, prodId) {
       let selectedProd = localStorage.getItem(`prod_${prodId}`);
-      console.log(selectedProd);
       if (selectedProd) {
         let prodObj = JSON.parse(selectedProd);
         context.commit("setCurrentProduct", prodObj);

@@ -4,63 +4,62 @@
     <div class="boxEnGlobal">
         <h1>COMMANDES</h1>
 
-                        <div class="cadreTitle" v-for="(commande, id) in commandePrises" :key="id" v-bind="commande.active">
-                            <div class="User">
-                                <div class="Userss" v-for="(use, id) in utilisateurs" :key="id">
-                                    <div v-if="commande.userId == use.id">
-                                        {{ use.raisonSociale }}
-                                    </div>
-                                </div>
+        <div class="cadreTitle" v-for="(commande, id) in commandePrises" :key="id" v-bind="commande.active">
+            <div class="User">
+                <div class="Userss" v-for="(use, id) in utilisateurs" :key="id">
+                    <div v-if="commande.userId == use.id">
+                        {{ use.raisonSociale }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="titre1">
+                <div class="tt" v-for="(prod, index) in commande.produits" :key="index">
+                    <div v-for="product in produits" :key="product.id">
+                        <div class="tru" v-if="prod.produitId == product.id">
+
+                            <div class="titre5">
+
+                                {{ product.titre }}
                             </div>
 
-                            <div class="titre1">
-                                <div class="tt" v-for="(prod, index) in commande.produits" :key="index">
-                                    <div v-for="product in produits" :key="product.id">
-                                        <div class="tru" v-if="prod.produitId == product.id">
+                            <div class="prix">
+                                {{ product.prix }} €
+                            </div>
 
-                                            <div class="titre5">
-
-                                                {{ product.titre }}
-                                            </div>
-
-                                            <div class="prix">
-                                                {{ product.prix }} €
-                                            </div>
-
-                                            <div class="quantite">
-                                                {{ prod.quantite }} x {{ product.moq }}
-
-                                            </div>
-
-
-
-
-                                        </div>
-
-
-                                    </div>
-
-
-                                </div>
+                            <div class="quantite">
+                                {{ prod.quantite }} x {{ product.moq }}
 
                             </div>
 
 
 
-                            <div class="PrixToto-User">
-                                Total: {{ commande.coutTotal.toFixed(2) }} €
-                            </div>
 
-                            <div class="livre">
-                                <label for="">Livraison:</label>
-                                <input type="checkbox" @click="checkLivraison(commande)"
-                                    :checked="commande.livraison === 'livré'" />
-
-                            </div>
                         </div>
+
+
                     </div>
 
-                    <myFooter />
+
+                </div>
+
+            </div>
+
+
+
+            <div class="PrixToto-User">
+                Total: {{ commande.coutTotal.toFixed(2) }} €
+            </div>
+
+            <div class="livre">
+                <label for="">Livraison:</label>
+                <input type="checkbox" @click="checkLivraison(commande)" :checked="commande.livraison === 'livré'" />
+
+            </div>
+        </div>
+    </div>
+
+    <myFooter />
 </template>
 
 <script>
@@ -121,9 +120,6 @@ export default {
         commandePrises() {
             return this.$store.getters.getCommandesPrises;
         },
-        //  commandes(){
-        // return this.$store.getters.getCommandes
-        // },
         produits() {
             return this.$store.getters.getProduits;
         },
@@ -151,7 +147,6 @@ export default {
 .titre1 {
     width: 100%;
 }
-
 
 .boxEnGlobal {
     min-height: 100vh;

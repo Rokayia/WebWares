@@ -1,10 +1,7 @@
 <template>
-
-
   <div class="homepage" v-cloak>
-    <MyHeader :currentUtilisateur="currentUtilisateur" :currentUtilisateurCommande="currentUtilisateurCommande" @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser()"/>
-
-
+    <MyHeader :currentUtilisateur="currentUtilisateur" :currentUtilisateurCommande="currentUtilisateurCommande"
+      @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser()" />
 
     <div class="containerBienvenue">
       <div class="containerLandingPage">
@@ -14,23 +11,15 @@
               Bienvenue sur WebWares votre solution de commande en ligne
               simplifié
             </h1>
-            <btnLanding
-              label="Dénichez vos meubles et objects déco, connectez-vous."
-              backgroundColor="EnSavoirPlus"
-            />
+            <btnLanding label="Dénichez vos meubles et objects déco, connectez-vous." backgroundColor="EnSavoirPlus" />
           </div>
         </div>
         <div class="cardRight">
-          <video
-            src="../video&PhotosLandingPage/LandingPageVideo.mp4"
-            autoplay
-            loop
-            muted
-          ></video>
+          <video src="../video&PhotosLandingPage/LandingPageVideo.mp4" autoplay loop muted></video>
         </div>
       </div>
     </div>
-    <div class="containerGe" >
+    <div class="containerGe">
       <div class="containerFormContact">
         <div class="cardLeftForm">
           <img src="../video&PhotosLandingPage/cuisineLandingPage.jpg" alt="" />
@@ -55,14 +44,13 @@
       </div>
     </div>
 
-   
-      <myFooter />
- 
+
+    <myFooter />
+
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
 import btnLanding from "@/components/btnLandingPage.vue";
 import myFooter from "@/components/myFooter.vue";
 import MyHeader from "@/components/GeneralHeader.vue";
@@ -71,7 +59,6 @@ export default {
   data() {
     return {
       isConnected: false,
-      // isUser: true,
     };
   },
 
@@ -81,43 +68,41 @@ export default {
     myFooter,
     btnLanding,
   },
-  methods:{
-    isUser(){
-      if(this.currentUtilisateur && this.currentUtilisateur.role=='ADMIN'){
+  methods: {
+    isUser() {
+      if (this.currentUtilisateur && this.currentUtilisateur.role == 'ADMIN') {
         return false;
-      }else{
+      } else {
         return true;
       }
     },
     deconnecterCurrentUser() {
       this.$store.commit("setCurrentUtilisateur", 0);
-      this.$store.commit("setCommandes",this.currentUtilisateurCommande);
-      this.$store.commit("setCurrentUtilisateurCommande",1);
+      this.$store.commit("setCommandes", this.currentUtilisateurCommande);
+      this.$store.commit("setCurrentUtilisateurCommande", 1);
       this.$router.push({
         name: "home"
       });
-    location.reload();
-   
+      location.reload();
+
     },
-    isHere(){
-      if(this.currentUtilisateur){
+    isHere() {
+      if (this.currentUtilisateur) {
         return true;
-      }else{
+      } else {
         return false;
       }
     },
   },
   computed: {
     currentUtilisateur() {
-     
+
       return this.$store.getters.getCurrentUtilisateur;
     },
     currentUtilisateurCommande() {
       return this.$store.getters.getCurrentUtilisateurCommande;
     },
-    
-    ...mapState(["commandes", "produits"]),
-
+   
   },
   mounted() {
     this.$store.dispatch("loadCommandes")
@@ -126,12 +111,12 @@ export default {
     this.$store.dispatch("oneUtilisateur")
     this.$store.dispatch("oneUtilisateurCommande")
     if (localStorage.getItem('reloaded')) {
-          localStorage.removeItem('reloaded');
+      localStorage.removeItem('reloaded');
     } else {
-        localStorage.setItem('reloaded', '1');
-        location.reload();
+      localStorage.setItem('reloaded', '1');
+      location.reload();
     }
- 
+
   },
 };
 </script>
@@ -143,6 +128,7 @@ export default {
   margin: 0;
   padding: 0;
 }
+
 .homepage {
 
   width: 100%;
@@ -162,6 +148,7 @@ export default {
   display: flex;
   justify-content: center;
 }
+
 .cardLeft {
   height: 100%;
   width: 50%;
@@ -184,17 +171,21 @@ export default {
   font-weight: 400;
   margin-bottom: 85px;
 }
+
 .cardRight {
   height: 100%;
   width: 50%;
 }
+
 .cardRight video {
   height: 500px;
   width: 100%;
 }
+
 .cardRight img {
   height: 600px;
 }
+
 .containerGe {
   background-color: #f9f7f4;
   display: flex;
@@ -205,6 +196,7 @@ export default {
   padding-bottom: 20px;
   margin: 0 auto;
 }
+
 .containerFormContact {
   max-width: 1500px;
   width: 100%;
@@ -223,6 +215,7 @@ export default {
   flex-direction: column;
   justify-content: center;
 }
+
 .cardLeftForm h5 {
   margin-bottom: 25px;
   font-size: 1.2rem;
@@ -250,6 +243,7 @@ export default {
   width: 50%;
   height: 30px;
 }
+
 .cardRightFormContact textarea {
   width: 80%;
   height: 200px;
@@ -259,9 +253,10 @@ export default {
 .connect {
   display: flex;
   flex-direction: column;
- 
+
 }
-.connect a:hover{
+
+.connect a:hover {
   color: #7D9167;
 }
 
@@ -282,6 +277,7 @@ export default {
   .containerGe {
     padding-bottom: 20px;
   }
+
   .title-btn h1 {
     font-size: 3rem;
   }
@@ -293,12 +289,14 @@ export default {
     align-items: center;
     margin-top: 20px;
   }
+
   .cardLeftForm {
     display: block;
     width: 600px;
     height: 600px;
     margin-bottom: 35px;
   }
+
   .cardLeftForm img {
     width: 100%;
   }
@@ -312,11 +310,12 @@ export default {
     text-align: center;
     width: 100%;
   }
+
   .cardRightFormContact {
     width: 600px;
     height: 100%;
   }
-  
+
 }
 
 @media (max-width: 655px) {
@@ -325,27 +324,33 @@ export default {
     text-align: center;
     margin: 8px 8px 50px 8px;
   }
+
   .cardLeft {
     width: 100%;
   }
+
   .title-btn {
     display: flex;
     justify-content: center;
     align-items: center;
     padding-bottom: 20px;
   }
+
   .cardRight {
     display: none;
   }
+
   .cardRight video {
     display: none;
   }
+
   .cardLeftForm {
     display: block;
     width: 300px;
     height: 300px;
     margin-bottom: 35px;
   }
+
   .cardLeftForm img {
     width: 100%;
   }
@@ -353,5 +358,4 @@ export default {
   .cardRightFormContact {
     width: 100%;
   }
-}
-</style>
+}</style>

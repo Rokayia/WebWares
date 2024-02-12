@@ -1,14 +1,8 @@
 <template>
-  <MyHeader
-    :currentUtilisateur="currentUtilisateur"
-    :currentUtilisateurCommande="currentUtilisateurCommande"
-    @deconnexionEventBtn="deconnecterCurrentUser"
-    :is-visible="isHere()"
-    :is-user="isUser()"
-  />
+  <MyHeader :currentUtilisateur="currentUtilisateur" :currentUtilisateurCommande="currentUtilisateurCommande"
+    @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser()" />
   <div class="AfficheListProduits">
     <h1 class="titreGestionProduits">Gestion des produits</h1>
-    
     <SearchBar v-on:click="filtered = true" />
     <div class="produitsAdmin">
       <section class="listeProduitsAdmin">
@@ -26,7 +20,6 @@
               <th></th>
             </tr>
           </thead>
-
           <tbody>
             <!-- Afficher tous les produits actifs -->
             <tr class="prodAdmin" v-for="item in produits" :key="item.id">
@@ -40,37 +33,22 @@
               <td data-label="Stock: ">{{ item.stock }}</td>
               <td data-label="Description: ">{{ item.description }}</td>
 
-              <div v-for="categorie in categories" :key="categorie.id" >
+              <div v-for="categorie in categories" :key="categorie.id">
                 <div v-if="categorie.id == item.categorieId">
                   <div class="categProdAdmin">
-                    <td  data-label="Categorie: ">{{ categorie.name }}</td>
+                    <td data-label="Categorie: ">{{ categorie.name }}</td>
                   </div>
                 </div>
               </div>
               <td>
-                <btnProduct
-                  label="Modifier"
-                  backgroundColor="ModifierBackOffice"
-                  @click="ModifierProd(item)"
-                />
-
-
-            <btnProduct
-              label="Supprimer" 
-              backgroundColor="SupprimerBackOffice" 
-              @click="remove(item.id)"
-           
-            /></td>
-
+                <btnProduct label="Modifier" backgroundColor="ModifierBackOffice" @click="ModifierProd(item)" />
+                <btnProduct label="Supprimer" backgroundColor="SupprimerBackOffice" @click="remove(item.id)" />
+              </td>
             </tr>
           </tbody>
         </table>
       </section>
-      <btnProduct
-        label="Ajouter"
-        backgroundColor="AjouterPanier"
-        @click="ouvrirModal()"
-      />
+      <btnProduct label="Ajouter" backgroundColor="AjouterPanier" @click="ouvrirModal()" />
     </div>
     <br />
   </div>
@@ -85,67 +63,38 @@
           <label for="editName">Titre : </label>
           <input type="text" id="editName" v-model="nouveauProd.titre" />
         </div>
-
-        
-
         <div class="info_Modal">
           <label for="editPrice">Prix produit:</label>
           <input type="number" id="editPrice" v-model="nouveauProd.prix" />
         </div>
-      
-
         <div class="info_Modal">
           <label for="editQuantity">Quantité de stock disponible:</label>
-          <input
-            type="number"
-            id="editQuantity"
-            v-model="nouveauProd.stock"
-          />
+          <input type="number" id="editQuantity" v-model="nouveauProd.stock" />
         </div>
-
         <div class=" info_Modal image">
           <label for="editimage">Image du produit:</label>
           <input type="file" @change="convertToBase64" accept="image/*" />
-          
           <div v-if="showImage">
             <img class="imageModal" :src="base64textString" :alt="imageName" />
           </div>
-          
         </div>
-
         <div class="info_Modal">
           <label for="editMoq">Quantité minimale de commande:</label>
-          <input
-            type="number"
-            id="editQuantity"
-            v-model="nouveauProd.moq"
-          />
+          <input type="number" id="editQuantity" v-model="nouveauProd.moq" />
         </div>
-<div class="info_Modal">
-  
+        <div class="info_Modal">
           <label for="editDesc">Description : </label>
           <input type="text" id="editDesc" v-model="nouveauProd.description" />
-</div>
-
+        </div>
         <div class="info_Modal">
           <label for="editCategory">Catégorie produit:</label>
           <select id="editCategory" v-model="nouveauProd.categorieId">
-            <option
-              v-for="categorie in categories"
-              :key="categorie.id"
-              :value="categorie.id"
-            >
+            <option v-for="categorie in categories" :key="categorie.id" :value="categorie.id">
               {{ categorie.name }}
-            </option></select
-          >
+            </option>
+          </select>
         </div>
-
-        
-        <btnProduct
-        label="Ajouter"
-        backgroundColor="AjouterPanier"
-          @click="AjoutProd()"
-        />
+        <btnProduct label="Ajouter" backgroundColor="AjouterPanier" @click="AjoutProd()" />
       </form>
     </div>
   </Modal>
@@ -160,79 +109,44 @@
           <label for="editName">Titre : </label>
           <input type="text" id="editName" v-model="nouveauProdModif.titre" />
         </div>
-
-        
-<div class="info_Modal">
-  
+        <div class="info_Modal">
           <label for="editPrice">Prix produit:</label>
           <input type="number" id="editPrice" v-model="nouveauProdModif.prix" />
-</div>
-        
-
+        </div>
         <div class="info_Modal">
           <label for="editQuantity">Quantité de stock disponible:</label>
-          <input
-            type="number"
-            id="editQuantity"
-            v-model="nouveauProdModif.stock"
-          />
-          
+          <input type="number" id="editQuantity" v-model="nouveauProdModif.stock" />
         </div>
-       
-
         <div class=" info_Modal-imageModalContainer">
           <div>
             <p>Image produit:</p>
-             <img class="imageModal" :src="getImgUrl(nouveauProdModif)"  />
+            <img class="imageModal" :src="getImgUrl(nouveauProdModif)" />
           </div>
-           
-           <div class="divimgModal" >
-             <p>Modifier l'image :</p>  
-                       <input type="file" @change="convertToBase64" accept="image/*" />
-           </div>
-          
-      
+          <div class="divimgModal">
+            <p>Modifier l'image :</p>
+            <input type="file" @change="convertToBase64" accept="image/*" />
+          </div>
           <div v-if="showImage">
             <img class="imageModal" :src="base64textString" :alt="imageName" />
           </div>
-          
-       
         </div>
-
         <div class="info_Modal">
           <label for="editMoq">Quantité minimale de commande:</label>
-          <input
-            type="number"
-            id="editQuantity"
-            v-model="nouveauProdModif.moq"
-          />
+          <input type="number" id="editQuantity" v-model="nouveauProdModif.moq" />
         </div>
-        
-
         <div class="info_Modal">
           <label for="editDesc">Description : </label>
           <input type="text" id="editDesc" v-model="nouveauProdModif.description" />
         </div>
-<div class="info_Modal">
-  
+        <div class="info_Modal">
           <label for="editCategory">Catégorie produit:</label>
           <select id="editCategory" v-model="nouveauProdModif.categorieId">
-            <option
-              v-for="categorie in categories"
-              :key="categorie.id"
-              :value="categorie.id"
-            >
+            <option v-for="categorie in categories" :key="categorie.id" :value="categorie.id">
               {{ categorie.name }}
-            </option></select
-          >
-</div>
-
-      
-        <btnProduct
-        label="Modifier"
-        backgroundColor="ModifierBackOffice"
-       @click="enregistrerModif()"
-        />
+            </option>
+          </select>
+        </div>
+        <btnProduct label="Modifier" backgroundColor="ModifierBackOffice" @click="enregistrerModif()" />
       </form>
     </div>
   </Modal>
@@ -241,7 +155,6 @@
 </template>
 
 <script>
-// import productCard from "@/components/ProdCard.vue";
 import Modal from "@/components/AjouterModifierModal.vue";
 import btnProduct from "@/components/btnLandingPage.vue";
 import SearchBar from "@/components/SearchBar.vue";
@@ -253,7 +166,7 @@ export default {
     return {
       filtered: false,
       showModalFlag: false,
-      showModifModalFlag:false,
+      showModifModalFlag: false,
       nouveauProd: {},
       nouveauProdModif: {},
       imgBase: "",
@@ -272,26 +185,26 @@ export default {
     Modal,
   },
   methods: {
-    isUser(){
-      if(this.currentUtilisateur && this.currentUtilisateur.role=='ADMIN'){
+    isUser() {
+      if (this.currentUtilisateur && this.currentUtilisateur.role == 'ADMIN') {
         return false;
-      }else{
+      } else {
         return true;
       }
     },
     deconnecterCurrentUser() {
       this.$store.commit("setCurrentUtilisateur", 0);
-      this.$store.commit("setCommandes",this.currentUtilisateurCommande);
-      this.$store.commit("setCurrentUtilisateurCommande",1);
+      this.$store.commit("setCommandes", this.currentUtilisateurCommande);
+      this.$store.commit("setCurrentUtilisateurCommande", 1);
       this.$router.push({
         name: "home"
       });
-  
+
     },
-    isHere(){
-      if(this.currentUtilisateur){
+    isHere() {
+      if (this.currentUtilisateur) {
         return true;
-      }else{
+      } else {
         return false;
       }
     },
@@ -308,7 +221,7 @@ export default {
     },
 
     closeModalFlag() {
-      this.base64textString="";
+      this.base64textString = "";
       this.showImage = false;
       this.showModalFlag = false;
       this.showModifModalFlag = false;
@@ -320,24 +233,24 @@ export default {
     AjoutProd() {
       this.nouveauProd.image = this.base64textString;
       this.$store.commit("addProd", this.nouveauProd);
-      this.base64textString="";
+      this.base64textString = "";
       this.showModalFlag = false;
       location.reload();
     },
-    ModifierProd(item){
+    ModifierProd(item) {
 
       this.showModifModalFlag = true;
-      this.nouveauProdModif=item;
+      this.nouveauProdModif = item;
     },
-    enregistrerModif(){
-      if(this.base64textString!=''){
+    enregistrerModif() {
+      if (this.base64textString != '') {
         this.nouveauProdModif.image = this.base64textString;
       }
       this.$store.commit("setOneProduct", this.nouveauProdModif);
-      this.base64textString="";
+      this.base64textString = "";
       this.showModifModalFlag = false;
       location.reload();
- 
+
     },
     convertToBase64(event) {
       const file = event.target.files[0];
@@ -353,10 +266,9 @@ export default {
         console.log("Error: ", error);
       };
     },
-
-    remove(prodId){
-            this.$store.commit('deleteProd',prodId)
-          }
+    remove(prodId) {
+      this.$store.commit('deleteProd', prodId)
+    }
 
   },
   computed: {
@@ -389,67 +301,69 @@ export default {
 </script>
 
 <style>
-.titreGestionProduits{
+.titreGestionProduits {
   margin-top: 20px;
 }
-.ajoutform .info_Modal{
+
+.ajoutform .info_Modal {
   margin-bottom: 10px;
 }
 
 
-.listeProduitsAdmin{
+.listeProduitsAdmin {
   font-family: cursive;
   width: 100%;
   display: flex;
   justify-content: center;
 }
-.categProdAdmin {
-height: 150px;
-display: flex;
-justify-content: center;
-align-items: center;
 
+.categProdAdmin {
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 tr th {
   background-color: #dab65b7e;
   height: 25px;
   width: 200px;
 }
-.tableAdmin{
-  margin:0 auto;
- 
- 
+
+.tableAdmin {
+  margin: 0 auto;
 }
-.prodAdmin{
+
+.prodAdmin {
   background-color: #F1F1EF;
-  margin-bottom:  10px ;
+  margin-bottom: 10px;
 }
+
 .imageProdAdmin {
   max-width: 100px;
 }
-.divimgModal{
+
+.divimgModal {
   width: 70%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
 }
-.divimgModal  input{
- width: 70%;
- text-align: center;
-  
+
+.divimgModal input {
+  width: 70%;
+  text-align: center;
 }
-.containerModal{
+
+.containerModal {
   height: 600px;
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  
-
 }
-.info_Modal-imageModalContainer{
+
+.info_Modal-imageModalContainer {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -459,57 +373,58 @@ tr th {
 .imageModal {
   max-width: 100px;
   height: 100px;
-  
 }
 
-.info_Modal{
+.info_Modal {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.info_Modal input, select{
+
+.info_Modal input,
+select {
   text-align: center;
   max-width: 300px;
   width: 100%;
-  
+
   border: 1px solid #DAB65B;
 }
-.formModalModif{
+
+.formModalModif {
   display: flex;
   flex-direction: column;
   gap: 12px;
- 
- 
 }
-.formModalModif h2{
+
+.formModalModif h2 {
   margin: 25px 0px 0px 0px;
 }
 
 
-@media (max-width: 850px) { 
-  table thead{
-  display: none;
+@media (max-width: 850px) {
+  table thead {
+    display: none;
   }
 
-  table tr{
-display: block;
+  table tr {
+    display: block;
+
+  }
+
+  table td {
+    display: block;
+
+  }
+
+  .categProdAdmin {
+    height: 50px;
+  }
+
+  table td:before {
+    content: attr(data-label);
+    font-weight: bold;
+  }
 
 }
-table td {
-display: block;
-
-}
-
-.categProdAdmin{
-  height: 50px;
-}
-table td:before {
-content: attr(data-label);
-font-weight: bold;
-}
-
-}
-
-
 </style>

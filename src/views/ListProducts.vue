@@ -1,41 +1,19 @@
 <template>
-  <MyHeader
-    :currentUtilisateur="currentUtilisateur"
-    :currentUtilisateurCommande="currentUtilisateurCommande"
-    @deconnexionEventBtn="deconnecterCurrentUser"
-    :is-visible="isHere()"
-    :is-user="isUser()"
-  />
+  <MyHeader :currentUtilisateur="currentUtilisateur" :currentUtilisateurCommande="currentUtilisateurCommande"
+    @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser()" />
 
   <SearchBar v-on:click="filtered = true" />
   <div class="produits">
     <div class="prod" v-for="item in produits" :key="item.id">
-      <productCard
-        :image="getImgUrl(item)"
-        :titre="item.titre"
-        :prix="item.prix"
-        :moq="item.moq"
-        :afficheMoq="true"
-        :affichedetails="true"
-        :affichePrix="isHere()"
-        @detailsCardEventBtn="getDetails(item.id)"
-        backgroundColor="beige"
-      >
+      <productCard :image="getImgUrl(item)" :titre="item.titre" :prix="item.prix" :moq="item.moq" :afficheMoq="true"
+        :affichedetails="true" :affichePrix="isHere()" @detailsCardEventBtn="getDetails(item.id)" backgroundColor="beige">
         <div v-if="currentUtilisateur">
           <div v-if="stockDispoProd(item)">
-            <btnProduct
-              label="Ajouter au panier"
-              backgroundColor="AjouterPanier"
-              :showButton="AjouterPanier(item)"
-              @click="addToPanier(item.id)"
-            />
+            <btnProduct label="Ajouter au panier" backgroundColor="AjouterPanier" :showButton="AjouterPanier(item)"
+              @click="addToPanier(item.id)" />
 
-            <btnProduct
-              label="Supprimer du panier"
-              backgroundColor="SupprimerPanier"
-              :showButton="SupprimerPanier(item)"
-              @click="removeProduct(item)"
-            />
+            <btnProduct label="Supprimer du panier" backgroundColor="SupprimerPanier" :showButton="SupprimerPanier(item)"
+              @click="removeProduct(item)" />
           </div>
           <div v-else>
             <div class="stockFini">plus de stock</div>
@@ -49,7 +27,6 @@
 </template>
 
 <script>
-//import { mapState } from "vuex";
 import productCard from "@/components/ProdCard.vue";
 import btnProduct from "@/components/btnLandingPage.vue";
 import SearchBar from "@/components/SearchBar.vue";
@@ -60,9 +37,7 @@ export default {
     return {
       filtered: false,
       isConnected: false,
-      // isUser: true,
       stockDispo: true,
-      // itemCommande:0,
     };
   },
   components: {
@@ -73,10 +48,10 @@ export default {
     btnProduct,
   },
   methods: {
-    isUser(){
-      if(this.currentUtilisateur && this.currentUtilisateur.role=='ADMIN'){
+    isUser() {
+      if (this.currentUtilisateur && this.currentUtilisateur.role == 'ADMIN') {
         return false;
-      }else{
+      } else {
         return true;
       }
     },
@@ -188,10 +163,6 @@ export default {
   },
 
   mounted() {
-    // this.$store.dispatch("loadProds")
-    // this.$store.dispatch("loadUtilisateurs"),
-    // this.$store.dispatch("oneUtilisateur");
-
     if (localStorage.getItem("reloaded")) {
       localStorage.removeItem("reloaded");
     } else {
@@ -204,28 +175,26 @@ export default {
 
 <style>
 .produits {
-
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
-  gap:20px;
-  
-  
- 
+  gap: 20px;
 }
 
 .prod {
   max-width: 400px;
 
- 
+
 }
+
 .stockFini {
   margin-top: 10px;
   color: red;
   font-size: larger;
 }
-.normal-card h2{
+
+.normal-card h2 {
   font-size: 1rem;
   margin-bottom: 8px;
   margin-top: 10px;

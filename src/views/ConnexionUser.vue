@@ -46,7 +46,6 @@ export default {
       verifUser: {},
       erreur: "",
       isConnected: false,
-      // isUser: true,
     };
   },
 
@@ -73,7 +72,6 @@ export default {
           user.motDePasse === this.verifUser.motDePasse
         ) {
           this.verifUser=user;
-          console.log("verifuser" + this.verifUser);
           trouve = true;
         }
       });
@@ -82,14 +80,11 @@ export default {
       }
 
       if (this.verifUser.role === "USER") {
-        console.log("dans USER");
             this.$store.commit("setCurrentUtilisateur", this.verifUser);
-            console.log("apres commiy USER");
             this.$store.commit("setCurrentUtilisateurCommande");
             this.$router.push("/");
             trouve = true;
           } else if(this.verifUser.role === "ADMIN"){
-            console.log("dans ADMIN");
             this.$store.commit("setCurrentUtilisateur", this.verifUser);
             this.$router.push("/ListUsers");
             
@@ -116,13 +111,6 @@ export default {
       return this.$store.getters.getCurrentUtilisateurCommande;
     },
 
-  },
-    mounted() {
-      // this.$store.dispatch("loadProds")
-    //   this.$store.dispatch("loadCommandes");
-    // this.$store.dispatch("loadUtilisateurs"),
-    // this.$store.dispatch("oneUtilisateur")
-    // this.$store.dispatch("oneUtilisateurCommande")
   },
 };
 </script>

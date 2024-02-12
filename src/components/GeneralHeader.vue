@@ -28,8 +28,8 @@
             <ul class="dropdown-content">
               <div v-for="category in categories" :key="category.id">
                 <router-link
-                  :to="'/categorieProduct/' + category.id"
-                  @click="getCategories(category.id)"
+                  :to="{ name: 'categorieproduits',  params: { id: category.id }}"
+               
                   class="nav-link"
                 >
                   {{ category.name }}
@@ -39,7 +39,6 @@
             </ul>
           </li>
         </ul> 
-     
      
         <div v-if="isVisible">
           <ul class="nav-dropdown2">
@@ -142,13 +141,6 @@
     </header>
     </div>
 
-
-
- 
-
-
-
-
 </template>
 
 <script>
@@ -178,18 +170,7 @@ export default {
 
 
   methods: {
-    getCategories(categoriesId) {
-      // this.$emit('changeCategorie')
-      console.log("categ router" + categoriesId)
-      this.$router.push({
-        name: "categorieproduits",
-        params: { id: categoriesId }
-      });
-
-    },
-    getUser() {
-    console.log("getuserheader"+this.currentUtilisateur.raisonSociale);
-    },
+  
     toggleDropdown() {
       this.isDropdownOpen = !this.isDropdownOpen;
     },
@@ -205,8 +186,6 @@ export default {
    }
 
   },
-
-
   computed: {
     categories() {
       return this.$store.getters.getCategories;

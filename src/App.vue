@@ -2,6 +2,7 @@
   <div id="app">
     <!-- Votre contenu ici -->
     <router-view />
+    
   </div>
 
 </template>
@@ -9,13 +10,6 @@
 <script>
 export default {
   name: 'App',
-  
-  computed: { 
-    commandes(){
-      return this.$store.getters.getCommandes
-    },
-
-  }
  
     
   }

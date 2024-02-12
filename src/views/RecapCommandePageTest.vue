@@ -1,66 +1,57 @@
 <template>
-  <MyHeader
-    :currentUtilisateur="currentUtilisateur"
-    :currentUtilisateurCommande="currentUtilisateurCommande"
-    @deconnexionEventBtn="deconnecterCurrentUser"
-    :is-visible="isHere()"
-    :is-user="isUser()"
-  />
+  <MyHeader :currentUtilisateur="currentUtilisateur" :currentUtilisateurCommande="currentUtilisateurCommande"
+    @deconnexionEventBtn="deconnecterCurrentUser" :is-visible="isHere()" :is-user="isUser()" />
   <div v-if="currentUtilisateur" class="recapCommande">
-      <FormUtilisateurVue :currentUtilisateur="currentUtilisateur" />
-      <section class="summary">
-        <strong>Panier</strong>
-        <table>
-          <thead>
-            <tr>
-              <th>Produits</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Afficher tous les produits actifs -->
-            <td></td>
-            <td>
-              <span>Total HT </span>|
-              <span>Total TTC</span>
-            </td>
-            <tr v-for="(prod, id) in currentUtilisateurCommande.produits" :key="id">
-              <div v-for="product in produits" :key="product.id">
-                <div v-if="prod.produitId == product.id">
-                  <td>
-                    {{
-                      product.titre
-                    }}(quantite:{{
-                      product.moq
-                    }})
-                  </td>
-                  <td>
-                    <strong> x {{ prod.quantite }}</strong>
-                  </td>
-                </div>
-              </div>
-      
-                 <td>
-                    <span> {{ totalProduct(prod) }}€ </span>|
-                    <span>{{ totalProductTTC(prod) }} €</span>
+    <FormUtilisateurVue :currentUtilisateur="currentUtilisateur" />
+    <section class="summary">
+      <strong>Panier</strong>
+      <table>
+        <thead>
+          <tr>
+            <th>Produits</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Afficher tous les produits actifs -->
+          <td></td>
+          <td>
+            <span>Total HT </span>|
+            <span>Total TTC</span>
+          </td>
+          <tr v-for="(prod, id) in currentUtilisateurCommande.produits" :key="id">
+            <div v-for="product in produits" :key="product.id">
+              <div v-if="prod.produitId == product.id">
+                <td>
+                  {{
+                    product.titre
+                  }}(quantite:{{
+  product.moq
+}})
                 </td>
-      
-            </tr>
-            <tr>
-              <th>Total TTC</th>
-              <th>{{ prixTotal() }}€ </th>
-            </tr>
-          </tbody>
-        </table>
-        <div>
-    
-    <btnValider
-          label="Valider la commande"
-          backgroundColor="ValiderConnexion"
-          @click="validerCommande()"
-        />
-</div>
-      </section>
+                <td>
+                  <strong> x {{ prod.quantite }}</strong>
+                </td>
+              </div>
+            </div>
+
+            <td>
+              <span> {{ totalProduct(prod) }}€ </span>|
+              <span>{{ totalProductTTC(prod) }} €</span>
+            </td>
+
+          </tr>
+          <tr>
+            <th>Total TTC</th>
+            <th>{{ prixTotal() }}€ </th>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+
+        <btnValider label="Valider la commande" backgroundColor="ValiderConnexion" @click="validerCommande()" />
+      </div>
+    </section>
 
   </div>
 
@@ -78,7 +69,6 @@ export default {
     return {
 
       isConnected: false,
-      // isUser: true,
       produitSelected: {},
     };
   },
@@ -89,7 +79,6 @@ export default {
     btnValider
   },
   computed: {
-    // Utilisation de mapState pour utiliser commandes depuis le store Vuex
     currentUtilisateur() {
       return this.$store.getters.getCurrentUtilisateur;
     },
@@ -99,13 +88,13 @@ export default {
     produits() {
       return this.$store.getters.getProduits;
     },
-  
+
   },
   methods: {
-    isUser(){
-      if(this.currentUtilisateur && this.currentUtilisateur.role=='ADMIN'){
+    isUser() {
+      if (this.currentUtilisateur && this.currentUtilisateur.role == 'ADMIN') {
         return false;
-      }else{
+      } else {
         return true;
       }
     },
@@ -125,14 +114,14 @@ export default {
         return false;
       }
     },
-    totalProduct( prod) {
-        let total =0;
-        this.produits.forEach(function (currentValue) {
-          if(currentValue.id==prod.produitId){
-          total=  (prod.quantite * currentValue.prix * currentValue.moq).toFixed(2);
-          }
-         
-        });
+    totalProduct(prod) {
+      let total = 0;
+      this.produits.forEach(function (currentValue) {
+        if (currentValue.id == prod.produitId) {
+          total = (prod.quantite * currentValue.prix * currentValue.moq).toFixed(2);
+        }
+
+      });
 
       return total
     },
@@ -141,44 +130,44 @@ export default {
       // Taux de TVA
       const tauxTVA = 20;
       // Calcul du ttc
-      let totalTTC =0
+      let totalTTC = 0
 
-   
-        this.produits.forEach(function (currentValue) {
-          if(currentValue.id==prod.produitId){
-            totalTTC= (
-        prod.quantite *
-        currentValue.prix *
-        currentValue.moq *
-        (1 + tauxTVA / 100)
-      ).toFixed(2);
 
-          }
-         
-        });
-    
+      this.produits.forEach(function (currentValue) {
+        if (currentValue.id == prod.produitId) {
+          totalTTC = (
+            prod.quantite *
+            currentValue.prix *
+            currentValue.moq *
+            (1 + tauxTVA / 100)
+          ).toFixed(2);
+
+        }
+
+      });
+
       return totalTTC;
     },
-    validerCommande(){
-  
-   let id=this.currentUtilisateurCommande.id;
- 
-        this.$store.commit("addCommandePrise", this.currentUtilisateurCommande);
-        console.log('id current' + this.currentUtilisateurCommande.id )
-        this.$store.commit("modifyCommandeDefault", this.currentUtilisateurCommande.id,this.currentUtilisateurCommande.userId);
-        this.currentUtilisateurCommande.coutTotal=0;
-        this.currentUtilisateurCommande.produits=[]  
-        this.currentUtilisateurCommande.id=id;
-        this.$store.commit("setCurrentUtilisateurCommande", this.currentUtilisateurCommande);
-        this.$router.push({
+    validerCommande() {
+
+      let id = this.currentUtilisateurCommande.id;
+
+      this.$store.commit("addCommandePrise", this.currentUtilisateurCommande);
+      console.log('id current' + this.currentUtilisateurCommande.id)
+      this.$store.commit("modifyCommandeDefault", this.currentUtilisateurCommande.id, this.currentUtilisateurCommande.userId);
+      this.currentUtilisateurCommande.coutTotal = 0;
+      this.currentUtilisateurCommande.produits = []
+      this.currentUtilisateurCommande.id = id;
+      this.$store.commit("setCurrentUtilisateurCommande", this.currentUtilisateurCommande);
+      this.$router.push({
         name: "home",
       });
     },
-    prixTotal(){
-        if(this.currentUtilisateurCommande && this.currentUtilisateur){
-     return   this.currentUtilisateurCommande.coutTotal.toFixed(2)
-    }
-      
+    prixTotal() {
+      if (this.currentUtilisateurCommande && this.currentUtilisateur) {
+        return this.currentUtilisateurCommande.coutTotal.toFixed(2)
+      }
+
     }
   },
   mounted() {
@@ -195,15 +184,15 @@ export default {
 <style>
 section.summary {
   background-color: #f3f3f39f;
-  border:solid;
+  border: solid;
   padding: 20px;
   min-height: 200px;
-  max-height:300px;
-  max-width:fit-content;
+  max-height: 300px;
+  max-width: fit-content;
   min-width: 200px;
   text-align: center;
   margin-bottom: 15px;
-  
+
 
 }
 
@@ -220,15 +209,15 @@ section.summary table tbody tr:last-of-type th div {
   padding-top: 4px;
 }
 
-.recapCommande{
+.recapCommande {
   max-width: 1300px;
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  
+
 
 }
 </style>
