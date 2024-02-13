@@ -133,12 +133,7 @@ export default {
     mounted() {
         this.$store.dispatch("loadCommandes");
 
-        if (localStorage.getItem("reloaded")) {
-            localStorage.removeItem("reloaded");
-        } else {
-            localStorage.setItem("reloaded", "1");
-            location.reload();
-        }
+     
     },
 };
 </script>
